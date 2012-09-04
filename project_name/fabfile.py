@@ -4,7 +4,7 @@ BASE_DIR = '/home/projects/{{project_name}}/{{project_name}}'
 TEMPLATES_DIR = '%s/res' % BASE_DIR
 CODE_DIR = BASE_DIR + '/{{project_name}}'
 
-env.hosts = ['{{project_name}}@vickie.cruncher.ch']
+env.hosts = ['{{project_name}}@{{project_name}}.cruncher.ch']
 env.activate = 'source %s/bin/activate' % BASE_DIR
 
 
