@@ -1,0 +1,9 @@
+Django>=1.4
+Fabric
+South
+django-sekizai
+gunicorn
+django-compressor
+python-memcached
+psycopg2
+raven
