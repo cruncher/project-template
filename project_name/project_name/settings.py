@@ -26,7 +26,7 @@ DEFAULT_LANGUAGE = 0
 # create database {{project_name}} with encoding='UTF-8' owner={{project_name}};
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '{{project_name}}',                      # Or path to database file if using sqlite3.
         'USER': '{{project_name}}',                      # Not used with sqlite3.
         'PASSWORD': '{{project_name}}',                  # Not used with sqlite3.
@@ -56,7 +56,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, '..', 'static'),
-    #os.path.join(PROJECT_DIR, '..', '..', 'res'),
+    os.path.join(PROJECT_DIR, '..', '..', '..', 'res'),
 )
 
 STATICFILES_FINDERS = (

@@ -1,4 +1,4 @@
-<!doctype html>{% load sekizai_tags compress %}
+<!doctype html>{% load sekizai_tags compress i18n %}
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,13 +27,13 @@
   </script-->
 
   {% compress css %}
-  <!--link rel="stylesheet" href="{{STATIC_URL}}css/template.normalise.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}css/template.typography.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}css/template.forms.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}css/template.classes.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.normalise.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.typography.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.forms.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.classes.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.typography.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.forms.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}css/site.classes.css" /-->
+  <link rel="stylesheet" href="{{STATIC_URL}}css/site.classes.css" />
   {% endcompress %}
 
   <!--[if lte IE 8]>
@@ -55,10 +55,16 @@
 <body>
   <header class="site_header header">
     <div class="site_wrap wrap">
-      <a class="logo_thumb thumb" href="{% url home %}">
-        <h1>HELLO WORLD</h1>
-      </a>
+      <a class="logo_thumb thumb" href="{% url home %}"></a>
     </div>
+  {% get_available_languages as LANGUAGES %}
+
+    <ul class="lang_sel">
+      {% for lang_code,lang_name in LANGUAGES  %}{% language lang_code %}
+        <li><a href="{% url home %}">{{lang_name}}</a></li>
+      {% endlanguage %}{% endfor %}
+    </ul>
+
   </header>
 
   <div class="content_wrap site_wrap wrap">
@@ -67,13 +73,13 @@
   {% render_block "site_templates" %}
 
   <!--[if lte IE 8]>
-  <script src="{{STATIC_URL}}res/es5-shim/es5-shim.js"></script>
+  <script src="{{STATIC_URL}}est5-shim/es5-shim.js"></script>
   <![endif]-->
   {% compress js %}
-  <!-- script src="{{STATIC_URL}}res/ios-orientationchange-fix/ios-orientationchange-fix.js"></script>
+  <script src="{{STATIC_URL}}ios-orientationchange-fix/ios-orientationchange-fix.js"></script>
   <script src="{{STATIC_URL}}js/js.extensions.js"></script>
-  <script src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
-  <script src="{{STATIC_URL}}js/jquery.extensions.js"></script-->
+  <script src="{{STATIC_URL}}bolt/js/jquery.js"></script>
+  <script src="{{STATIC_URL}}js/jquery.extensions.js"></script>
   {% endcompress %}
 
   {% render_block "site_js" %}
