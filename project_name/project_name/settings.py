@@ -33,6 +33,16 @@ DATABASES = {
     }
 }
 
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': os.path.join(PROJECT_DIR, '{{project_name}}.db'),
+    }
+}
+"""
+
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -56,7 +66,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, '..', 'static'),
-    os.path.join(PROJECT_DIR, '..', '..', '..', 'res'),
+    os.path.join(PROJECT_DIR, '..', '..', 'res'),
 )
 
 STATICFILES_FINDERS = (
