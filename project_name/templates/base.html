@@ -1,4 +1,5 @@
 <!doctype html>{% load sekizai_tags compress i18n %}
+{% load url from future %}
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -55,13 +56,13 @@
 <body>
   <header class="site_header header">
     <div class="site_wrap wrap">
-      <a class="logo_thumb thumb" href="{% url home %}"></a>
+      <a class="logo_thumb thumb" href="{% url 'home' %}"></a>
     </div>
   {% get_available_languages as LANGUAGES %}
 
     <ul class="lang_sel">
       {% for lang_code,lang_name in LANGUAGES  %}{% language lang_code %}
-        <li><a href="{% url home %}">{{lang_name}}</a></li>
+        <li><a href="{% url 'home' %}">{{lang_name}}</a></li>
       {% endlanguage %}{% endfor %}
     </ul>
 
