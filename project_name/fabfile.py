@@ -33,6 +33,14 @@ def reload_server():
     run('sudo supervisorctl restart {{project_name}}_gunicorn')
 
 
+def clear_cache():
+    with(cd(CODE_DIR)):
+        with prefix(env.activate):
+            run('python manage.py clear_cache')
+
+def load():
+    run('w')
+
 def deploy():
     pull_code()
     collectstatic()
