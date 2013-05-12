@@ -66,7 +66,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, '..', 'static'),
-    os.path.join(PROJECT_DIR, '..', '..', 'res'),
+    # os.path.join(PROJECT_DIR, '..', '..', 'res'),
 )
 
 STATICFILES_FINDERS = (
