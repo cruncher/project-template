@@ -5,7 +5,7 @@ TEMPLATES_DIR = '%s/res' % BASE_DIR
 CODE_DIR = BASE_DIR + '/{{project_name}}'
 
 env.hosts = ['{{project_name}}@{{project_name}}.cruncher.ch']
-env.activate = 'source %s/bin/activate' % BASE_DIR
+env.activate = 'source %s/.venv/bin/activate' % BASE_DIR
 env.remote_db = '{{project_name}}'
 env.local_db = '{{project_name}}'
 env.git_branch = 'master'
