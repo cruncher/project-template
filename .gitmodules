@@ -1,9 +1,3 @@
-[submodule "res/ios-orientationchange-fix"]
-	path = res/ios-orientationchange-fix
-	url = https://github.com/scottjehl/iOS-Orientationchange-Fix.git
-[submodule "res/es5-shim"]
-	path = res/es5-shim
-	url = https://github.com/kriskowal/es5-shim.git
-[submodule "res/bolt"]
-	path = res/bolt
+[submodule "project_name/static/bolt"]
+	path = project_name/static/bolt
 	url = https://github.com/stephband/bolt.git
