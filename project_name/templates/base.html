@@ -1,18 +1,35 @@
 <!doctype html>{% load sekizai_tags compress i18n %}
 {% load url from future %}
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.66" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  
   {% block extra_head_meta %}{% endblock extra_head_meta %}
+  
   <title>{% block headtitle %}{% endblock headtitle %}</title>
+  
   <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
   <script>
-    // Adds js, loading and random color mix 'flag' classes
-    document.documentElement.className = 'js notransition loading';
+    document.documentElement.className = 'js';
+    window.cms_config = {
+      mediaURL: '{{ CMS_MEDIA_URL }}',
+      trans: {}
+    };
+    window.WebFontConfig = {
+      google: {
+        families: []
+      }
+    };
   </script>
 
-  <!-- Make IE recognise HTML5 elements for styling -->
+  {# Make IE recognise HTML5 elements for styling #}
   <!--[if lte IE 8]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <noscript>
@@ -23,13 +40,10 @@
   </noscript>
   <![endif]-->
 
-  <!--script>
-    document.write(unescape('%3Cscript src="http://'+window.location.hostname+':8081/target/target-script-min.js"%3E%3C/script%3E'));
-  </script-->
-
   {% compress css %}
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.normalise.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.typography.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.typography.16_24.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.forms.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.classes.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.typography.css" />
@@ -37,54 +51,82 @@
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.classes.css" />
   {% endcompress %}
 
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="{{STATIC_URL}}css/template.ie.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}css/site.ie.css" />
-  <![endif]-->
-  <!--[if IE 8]>
-    <link rel="stylesheet" href="{{STATIC_URL}}css/template.ie8.css" />
-    <link rel="stylesheet" href="{{STATIC_URL}}css/site.ie8.css" />
-  <![endif]-->
-  <!--[if IE 7]>
-    <link rel="stylesheet" href="{{STATIC_URL}}css/template.ie7.css" />
-    <link rel="stylesheet" href="{{STATIC_URL}}css/site.ie7.css" />
-  <![endif]-->
+  <!--[if lte IE 8]><link rel="stylesheet" href="css/bolt.ie.css" /><![endif]-->
+  <!--[if IE 8]><link rel="stylesheet" href="css/bolt.ie8.css" /><![endif]-->
+  <!--[if IE 7]><link rel="stylesheet" href="css/bolt.ie7.css" /><![endif]-->
+  <!--[if IE 6]><link rel="stylesheet" href="css/bolt.ie6.css" /><![endif]-->
+  <!--link rel="stylesheet" href="css/bolt.debug.css" /-->
+
   {% render_block "css" %}
   {% block extrahead %}{% endblock %}
 </head>
 
 <body>
-  <header class="site_header header">
-    <div class="site_wrap wrap">
-      <a class="logo_thumb thumb" href="{% url 'home' %}"></a>
-    </div>
-  {% get_available_languages as LANGUAGES %}
+  {% include "includes/site_header.html" %}
 
-    <ul class="lang_sel">
-      {% for lang_code,lang_name in LANGUAGES  %}{% language lang_code %}
-        <li><a href="{% url 'home' %}">{{lang_name}}</a></li>
-      {% endlanguage %}{% endfor %}
-    </ul>
+  {% block main %}{% endblock main %}
+  
+  {% include "includes/nav_layer.html" %}
 
-  </header>
+  <script>
+    // Function.prototype.bind is the ES5 feature with by far the worst support. Use it
+    // to roughly detect ES5. http://kangax.github.com/es5-compat-table/
+    !Function.prototype.bind && document.write(unescape('%3Cscript src="{{STATIC_URL}}bolt/res/es5-shim/es5-shim.min.js"%3E%3C/script%3E'));
+  </script>
 
-  <div class="content_wrap site_wrap wrap">
-    {% block main %}{% endblock main %}
-  </div>
-  {% render_block "site_templates" %}
-
+  <!--[if (gt IE 8)|!(IE)]><!-->
+    <script src="{{STATIC_URL}}bolt/js/jquery-2.0.0-custom.js"></script>
+  <!--<![endif]-->
   <!--[if lte IE 8]>
-  <script src="{{STATIC_URL}}est5-shim/es5-shim.js"></script>
+    <script defer="defer" src="js/jquery-1.9.1.js"></script>
   <![endif]-->
+
   {% compress js %}
-  <script src="{{STATIC_URL}}ios-orientationchange-fix/ios-orientationchange-fix.js"></script>
-  <script src="{{STATIC_URL}}js/js.extensions.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.js"></script>
-  <script src="{{STATIC_URL}}js/jquery.extensions.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/res/ios-orientationchange-fix/ios-orientationchange-fix.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/res/jquery.cookie/jquery.cookie.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.prefix.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.render.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.event.tap.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.event.move.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.event.swipe.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.event.activate.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.dialog.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.loading.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.scrollto.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.validate.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.transition.js"></script>
+  
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.a.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.tip.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.tab.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.slide.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.dialog.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.dropdown.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.input.js"></script>
+  <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.input.placeholder.js"></script>
   {% endcompress %}
 
   {% render_block "site_js" %}
   {% render_block "js" %}
+
+  {% comment %}
+  Use google webfont loader to asynchronously load fonts in, otherwise
+  they really slow down text rendering on slow connections.
+  https://developers.google.com/fonts/docs/webfont_loader
+  {% endcomment %}
+  <script>
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+
   {% if not DEBUG %}
   <script>
       var _gaq = _gaq || [];
@@ -97,5 +139,9 @@
       })();
   </script>
   {% endif %}
+
+  <!--[if IE 7]>
+    Get a better browser
+  <![endif]-->
 </body>
 </html>
