@@ -11,7 +11,10 @@
   {% block extra_head_meta %}{% endblock extra_head_meta %}
   
   <title>{% block headtitle %}{% endblock headtitle %}</title>
-  
+
+  {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
+  {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
+
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
