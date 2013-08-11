@@ -33,6 +33,8 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
+
 """
 DATABASES = {
     'default': {
