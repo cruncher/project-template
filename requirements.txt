@@ -1,4 +1,4 @@
-Django>=1.4
+Django>=1.5.4
 Fabric
 South
 django-sekizai
