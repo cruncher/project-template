@@ -4,6 +4,7 @@ South
 django-sekizai
 gunicorn
 django-compressor
+easy-thumbnails
 django-extensions
 python-memcached
 psycopg2
