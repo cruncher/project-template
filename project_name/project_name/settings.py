@@ -137,7 +137,7 @@ INSTALLED_APPS = (
     'compressor',
     'gunicorn',
     'django_extensions',
-    'raven.contrib.django',
+    'raven.contrib.django.raven_compat',
     'south'
 )
 
