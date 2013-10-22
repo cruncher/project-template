@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', 
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(PROJECT_DIR, '{{project_name}}.db'),
     }
 }
@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_keyboard_shortcuts',
     'django.contrib.admin',
 
     'sekizai',
@@ -138,7 +139,9 @@ INSTALLED_APPS = (
     'gunicorn',
     'django_extensions',
     'raven.contrib.django.raven_compat',
-    'south'
+    'south',
+    'crispy_forms',
+    'front',
 )
 
 
@@ -169,6 +172,11 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': None
 }
 
 
