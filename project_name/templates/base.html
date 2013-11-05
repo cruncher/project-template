@@ -7,9 +7,9 @@
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.66" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  
+
   {% block extra_head_meta %}{% endblock extra_head_meta %}
-  
+
   <title>{% block headtitle %}{% endblock headtitle %}</title>
 
   {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
@@ -46,7 +46,7 @@
   {% compress css %}
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.normalise.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.typography.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.typography.16_24.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.typography.16_20.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.forms.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.classes.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.typography.css" />
@@ -68,7 +68,7 @@
   {% include "includes/site_header.html" %}
 
   {% block main %}{% endblock main %}
-  
+
   {% include "includes/nav_layer.html" %}
 
   <script>
@@ -98,7 +98,7 @@
   <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.scrollto.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.validate.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.transition.js"></script>
-  
+
   <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.a.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.tip.js"></script>
