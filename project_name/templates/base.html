@@ -1,4 +1,4 @@
-<!doctype html>{% load sekizai_tags compress i18n %}
+<!doctype html>{% load sekizai_tags compress i18n front_tags %}
 {% load url from future %}
 <html lang="en">
 <head>
@@ -112,6 +112,8 @@
 
   {% render_block "site_js" %}
   {% render_block "js" %}
+  {% render_block "js_nocompress" %}
+  {% front_edit_scripts editor="redactor" %}
 
   {% comment %}
   Use google webfont loader to asynchronously load fonts in, otherwise
