@@ -174,6 +174,8 @@ LOGGING = {
     }
 }
 
+ADMIN_KEYBOARD_SHORTCUTS_HIDE_ICON = True
+
 # Set your DSN value
 RAVEN_CONFIG = {
     'dsn': None
