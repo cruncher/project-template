@@ -56,6 +56,10 @@ def compilemessages(do_reload=True):
     if do_reload:
         reload_server()
 
+def requirements():
+    with(cd(CODE_DIR)):
+        with prefix(env.activate):
+            run('pip install -r ../requirements.txt')
 
 
 def deploy():
