@@ -13,4 +13,5 @@ python-memcached
 psycopg2
 raven
 django-admin-keyboard-shortcuts
-
+IPython
+pudb
