@@ -5,6 +5,7 @@ django-crispy-forms
 django-front
 South
 django-sekizai
+cssmin
 gunicorn
 django-compressor
 easy-thumbnails
