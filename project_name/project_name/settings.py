@@ -77,6 +77,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter',]
 
 SECRET_KEY = '{{ secret_key }}'
 
@@ -173,6 +174,8 @@ LOGGING = {
         },
     }
 }
+
+
 
 ADMIN_KEYBOARD_SHORTCUTS_HIDE_ICON = True
 
