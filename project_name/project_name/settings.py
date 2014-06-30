@@ -60,6 +60,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+INTERNAL_IPS = ('127.0.0.1', )
+
 MEDIA_ROOT = os.path.join(PROJECT_DIR, '..', '..', 'tmp', 'media')
 STATIC_ROOT = os.path.join(PROJECT_DIR,  '..', '..', 'tmp', 'static')
 MEDIA_URL = '/media/'
