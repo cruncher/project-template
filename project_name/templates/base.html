@@ -20,7 +20,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <script>
-    document.documentElement.className = 'js';
+    document.documentElement.className = 'js loading';
     window.cms_config = {
       mediaURL: '{{ CMS_MEDIA_URL }}',
       trans: {}
@@ -49,27 +49,24 @@
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.typography.16_24.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.forms.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.classes.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}css/site.typography.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}css/site.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}css/site.type.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.forms.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.classes.css" />
   {% endcompress %}
 
   <!--[if lte IE 8]><link rel="stylesheet" href="css/bolt.ie.css" /><![endif]-->
   <!--[if IE 8]><link rel="stylesheet" href="css/bolt.ie8.css" /><![endif]-->
-  <!--[if IE 7]><link rel="stylesheet" href="css/bolt.ie7.css" /><![endif]-->
-  <!--[if IE 6]><link rel="stylesheet" href="css/bolt.ie6.css" /><![endif]-->
-  <!--link rel="stylesheet" href="css/bolt.debug.css" /-->
 
   {% render_block "css" %}
   {% block extrahead %}{% endblock %}
 </head>
 
 <body>
-  {% include "includes/site_header.html" %}
-
-  {% block main %}{% endblock main %}
-  
-  {% include "includes/nav_layer.html" %}
+  {% include "includes/site-header.html" %}
+  {% block body %}{% endblock body %}
+  {% include "includes/site-nav.html" %}
+  {% include "includes/site-footer.html" %}
 
   <script>
     // Function.prototype.bind is the ES5 feature with by far the worst support. Use it
@@ -142,9 +139,5 @@
       })();
   </script>
   {% endif %}
-
-  <!--[if IE 7]>
-    Get a better browser
-  <![endif]-->
 </body>
 </html>
