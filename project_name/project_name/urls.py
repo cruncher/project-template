@@ -12,3 +12,7 @@ urlpatterns = i18n_patterns('',
 urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
+
+urlpatterns += patterns('',
+    url(r'^front-edit/', include('front.urls')),
+)

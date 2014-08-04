@@ -56,6 +56,10 @@ def compilemessages(do_reload=True):
     if do_reload:
         reload_server()
 
+def requirements():
+    with(cd(CODE_DIR)):
+        with prefix(env.activate):
+            run('pip install -r ../requirements.txt')
 
 
 def deploy():
@@ -68,13 +72,13 @@ def deploy():
 def sync_get():
     with(cd(CODE_DIR)):
         with prefix(env.activate):
-            run('pg_dump -E UTF8 --disable-dollar-quoting --disable-triggers  -Fc -f ~/backup/%s.dmp %s' % (env.remote_db, env.remote_db))
+            run('pg_dump -f ~/backup/%s.dmp %s' % (env.remote_db, env.remote_db))
     local('scp %s:backup/%s.dmp .' % (env.hosts[0], env.remote_db))
     local('rsync -avz -e ssh %s:%s/tmp/media/ ../tmp/media/' % (env.hosts[0], BASE_DIR))
     local('dropdb %s' % env.local_db)
     local('createdb -E utf8 %s' % env.local_db)
-    local('psql -q -d %s -c "CREATE EXTENSION postgis;"' % env.local_db)
-    local('perl /usr/local/Cellar/postgis/2.0.3/share/postgis/postgis_restore.pl %s.dmp | psql -q %s' % (env.remote_db, env.local_db))
-    local('rm %s.dmp %s.dmp.lst' % (env.remote_db, env.remote_db))
+    local('psql -q -d %s -f %s.dmp' % (env.local_db, env.remote_db))
+    local('rm -f %s.dmp %s.dmp.lst' % (env.remote_db, env.remote_db))
     local('python manage.py migrate')
-    local('python manage.py createsuperuser --username=admin  --email=admin@admin.com')
+    local('python manage.py set_fake_passwords --password="admin"')
+

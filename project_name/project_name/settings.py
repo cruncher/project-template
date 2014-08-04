@@ -33,10 +33,12 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
+
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', 
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(PROJECT_DIR, '{{project_name}}.db'),
     }
 }
@@ -58,6 +60,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+INTERNAL_IPS = ('127.0.0.1', )
+
 MEDIA_ROOT = os.path.join(PROJECT_DIR, '..', '..', 'tmp', 'media')
 STATIC_ROOT = os.path.join(PROJECT_DIR,  '..', '..', 'tmp', 'static')
 MEDIA_URL = '/media/'
@@ -75,6 +79,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter',]
 
 SECRET_KEY = '{{ secret_key }}'
 
@@ -101,6 +106,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
+    'django.core.context_processors.debug',
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
@@ -129,14 +135,17 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_keyboard_shortcuts',
     'django.contrib.admin',
 
     'sekizai',
     'compressor',
     'gunicorn',
     'django_extensions',
-    'raven.contrib.django',
-    'south'
+    'raven.contrib.django.raven_compat',
+    'south',
+    'crispy_forms',
+    'front',
 )
 
 
@@ -167,6 +176,15 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+
+
+ADMIN_KEYBOARD_SHORTCUTS_HIDE_ICON = True
+
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': None
 }
 
 
