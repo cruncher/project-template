@@ -68,6 +68,9 @@ def deploy():
     compilemessages(False)
     reload_server()
 
+def ssh():
+    with(cd(CODE_DIR)):
+        run('bash')
 
 def sync_get():
     with(cd(CODE_DIR)):
