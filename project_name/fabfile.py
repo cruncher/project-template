@@ -10,7 +10,7 @@ env.remote_db = '{{project_name}}'
 env.local_db = '{{project_name}}'
 env.git_branch = 'master'
 env.gunicorn_process = '{{project_name}}_gunicorn'
-
+env.forward_agent = True
 
 
 def migrate():
