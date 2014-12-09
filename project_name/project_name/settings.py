@@ -138,6 +138,8 @@ INSTALLED_APPS = (
     'admin_keyboard_shortcuts',
     'django.contrib.admin',
 
+    'apps.styleguide',
+
     'sekizai',
     'compressor',
     'gunicorn',

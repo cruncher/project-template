@@ -1,0 +1,81 @@
+{% extends "cms/2014/site.html" %}
+{% load cms_tags sekizai_tags %}
+
+{% block title %}Styles{% endblock %}
+
+{% block content %}
+<div class="site-wrap wrap">
+	<ul class="index">
+		<li><a href="/style/">typography and buttons</a></li>
+		<li><a href="/style/forms/">forms</a></li>
+		<li><a href="/style/blocks/">columns, blocks and tables</a></li>
+		<li><a href="/style/channels/">channels</a></li>
+	</ul>
+</div>
+
+{% block tables %}{% endblock %}
+
+{% addtoblock "css" %}
+<style>
+	.site-wrap + .site-wrap {
+		margin-top: 2.5rem;
+	}
+
+	.styleguide-title {
+		margin-top: 3rem;
+		font-size: 1.5rem;
+	}
+
+	.styleguide-table {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100% !important;
+		margin-top: 3rem;
+	}
+
+	.styleguide-table > tbody > tr {
+		border-bottom: 1px solid #eeeeee;
+	}
+
+	.styleguide-table > tbody > tr:first-child {
+		border-top: 1px solid #eeeeee;
+	}
+
+	.styleguide-table > thead > tr > td,
+	.styleguide-table > tbody > tr > td {
+		min-height: 0 !important;
+	}
+
+	.styleguide-table > tbody > tr > td {
+		width: auto;
+		height: 4rem;
+		padding: 0;
+		vertical-align: top;
+		background-color: transparent !important;
+	}
+
+	.styleguide-table > tbody > tr > td:before,
+	.styleguide-table > tbody > tr > td:after {
+		content: none !important;
+	}
+
+	.styleguide-table > tbody > tr > td:first-child {
+		width: 25%;
+		font-family: 'Andale Mono', monospace;
+		font-size: 0.875rem;
+		padding-right: 2rem;
+		border-right: 1px solid #eeeeee;
+		vertical-align: middle;
+	}
+
+	.styleguide-table > tbody > tr > td:last-child {
+		width: 25%;
+		font-size: 0.75rem;
+		padding-left: 2rem;
+		color: #999999;
+		border-left: 1px solid #eeeeee;
+		vertical-align: middle;
+	}
+</style>
+{% endaddtoblock %}
+{% endblock %}

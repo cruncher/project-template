@@ -1,0 +1,203 @@
+{% extends "styleguide/base.html" %}
+
+{% block tables %}
+<div class="site-wrap wrap">
+	<table class="styleguide-table">
+		<tr>
+			<td>
+				label<br/>
+				input<br/>
+				button<br/>
+				select<br/>
+				textarea
+			</td>
+			<td>
+				<form>
+					<label for="text">text</label>
+					<input type="text" id="text" name="text" />
+					
+					<label for="search">search</label>
+					<input type="search" id="search" name="search" />
+					
+					<label for="tel">tel</label>
+					<input type="tel" id="tel" name="tel" />
+					
+					<label for="url">url</label>
+					<input type="url" id="url" name="url" />
+					 
+					<label for="email">email</label>
+					<input type="email" id="email" name="email" />
+					
+					<label for="password">password</label>
+					<input type="password" id="password" name="password" />
+					
+					<label for="textarea">textarea</label>
+					<textarea id="textarea" name="textarea"></textarea>
+					
+					<label for="textarea">textarea.resize_textarea</label>
+					<textarea class="resize_textarea" id="textarea" name="textarea">The quick brown fox jumps over the lazy dog.</textarea>
+					
+					<label for="number">number</label>
+					<input type="number" id="number" name="number" />
+					
+					<label for="date">date</label>
+					<input type="date" id="date" name="date" />
+					
+					<label for="time">time</label>
+					<input type="time" id="time" name="time" />
+					
+					<label for="week">week</label>
+					<input type="week" id="week" name="week" />
+					
+					<label for="month">month</label>
+					<input type="month" id="month" name="month" />
+				
+					<label for="datetime">datetime</label>
+					<input type="datetime" id="datetime" name="datetime" />
+					 
+					<label for="datetime-local">datetime-local</label>
+					<input type="datetime-local" id="datetime-local" name="datetime-local" />
+
+					<label for="color">color</label>
+					<input type="color" id="color" name="color" />
+
+					<label for="range">range</label>
+					<input type="range" id="range" name="range" />
+					
+					<label for="radio">radio</label>
+					<input type="radio" id="radio" name="radio" />
+					
+					<label for="checkbox">checkbox</label>
+					<input type="checkbox" id="checkbox" name="checkbox" />
+				
+					<label for="radio2">
+					  <input type="radio" id="radio2" name="radio2" />
+					  radio
+					</label>
+					
+					<label for="checkbox2">
+					  <input type="checkbox" id="checkbox2" name="checkbox2" />
+					  checkbox
+					</label>
+					
+					<label for="select">select</label>
+					<select>
+						<option>Item 1</option>
+						<option>Item 2</option>
+						<option>Item 3</option>
+						<option>Item 4</option>
+					</select>
+					
+					<label for="file">file</label>
+					<input type="file" id="file" name="file" />
+					
+					<label for="hidden">hidden</label>
+					<input type="hidden" id="hidden" name="hidden" />
+					
+					<label for="image">image</label>
+					<input type="image" id="image" name="image" />
+					
+					<label for="button">button</label>
+					<input type="button" id="button" name="button" value="button" />
+					
+					<label for="reset">reset</label>
+					<input type="reset" id="reset" name="reset" />
+					
+					<label for="submit">submit</label>
+					<input type="submit" id="submit" name="submit" />
+				</form>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>.radio-label</td>
+			<td>
+				<label for="radio3" class="radio-label">
+					<input type="radio" id="radio3" name="radio3">
+					radio
+				</label>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>.checkbox-label</td>
+			<td>
+				<label for="checkbox3" class="checkbox-label">
+					<input type="checkbox" id="checkbox3" name="radio2">
+					checkbox
+				</label>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>.checkbox-label.v2</td>
+			<td>
+				<label for="checkbox4" class="checkbox-label v2">
+					<input type="checkbox" id="checkbox4" name="radio2">
+					checkbox
+				</label>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>.select-button</td>
+			<td>
+				<label for="checkbox3" class="select-button button">
+					Item 1
+					<select>
+						<option value="Value 1">Item 1</option>
+						<option value="Value 2">Item 2</option>
+						<option value="Value 3">Item 3</option>
+						<option value="Value 4">Item 4</option>
+					</select>
+				</label>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>.action-button .v2/.v1</td>
+			<td>
+				<input class="action-button button v2" type="reset" id="reset" name="reset" />
+				<input class="action-button button v1" type="submit" id="submit" name="submit" />
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>.action-button .v4/.v3</td>
+			<td>
+				<input class="action-button button v4" type="reset" id="reset" name="reset" />
+				<input class="action-button button v3" type="submit" id="submit" name="submit" />
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>.confirm-block</td>
+			<td>
+				<p class="confirm-block block">
+					Votre sdresse est sur le réseau Citycable.
+					<small>Vous pouvez continuer votre inscription</small>
+				</p>
+			</td>
+			<td></td>
+		</tr>
+	</table>
+
+	<h1>Legacy</h1>
+
+	<table class="styleguide-table">
+		<tr>
+			<td>.radio-label</td>
+			<td>
+				<div class="input-block block">
+					<label for="id_2-email">Email:</label>
+					<label class="error_label" for="id_2-email">Enter a valid email</label>
+					<input type="email" name="2-email" required="Requis" value="" maxlength="255" id="id_2-email" placeholder="" spellcheck="false" class="error">
+				</div>
+			</td>
+			<td></td>
+		</tr>
+	</table>
+</div>
+{% endblock %}
+
+
