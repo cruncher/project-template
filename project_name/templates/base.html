@@ -8,6 +8,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.66" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
+  {# Twitter #}
+  <meta name="twitter:card" content="">
+  <meta name="twitter:url" content="http://">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="http://images/logo.png">
+  <meta name="twitter:site" content="@cruncher">
+  <meta name="twitter:creator" content="@cruncher">
+
+  {# OpenGraph #}
+  <meta property="og:url" content="http://"/>
+  <meta property="og:title" content=""/>
+  <meta property="og:image" content="http://cruncher.ch/static/images/logo.png"/> {# Ideal size for fb: 1200x630 #}
+  <meta property="og:site_name" content="Cruncher"/>
+  <meta property="og:type" content="blog"/>
+
+  {# Google+ #}
+  <link rel="author" href="https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]"/>
+  {% comment %}
+  Google also reads schema.org metadata, and the OpenGraph API.
+  itemscope
+  itemtype=”[pageType]“ – where [pageType] is Article, Blog, Book, Event, LocalBusiness, Organization, Person, Product or Review.
+  itemprop=”name”       – 140 characters.
+  itemprop=”description”– 185 characters
+  itemprop=”image”      - Optimal size is 180 x 120.
+  {% endcomment %}
+
   {% block extra_head_meta %}{% endblock extra_head_meta %}
 
   <title>{% block headtitle %}{% endblock headtitle %}</title>
@@ -62,7 +89,7 @@
   {% block extrahead %}{% endblock %}
 </head>
 
-<body>
+<body itemscope itemtype="http://schema.org/Organization">
   {% include "includes/site-header.html" %}
   {% block body %}{% endblock body %}
   {% include "includes/site-nav.html" %}
