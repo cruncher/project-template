@@ -1,6 +1,6 @@
 <!doctype html>{% load sekizai_tags compress i18n front_tags %}
 {% load url from future %}
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/Article">
 <head>
   <meta charset="utf-8" />
   <meta name="author" content="" />
@@ -13,27 +13,27 @@
   <meta name="twitter:url" content="http://">
   <meta name="twitter:title" content="">
   <meta name="twitter:description" content="">
-  <meta name="twitter:image" content="http://images/logo.png">
+  <meta name="twitter:image" content="http://cruncher.ch/static/images/logo_512x512.png"> {# Must be at least 120x120 #}
   <meta name="twitter:site" content="@cruncher">
   <meta name="twitter:creator" content="@cruncher">
 
   {# OpenGraph #}
   <meta property="og:url" content="http://"/>
   <meta property="og:title" content=""/>
-  <meta property="og:image" content="http://cruncher.ch/static/images/logo.png"/> {# Ideal size for fb: 1200x630 #}
+  <meta property="og:description" content="" /> 
+  <meta property="og:image" content="http://cruncher.ch/static/images/logo_512x512.png"/> {# Ideal size for fb: 1200x630 #}
   <meta property="og:site_name" content="Cruncher"/>
   <meta property="og:type" content="blog"/>
 
-  {# Google+ #}
-  <link rel="author" href="https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]"/>
   {% comment %}
-  Google also reads schema.org metadata, and the OpenGraph API.
-  itemscope
-  itemtype=”[pageType]“ – where [pageType] is Article, Blog, Book, Event, LocalBusiness, Organization, Person, Product or Review.
-  itemprop=”name”       – 140 characters.
-  itemprop=”description”– 185 characters
-  itemprop=”image”      - Optimal size is 180 x 120.
+  Google+
+  Google reads schema.org metadata. That's what itemscope
+  and itemtype attributes on html are doing, too.
   {% endcomment %}
+  <meta itemprop="name" content="">
+  <meta itemprop="description" content="">
+  <meta itemprop="image" content="http://cruncher.ch/static/images/logo_512x512.png">
+  <link rel="author" href="https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]"/>
 
   {% block extra_head_meta %}{% endblock extra_head_meta %}
 
@@ -89,7 +89,7 @@
   {% block extrahead %}{% endblock %}
 </head>
 
-<body itemscope itemtype="http://schema.org/Organization">
+<body>
   {% include "includes/site-header.html" %}
   {% block body %}{% endblock body %}
   {% include "includes/site-nav.html" %}
