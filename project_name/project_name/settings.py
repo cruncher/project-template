@@ -82,6 +82,7 @@ STATICFILES_FINDERS = (
 COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter',]
 
 SECRET_KEY = '{{ secret_key }}'
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -135,7 +136,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'admin_keyboard_shortcuts',
     'django.contrib.admin',
 
     'apps.styleguide',
