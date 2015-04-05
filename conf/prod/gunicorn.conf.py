@@ -13,4 +13,3 @@ loglevel = "error"
 user = "{{project_name}}"
 proc_name = "{{project_name}}"
 timeout = 60
-

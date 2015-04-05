@@ -28,8 +28,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '{{project_name}}',                      # Or path to database file if using sqlite3.
-        # 'USER': '{{project_name}}',                      # Not used with sqlite3.
-        # 'PASSWORD': '{{project_name}}',                  # Not used with sqlite3.
     }
 }
 
@@ -63,7 +61,7 @@ USE_TZ = True
 INTERNAL_IPS = ('127.0.0.1', )
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, '..', '..', 'tmp', 'media')
-STATIC_ROOT = os.path.join(PROJECT_DIR,  '..', '..', 'tmp', 'static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, '..', '..', 'tmp', 'static')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
@@ -88,7 +86,6 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,7 +108,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
-    #'utils.contextprocessors.conf'
+    # 'utils.contextprocessors.conf'
 )
 
 TEMPLATE_DIRS = (
@@ -145,7 +142,6 @@ INSTALLED_APPS = (
     'gunicorn',
     'django_extensions',
     'raven.contrib.django.raven_compat',
-    # 'south',
     'crispy_forms',
     'front',
 )

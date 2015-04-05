@@ -6,15 +6,18 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = i18n_patterns('',
+urlpatterns = i18n_patterns(
+    '',
     url(r'^$', '{{project_name}}.views.home', name='home'),
 )
 
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(r'^admin/', include(admin.site.urls)),
 )
 
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(r'^front-edit/', include('front.urls')),
 )
 
