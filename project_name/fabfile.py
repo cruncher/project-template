@@ -26,7 +26,6 @@ def collectstatic():
             run('python manage.py collectstatic --noinput')
 
 
-
 def pull_code():
     with(cd(BASE_DIR)):
         run('git pull origin %s' % env.git_branch)
@@ -38,16 +37,20 @@ def commit_push():
         run('git commit -am "dunno"')
         run('git push origin %s' % env.git_branch)
 
+
 def reload_server():
     run('sudo supervisorctl restart %s' % env.gunicorn_process)
+
 
 def clear_cache():
     with(cd(CODE_DIR)):
         with prefix(env.activate):
             run('python manage.py clear_cache')
 
+
 def load():
     run('w')
+
 
 def compilemessages(do_reload=True):
     with(cd(CODE_DIR)):
@@ -55,6 +58,7 @@ def compilemessages(do_reload=True):
             run('python manage.py compilemessages')
     if do_reload:
         reload_server()
+
 
 def requirements():
     with(cd(CODE_DIR)):
@@ -68,9 +72,11 @@ def deploy():
     compilemessages(False)
     reload_server()
 
+
 def ssh():
     with(cd(CODE_DIR)):
         run('bash')
+
 
 def sync_get():
     with(cd(CODE_DIR)):
@@ -84,4 +90,3 @@ def sync_get():
     local('rm -f %s.dmp %s.dmp.lst' % (env.remote_db, env.remote_db))
     local('python manage.py migrate')
     local('python manage.py set_fake_passwords --password="admin"')
-

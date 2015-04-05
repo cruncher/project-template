@@ -77,7 +77,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter',]
+COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
 
 SECRET_KEY = '{{ secret_key }}'
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
@@ -188,7 +188,7 @@ RAVEN_CONFIG = {
 
 
 try:
-    from settings_local import *
+    from settings_local import *  # NOQA
 except ImportError:
     pass
 
