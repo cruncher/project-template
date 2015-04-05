@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'apps.styleguide',
+    # 'apps.cruncher',
 
     'sekizai',
     'compressor',

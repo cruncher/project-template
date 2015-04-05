@@ -9,16 +9,14 @@ admin.autodiscover()
 urlpatterns = i18n_patterns(
     '',
     url(r'^$', '{{project_name}}.views.home', name='home'),
-)
-
-urlpatterns += patterns(
-    '',
     url(r'^admin/', include(admin.site.urls)),
 )
 
 urlpatterns += patterns(
     '',
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^front-edit/', include('front.urls')),
+    # url(r'^redactor-3298hjahsd2/', include('apps.cruncher.urls')),
 )
 
 if settings.DEBUG:
@@ -30,3 +28,6 @@ if settings.DEBUG:
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
         url(r'', include('django.contrib.staticfiles.urls')),
     ) + urlpatterns
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns('', url(r'^rosetta/', include('rosetta.urls')), )
