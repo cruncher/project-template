@@ -80,7 +80,10 @@
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.forms.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.classes.css" />
   {% endcompress %}
-
+  
+  {% if request.user.is_staff %}
+  <link rel="stylesheet" type="text/css" href="{% static "redactor1009/redactor/redactor.css" %}">
+  {% endif %}
   <!--[if lte IE 8]><link rel="stylesheet" href="css/bolt.ie.css" /><![endif]-->
   <!--[if IE 8]><link rel="stylesheet" href="css/bolt.ie8.css" /><![endif]-->
 
@@ -130,6 +133,16 @@
   <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.input.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.input.placeholder.js"></script>
   {% endcompress %}
+  {% if request.user.is_staff %}
+  <script src="{% static "redactor1009/redactor/redactor.min.js" %}"></script>
+  {% comment %}
+  <script src="{% static "js/redactor.table.js" %}"></script>
+  <script src="{% static "js/redactor.text_styles.js" %}"></script>
+  <script src="{% static "colorfield/jscolor/jscolor.js" %}"></script>
+  <script src="{% static "js/redactor.fontcolor.js" %}"></script>
+  {% endcomment %}
+  <script src="{% static "redactor1009/redactor/fr.js" %}"></script>
+  {% endif %}
 
   {% render_block "site_js" %}
   {% render_block "js" %}
