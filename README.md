@@ -1,4 +1,4 @@
-A Django 1.4+ project template
+A Django project template
 
 * nginx, supervisord, gunicorn configuration
 * PostrgreSQL
