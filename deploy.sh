@@ -9,3 +9,17 @@ cd {{project_name}}
 createdb {{project_name}}
 python manage.py collectstatic --noinput
 python manage.py syncdb
+
+cd
+mkdir -p backups
+(crontab -l ; echo "@daily ~/{{project_name}}/.venv/bin/python ~/{{project_name}}/{{project_name}}/manage.py clearsessions") | crontab -
+(crontab -l ; echo "@daily pg_dump -f ~/backups/{{project_name}}.sql {{project_name}}") | crontab -
+
+cd {{project_name}}/conf/prod
+echo
+echo "sudo ln -s $PWD/supervisord.gunicorn.conf /etc/supervisord.d/{{project_name}}.conf"
+echo "sudo ln -s $PWD/nginx.conf /etc/nginx/sites-enabled/{{project_name}}.conf"
+echo "sudo supervisorctl update"
+echo "sudo service nginx configtest"
+echo
+cd
