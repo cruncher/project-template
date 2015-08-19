@@ -11,9 +11,9 @@ python manage.py collectstatic --noinput
 python manage.py syncdb
 
 cd
-mkdir -p backups
+mkdir -p backup
 (crontab -l ; echo "@daily ~/{{project_name}}/.venv/bin/python ~/{{project_name}}/{{project_name}}/manage.py clearsessions") | crontab -
-(crontab -l ; echo "@daily pg_dump -f ~/backups/{{project_name}}.sql {{project_name}}") | crontab -
+(crontab -l ; echo "@daily pg_dump -f ~/backup/{{project_name}}.sql {{project_name}}") | crontab -
 
 cd {{project_name}}/conf/prod
 echo
