@@ -9,6 +9,7 @@ cd {{project_name}}
 createdb {{project_name}}
 python manage.py collectstatic --noinput
 python manage.py syncdb
+mkdir -p ../tmp/media
 
 cd
 mkdir -p backup
