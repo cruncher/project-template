@@ -77,6 +77,10 @@ def ssh():
     with(cd(CODE_DIR)):
         run('bash')
 
+def version():
+    with(cd(CODE_DIR)):
+        with prefix(env.activate):
+            run('python manage.py --version')
 
 def sync_get():
     with(cd(CODE_DIR)):
