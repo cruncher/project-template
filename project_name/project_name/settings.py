@@ -3,7 +3,7 @@ import os
 
 gettext = lambda s: s
 _ = lambda x: x
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 DEBUG = True
 
@@ -32,14 +32,6 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, '{{project_name}}.db'),
-    }
-}
-"""
 
 
 CACHES = {
@@ -59,15 +51,14 @@ USE_TZ = True
 
 INTERNAL_IPS = ('127.0.0.1', )
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, '..', '..', 'tmp', 'media')
-STATIC_ROOT = os.path.join(PROJECT_DIR, '..', '..', 'tmp', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'tmp', 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'tmp', 'static')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, '..', 'static'),
-    # os.path.join(PROJECT_DIR, '..', '..', 'res'),
+    os.path.join(BASE_DIR, '..', 'static'),
 )
 
 STATICFILES_FINDERS = (
@@ -114,11 +105,11 @@ TEMPLATES = [
 ]
 
 # TEMPLATE_DIRS = (
-#     os.path.join(PROJECT_DIR, '..', 'templates'),
+#     os.path.join(BASE_DIR, 'templates'),
 # )
 
 LOCALE_PATHS = (
-    os.path.join(PROJECT_DIR, '..', 'locale'),
+    os.path.join(BASE_DIR, 'locale'),
 )
 
 
