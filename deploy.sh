@@ -10,6 +10,7 @@ createdb {{project_name}}
 python manage.py collectstatic --noinput
 python manage.py syncdb
 mkdir -p ../tmp/media
+mkdir /var/tmp/letsencrypt-auto
 
 cd
 mkdir -p backup
