@@ -1,3 +1,9 @@
 [submodule "project_name/static/bolt"]
 	path = project_name/static/bolt
 	url = https://github.com/stephband/bolt.git
+[submodule "project_name/static/breakpoint"]
+	path = project_name/static/breakpoint
+	url = https://github.com/stephband/window.breakpoint.git
+[submodule "project_name/static/sparky"]
+	path = project_name/static/sparky
+	url = https://github.com/cruncher/sparky.git
