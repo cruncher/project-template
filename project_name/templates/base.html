@@ -1,4 +1,4 @@
-<!doctype html>{% load sekizai_tags compress i18n front_tags %}
+<!doctype html>{% load sekizai_tags compress i18n front_tags static %}
 {% load url from future %}
 <html lang="en" itemscope itemtype="http://schema.org/Article">
 <head>
@@ -13,15 +13,15 @@
   <meta name="twitter:url" content="http://">
   <meta name="twitter:title" content="">
   <meta name="twitter:description" content="">
-  <meta name="twitter:image" content="http://cruncher.ch/static/images/logo_512x512.png"> {# Must be at least 120x120 #}
+  <meta name="twitter:image" content="https://cruncher.ch/static/images/logo_512x512.png"> {# Must be at least 120x120 #}
   <meta name="twitter:site" content="@cruncher">
   <meta name="twitter:creator" content="@cruncher">
 
   {# OpenGraph #}
   <meta property="og:url" content="http://"/>
   <meta property="og:title" content=""/>
-  <meta property="og:description" content="" /> 
-  <meta property="og:image" content="http://cruncher.ch/static/images/logo_512x512.png"/> {# Ideal size for fb: 1200x630 #}
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="https://cruncher.ch/static/images/logo_512x512.png"/> {# Ideal size for fb: 1200x630 #}
   <meta property="og:site_name" content="Cruncher"/>
   <meta property="og:type" content="blog"/>
 
@@ -42,9 +42,8 @@
   {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
   {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
 
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" href="images/favicon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" />
+  <link rel="apple-touch-icon" href="{% static "images/apple-touch-icon.png" %}" />
 
   <script>
     document.documentElement.className = 'js loading';
@@ -77,11 +76,14 @@
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.forms.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/bolt.classes.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}css/site.type.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}css/site.typography.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.forms.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}css/site.classes.css" />
   {% endcompress %}
-
+  
+  {% if request.user.is_staff %}
+  <link rel="stylesheet" type="text/css" href="{% static "redactor1009/redactor/redactor.css" %}">
+  {% endif %}
   <!--[if lte IE 8]><link rel="stylesheet" href="css/bolt.ie.css" /><![endif]-->
   <!--[if IE 8]><link rel="stylesheet" href="css/bolt.ie8.css" /><![endif]-->
 
@@ -102,15 +104,13 @@
   </script>
 
   <!--[if (gt IE 8)|!(IE)]><!-->
-    <script src="{{STATIC_URL}}bolt/js/jquery-2.0.0-custom.js"></script>
+    <script src="{{STATIC_URL}}bolt/js/jquery.js"></script>
   <!--<![endif]-->
   <!--[if lte IE 8]>
     <script defer="defer" src="js/jquery-1.9.1.js"></script>
   <![endif]-->
 
   {% compress js %}
-  <script defer="defer" src="{{STATIC_URL}}bolt/res/ios-orientationchange-fix/ios-orientationchange-fix.js"></script>
-  <script defer="defer" src="{{STATIC_URL}}bolt/res/jquery.cookie/jquery.cookie.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.prefix.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.render.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/jquery.event.tap.js"></script>
@@ -133,6 +133,16 @@
   <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.input.js"></script>
   <script defer="defer" src="{{STATIC_URL}}bolt/js/bolt.input.placeholder.js"></script>
   {% endcompress %}
+  {% if request.user.is_staff %}
+  <script src="{% static "redactor1009/redactor/redactor.min.js" %}"></script>
+  {% comment %}
+  <script src="{% static "js/redactor.table.js" %}"></script>
+  <script src="{% static "js/redactor.text_styles.js" %}"></script>
+  <script src="{% static "colorfield/jscolor/jscolor.js" %}"></script>
+  <script src="{% static "js/redactor.fontcolor.js" %}"></script>
+  {% endcomment %}
+  <script src="{% static "redactor1009/redactor/fr.js" %}"></script>
+  {% endif %}
 
   {% render_block "site_js" %}
   {% render_block "js" %}

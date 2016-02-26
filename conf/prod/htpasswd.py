@@ -5,4 +5,3 @@ import sys
 
 if len(sys.argv) == 3:
     print("%s:%s" % (sys.argv[1], crypt.crypt(sys.argv[2], sys.argv[2])))
-

@@ -3,10 +3,9 @@ import os
 
 gettext = lambda s: s
 _ = lambda x: x
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Marco', 'marco@cruncher.ch')
@@ -28,21 +27,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '{{project_name}}',                      # Or path to database file if using sqlite3.
-        'USER': '{{project_name}}',                      # Not used with sqlite3.
-        'PASSWORD': '{{project_name}}',                  # Not used with sqlite3.
     }
 }
 
 ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, '{{project_name}}.db'),
-    }
-}
-"""
 
 
 CACHES = {
@@ -62,15 +51,14 @@ USE_TZ = True
 
 INTERNAL_IPS = ('127.0.0.1', )
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, '..', '..', 'tmp', 'media')
-STATIC_ROOT = os.path.join(PROJECT_DIR,  '..', '..', 'tmp', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'tmp', 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'tmp', 'static')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, '..', 'static'),
-    # os.path.join(PROJECT_DIR, '..', '..', 'res'),
+    os.path.join(BASE_DIR, '..', 'static'),
 )
 
 STATICFILES_FINDERS = (
@@ -79,46 +67,49 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter',]
+COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
 
 SECRET_KEY = '{{ secret_key }}'
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.static',
-    'django.contrib.messages.context_processors.messages',
-    'sekizai.context_processors.sekizai',
-    #'utils.contextprocessors.conf'
-)
 
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, '..', 'templates'),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.request',
+                'django.core.context_processors.media',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.static',
+                'django.contrib.messages.context_processors.messages',
+                # 'sekizai.context_processors.sekizai',
+            ],
+            'debug': False
+        }
+    },
+]
+
+# TEMPLATE_DIRS = (
+#     os.path.join(BASE_DIR, 'templates'),
+# )
 
 LOCALE_PATHS = (
-    os.path.join(PROJECT_DIR, '..', 'locale'),
+    os.path.join(BASE_DIR, 'locale'),
 )
 
 
@@ -135,17 +126,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'admin_keyboard_shortcuts',
     'django.contrib.admin',
 
     'apps.styleguide',
+    # 'apps.cruncher',
 
     'sekizai',
     'compressor',
     'gunicorn',
     'django_extensions',
     'raven.contrib.django.raven_compat',
-    'south',
     'crispy_forms',
     'front',
 )
@@ -181,6 +171,7 @@ LOGGING = {
 }
 
 
+FILE_UPLOAD_PERMISSIONS = 0644
 
 ADMIN_KEYBOARD_SHORTCUTS_HIDE_ICON = True
 
@@ -191,7 +182,7 @@ RAVEN_CONFIG = {
 
 
 try:
-    from settings_local import *
+    from settings_local import *  # NOQA
 except ImportError:
     pass
 

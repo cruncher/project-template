@@ -1,10 +1,10 @@
-Django>=1.5.4
+Django>=1.8
 Fabric
-Pillow==2.1.0
+Pillow
 django-crispy-forms
 django-front
-South
 django-sekizai
+# https://github.com/ojii/django-sekizai/archive/master.zip
 cssmin
 gunicorn
 django-compressor
@@ -13,6 +13,5 @@ django-extensions
 python-memcached
 psycopg2
 raven
-django-admin-keyboard-shortcuts
 IPython
 pudb
