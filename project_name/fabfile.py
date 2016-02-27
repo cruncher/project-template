@@ -34,9 +34,18 @@ def pull_code():
 
 def commit_push():
     with(cd(BASE_DIR)):
-        run('git commit -am "dunno"')
-        run('git push origin %s' % env.git_branch)
+        git_commit()
+        git_push()
 
+
+def git_commit():
+    with(cd(BASE_DIR)):
+        run('git commit -am "dunno"')
+
+
+def git_push():
+    with(cd(BASE_DIR)):
+        run('git push origin %s' % env.git_branch)
 
 def reload_server():
     run('sudo supervisorctl restart %s' % env.gunicorn_process)
