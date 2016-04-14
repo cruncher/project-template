@@ -21,7 +21,7 @@ var files = {
 		"bolt/css/thumb.css",
 		"bolt/css/text.css",
 		"bolt/css/utilities.css",
-		"bolt/css/document.css",
+		"bolt/css/dom.css",
 		"bolt/css/action.css",
 
 		"css/form.css",
@@ -32,7 +32,7 @@ var files = {
 		"css/grid.css",
 		"css/text.css",
 		"css/color.css",
-		"css/document.css",
+		"css/dom.css",
 		"css/space.css"
 	],
 
@@ -69,10 +69,10 @@ var config = {
 		],
 
 		// Directory to render styleguide
-		destination: 'static/styleguide',
+		destination: 'static/styles',
 
 		// Location of template
-		template: 'static/bolt/docs-template',
+		template: 'static/bolt/styles-template',
 
 		// Relative paths to include in styleguide
 		css: files.css.map(upLevel),
