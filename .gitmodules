@@ -7,3 +7,6 @@
 [submodule "project_name/static/sparky"]
 	path = project_name/static/sparky
 	url = https://github.com/cruncher/sparky.git
+[submodule "project_name/static/fn"]
+	path = project_name/static/fn
+	url = https://github.com/cruncher/fn
