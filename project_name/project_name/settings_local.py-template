@@ -4,7 +4,8 @@ PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 
 # DEBUG=False
-
+INTERNAL_IPS = ('127.0.0.1', )
+ 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
