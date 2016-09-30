@@ -41,7 +41,21 @@
     download a modern browser: FireFox, Chrome or Opera. It's free!
   </noscript>
   <![endif]-->
-
+  
+  {% if not debug %}
+  <script title="raven">
+    Raven.config('https://FIXME@sentry.io/FIXME', {
+      whitelistUrls: [/FIXME\.com/]
+    }).install();
+    {% if request.user.is_authenticated %}
+    Raven.setUserContext({
+        email: '{{request.user.email}}',
+        id: '{{request.user.pk}}'
+    })
+    {% endif %}
+  </script>
+  {% endif %}
+  
   {% compress css %}
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/normalise.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/form.css" />
