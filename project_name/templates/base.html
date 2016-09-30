@@ -17,7 +17,6 @@
 
   <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" />
   <link rel="apple-touch-icon" href="{% static "images/apple-touch-icon.png" %}" />
-
   <script>
     document.documentElement.className = 'js loading';
     window.cms_config = {
@@ -41,20 +40,6 @@
     download a modern browser: FireFox, Chrome or Opera. It's free!
   </noscript>
   <![endif]-->
-  
-  {% if not debug %}
-  <script title="raven">
-    Raven.config('https://FIXME@sentry.io/FIXME', {
-      whitelistUrls: [/FIXME\.com/]
-    }).install();
-    {% if request.user.is_authenticated %}
-    Raven.setUserContext({
-        email: '{{request.user.email}}',
-        id: '{{request.user.pk}}'
-    })
-    {% endif %}
-  </script>
-  {% endif %}
   
   {% compress css %}
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/normalise.css" />
@@ -89,6 +74,21 @@
   {% include "includes/site-nav.html" %}
   {% include "includes/site-footer.html" %}
 
+  <script src="https://cdn.ravenjs.com/3.7.0/raven.min.js"></script>
+  {% if not debug %}
+  <script title="raven">
+    Raven.config('https://FIXME@sentry.io/FIXME', {
+      whitelistUrls: [/FIXME\.com/]
+    }).install();
+    {% if request.user.is_authenticated %}
+    Raven.setUserContext({
+        email: '{{request.user.email}}',
+        id: '{{request.user.pk}}'
+    })
+    {% endif %}
+  </script>
+  {% endif %}
+  
   <script>
     // Function.prototype.bind is the ES5 feature with by far the worst support. Use it
     // to roughly detect ES5. http://kangax.github.com/es5-compat-table/
