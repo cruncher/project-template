@@ -21,16 +21,16 @@ LANGUAGES = [
 
 DEFAULT_LANGUAGE = 0
 
-# create user {{project_name}} with password '{{project_name}}';
-# create database {{project_name}} with encoding='UTF-8' owner={{project_name}};
+# create user se_photo_upload with password 'se_photo_upload';
+# create database se_photo_upload with encoding='UTF-8' owner=se_photo_upload;
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '{{project_name}}',                      # Or path to database file if using sqlite3.
+        'NAME': 'se_photo_upload',                      # Or path to database file if using sqlite3.
     }
 }
 
-ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
+ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.se_photo_upload.ch']
 
 
 
@@ -38,7 +38,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
-        'KEY_PREFIX': '{{project_name}}'
+        'KEY_PREFIX': 'se_photo_upload'
     }
 }
 
@@ -70,7 +70,7 @@ STATICFILES_FINDERS = (
 
 COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
 
-SECRET_KEY = '{{ secret_key }}'
+SECRET_KEY = '9jp7-dqkk9#ntbz%8xx!0o7+z#!k=5zuvv1fotn)@#1gjsa&$x'
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 MIDDLEWARE_CLASSES = (
@@ -96,13 +96,13 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.request',
-                'django.core.context_processors.media',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.static',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
+                'django.template.context_processors.media',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
-                # 'sekizai.context_processors.sekizai',
+                'sekizai.context_processors.sekizai',
             ],
             'debug': False
         }
@@ -118,10 +118,10 @@ LOCALE_PATHS = (
 )
 
 
-ROOT_URLCONF = '{{project_name}}.urls'
+ROOT_URLCONF = 'se_photo_upload.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = '{{project_name}}.wsgi.application'
+WSGI_APPLICATION = 'se_photo_upload.wsgi.application'
 
 
 INSTALLED_APPS = (
@@ -177,8 +177,6 @@ LOGGING = {
 
 
 FILE_UPLOAD_PERMISSIONS = 0644
-
-ADMIN_KEYBOARD_SHORTCUTS_HIDE_ICON = True
 
 # Set your DSN value
 RAVEN_CONFIG = {
