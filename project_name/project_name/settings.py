@@ -21,16 +21,16 @@ LANGUAGES = [
 
 DEFAULT_LANGUAGE = 0
 
-# create user se_photo_upload with password 'se_photo_upload';
-# create database se_photo_upload with encoding='UTF-8' owner=se_photo_upload;
+# create user {{project_name}} with password '{{project_name}}';
+# create database {{project_name}} with encoding='UTF-8' owner={{project_name}};
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'se_photo_upload',                      # Or path to database file if using sqlite3.
+        'NAME': '{{project_name}}',                      # Or path to database file if using sqlite3.
     }
 }
 
-ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.se_photo_upload.ch']
+ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
 
 
 
@@ -38,7 +38,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
-        'KEY_PREFIX': 'se_photo_upload'
+        'KEY_PREFIX': '{{project_name}}'
     }
 }
 
@@ -70,7 +70,7 @@ STATICFILES_FINDERS = (
 
 COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
 
-SECRET_KEY = '9jp7-dqkk9#ntbz%8xx!0o7+z#!k=5zuvv1fotn)@#1gjsa&$x'
+SECRET_KEY = '{{secret_key}}'
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 MIDDLEWARE_CLASSES = (
@@ -118,10 +118,10 @@ LOCALE_PATHS = (
 )
 
 
-ROOT_URLCONF = 'se_photo_upload.urls'
+ROOT_URLCONF = '{{project_name}}.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'se_photo_upload.wsgi.application'
+WSGI_APPLICATION = '{{project_name}}.wsgi.application'
 
 
 INSTALLED_APPS = (
