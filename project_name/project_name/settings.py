@@ -68,7 +68,8 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
+# COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
+COMPRESS_CSS_FILTERS = ['compressor.filters.cleancss.CleanCSSFilter', ]
 
 SECRET_KEY = '{{secret_key}}'
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
