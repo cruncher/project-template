@@ -49,7 +49,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-INTERNAL_IPS = ('127.0.0.1', )
+# INTERNAL_IPS = ('127.0.0.1', )
+INTERNAL_IPS = []
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'tmp', 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'tmp', 'static')
@@ -58,7 +59,7 @@ STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '..', 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 STATICFILES_FINDERS = (
@@ -67,14 +68,16 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
+# COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter', ]
+COMPRESS_CSS_FILTERS = ['compressor.filters.cleancss.CleanCSSFilter', ]
 
-SECRET_KEY = '{{ secret_key }}'
+SECRET_KEY = '{{secret_key}}'
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -88,16 +91,19 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.request',
-                'django.core.context_processors.media',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.static',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
+                'django.template.context_processors.media',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
-                # 'sekizai.context_processors.sekizai',
+                'sekizai.context_processors.sekizai',
             ],
             'debug': False
         }
@@ -172,8 +178,6 @@ LOGGING = {
 
 
 FILE_UPLOAD_PERMISSIONS = 0644
-
-ADMIN_KEYBOARD_SHORTCUTS_HIDE_ICON = True
 
 # Set your DSN value
 RAVEN_CONFIG = {
