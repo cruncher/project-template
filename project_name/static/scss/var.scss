@@ -1,0 +1,15 @@
+// Default grid count
+$grid-count: 7;
+
+// Default grid gutter
+$grid-gutter: 1.25rem;
+
+// Default vertical space
+$grid-space:  1.25rem;
+
+// Breakpoint prefix, min-width, grid count, gutter, space
+// 540px, 760px, 980px, Maybe 1200px too?
+$breakpoints:
+	'\\@1-' 32em $grid-count $grid-gutter $grid-space,
+	'\\@2-' 48em $grid-count $grid-gutter $grid-space,
+	'\\@3-' 64em $grid-count $grid-gutter $grid-space;
