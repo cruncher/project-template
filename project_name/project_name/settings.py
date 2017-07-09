@@ -186,7 +186,7 @@ RAVEN_CONFIG = {
 
 
 try:
-    from settings_local import *  # NOQA
+    from .settings_local import *  # NOQA
 except ImportError:
     pass
 
