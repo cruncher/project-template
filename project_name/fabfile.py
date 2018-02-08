@@ -1,15 +1,15 @@
 from fabric.api import run, cd, env, prefix, local
 
-BASE_DIR = '/home/projects/symplifi/symplifi'
+BASE_DIR = '/home/projects/{{project_name}}/{{project_name}}'
 TEMPLATES_DIR = '%s/res' % BASE_DIR
-CODE_DIR = BASE_DIR + '/symplifi'
+CODE_DIR = BASE_DIR + '/{{project_name}}'
 
-env.hosts = ['symplifi@symplifi.cruncher.ch']
+env.hosts = ['{{project_name}}@{{project_name}}.cruncher.ch']
 env.activate = 'source %s/.venv/bin/activate' % BASE_DIR
-env.remote_db = 'symplifi'
-env.local_db = 'symplifi'
+env.remote_db = '{{project_name}}'
+env.local_db = '{{project_name}}'
 env.git_branch = 'master'
-env.gunicorn_process = 'symplifi_gunicorn'
+env.gunicorn_process = '{{project_name}}_gunicorn'
 env.forward_agent = True
 
 
