@@ -1,15 +1,15 @@
 from fabric.api import run, cd, env, prefix, local
 
-BASE_DIR = '/home/projects/{{project_name}}/{{project_name}}'
+BASE_DIR = '/home/projects/symplifi/symplifi'
 TEMPLATES_DIR = '%s/res' % BASE_DIR
-CODE_DIR = BASE_DIR + '/{{project_name}}'
+CODE_DIR = BASE_DIR + '/symplifi'
 
-env.hosts = ['{{project_name}}@{{project_name}}.cruncher.ch']
+env.hosts = ['symplifi@symplifi.cruncher.ch']
 env.activate = 'source %s/.venv/bin/activate' % BASE_DIR
-env.remote_db = '{{project_name}}'
-env.local_db = '{{project_name}}'
+env.remote_db = 'symplifi'
+env.local_db = 'symplifi'
 env.git_branch = 'master'
-env.gunicorn_process = '{{project_name}}_gunicorn'
+env.gunicorn_process = 'symplifi_gunicorn'
 env.forward_agent = True
 
 
@@ -47,6 +47,7 @@ def git_push():
     with(cd(BASE_DIR)):
         run('git push origin %s' % env.git_branch)
 
+
 def reload_server():
     run('sudo supervisorctl restart %s' % env.gunicorn_process)
 
@@ -82,14 +83,22 @@ def deploy():
     reload_server()
 
 
+def crontab():
+    with(cd(BASE_DIR)):
+        run('crontab {}/conf/prod/crontab'.format(BASE_DIR))
+        run('crontab -l')
+
+
 def ssh():
     with(cd(CODE_DIR)):
         run('bash')
+
 
 def version():
     with(cd(CODE_DIR)):
         with prefix(env.activate):
             run('python manage.py --version')
+
 
 def sync_get():
     with(cd(CODE_DIR)):
