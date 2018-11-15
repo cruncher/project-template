@@ -34,7 +34,17 @@ def pull_code():
 
 def commit_push():
     with(cd(BASE_DIR)):
+        git_commit()
+        git_push()
+
+
+def git_commit():
+    with(cd(BASE_DIR)):
         run('git commit -am "dunno"')
+
+
+def git_push():
+    with(cd(BASE_DIR)):
         run('git push origin %s' % env.git_branch)
 
 
@@ -73,14 +83,22 @@ def deploy():
     reload_server()
 
 
+def crontab():
+    with(cd(BASE_DIR)):
+        run('crontab {}/conf/prod/crontab'.format(BASE_DIR))
+        run('crontab -l')
+
+
 def ssh():
     with(cd(CODE_DIR)):
         run('bash')
+
 
 def version():
     with(cd(CODE_DIR)):
         with prefix(env.activate):
             run('python manage.py --version')
+
 
 def sync_get():
     with(cd(CODE_DIR)):
