@@ -6,7 +6,7 @@
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.66" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  
+
   {% block extra_head_meta %}{% endblock extra_head_meta %}
 
   <title>{% block headtitle %}{% endblock headtitle %}</title>
@@ -15,53 +15,33 @@
   {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
 
   <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" />
-  <link rel="apple-touch-icon" href="{% static "images/apple-touch-icon.png" %}" />
-  <script>
-    document.documentElement.className = 'js loading';
-    window.cms_config = {
-      mediaURL: '{{ CMS_MEDIA_URL }}',
-      trans: {}
-    };
-    window.WebFontConfig = {
-      google: {
-        families: []
-      }
-    };
+
+  <script title="config">
+  document.documentElement.className = 'js notransition loading';
+  {% if debug %}window.DEBUG = true;{% endif %}
+  window.config = {};
+  {% render_block "config" %}
   </script>
 
-  {# Make IE recognise HTML5 elements for styling #}
-  <!--[if lte IE 8]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <noscript>
-    <strong>Warning!</strong>
-    Your creaking old browser does not support HTML5 so some elements on this page are simulated using JScript.
-    Your browser has JScript disabled. Please enable it in order to properly display this page. Alternatively,
-    download a modern browser: FireFox, Chrome or Opera. It's free!
-  </noscript>
-  <![endif]-->
-  
   {% compress css %}
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/normalise.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/form.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/card.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/html.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/svg.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/body.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/input.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/label.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/index.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/layer.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/button.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/thumb.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/block.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/index.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/type.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/text.css" />
   <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/color.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/utilities.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/dom.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/action.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/layer.css" />
-  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/dialog.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/modifiers.css" />
+  <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/respond.css" />
+
+  <link rel="stylesheet" href="{{STATIC_URL}}dom/css/dom.css" />
   {% endcompress %}
-  
-  {% if request.user.is_staff %}
-  <link rel="stylesheet" type="text/css" href="{% static "redactor1022/redactor/redactor.css" %}">
-  {% endif %}
-  <!--[if lte IE 8]><link rel="stylesheet" href="css/bolt.ie.css" /><![endif]-->
-  <!--[if IE 8]><link rel="stylesheet" href="css/bolt.ie8.css" /><![endif]-->
 
   {% render_block "css" %}
   {% block extrahead %}{% endblock %}
@@ -73,100 +53,26 @@
   {% include "includes/site-nav.html" %}
   {% include "includes/site-footer.html" %}
 
-  <script src="https://cdn.ravenjs.com/3.7.0/raven.min.js"></script>
-  {% if not debug %}
-  <script title="raven">
-    Raven.config('https://FIXME@sentry.io/FIXME', {
-      whitelistUrls: [/FIXME\.com/]
-    }).install();
-    {% if request.user.is_authenticated %}
-    Raven.setUserContext({
-        email: '{{request.user.email}}',
-        id: '{{request.user.pk}}'
-    })
-    {% endif %}
-  </script>
-  {% endif %}
-  
-  <script>
-    // Function.prototype.bind is the ES5 feature with by far the worst support. Use it
-    // to roughly detect ES5. http://kangax.github.com/es5-compat-table/
-    !Function.prototype.bind && document.write(unescape('%3Cscript src="{{STATIC_URL}}bolt/res/es5-shim/es5-shim.min.js"%3E%3C/script%3E'));
+  {% if debug %}<!-- templates -->{% endif %}
+  {% render_block "templates" %}
+
+
+  <script type="module" title="Module">
+    {% render_block "js" postprocessor "apps.cruncher.rollup.rollup_compress" %}
   </script>
 
-  <!--[if (gt IE 8)|!(IE)]><!-->
-    <script src="{{STATIC_URL}}bolt/js/jquery.js"></script>
-  <!--<![endif]-->
-  <!--[if lte IE 8]>
-    <script defer="defer" src="js/jquery-1.9.1.js"></script>
-  <![endif]-->
-
-  {% compress js %}
-  <script src="{{STATIC_URL}}bolt/js/jquery-2.2.0.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.prefix.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.render.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.event.move.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.event.swipe.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.event.activate.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.dialog.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.loading.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.scrollto.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.validate.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/jquery.transition.js"></script>
-
-  <script src="{{STATIC_URL}}bolt/js/bolt.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/bolt.a.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/bolt.tab.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/bolt.dialog.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/bolt.tip.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/bolt.toggle.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/bolt.slide.js"></script>
-  <script src="{{STATIC_URL}}bolt/js/bolt.input.js"></script>
-  {% endcompress %}
-  {% if request.user.is_staff %}
-  <script src="{% static "redactor1022/redactor/redactor.min.js" %}"></script>
-  {% comment %}
-  <script src="{% static "js/redactor.table.js" %}"></script>
-  <script src="{% static "js/redactor.text_styles.js" %}"></script>
-  <script src="{% static "colorfield/jscolor/jscolor.js" %}"></script>
-  <script src="{% static "js/redactor.fontcolor.js" %}"></script>
-  {% endcomment %}
-  <script src="{% static "redactor1022/redactor/fr.js" %}"></script>
-  {% endif %}
-
-  {% render_block "site_js" %}
-  {% render_block "js" %}
+  {% render_block "script" %}
   {% render_block "js_nocompress" %}
-  {% front_edit_scripts editor="redactor" %}
 
-  {% comment %}
-  Use google webfont loader to asynchronously load fonts in, otherwise
-  they really slow down text rendering on slow connections.
-  https://developers.google.com/fonts/docs/webfont_loader
-  {% endcomment %}
+  {% if not debug %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129018304-1"></script>
   <script>
-    (function() {
-      var wf = document.createElement('script');
-      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })();
-  </script>
-
-  {% if not DEBUG %}
-  <script>
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-34212502-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-129018304-1');
   </script>
   {% endif %}
+
 </body>
 </html>

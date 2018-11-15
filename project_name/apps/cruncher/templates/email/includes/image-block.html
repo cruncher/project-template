@@ -1,0 +1,26 @@
+<!-- image block -->{% load static nl_tags %}
+<table cellpadding="0" cellspacing="0" border="0" align="center" class="w600" style="background:#ffffff" bgcolor="#ffffff">
+  <tr><td valign="top">&nbsp;</td></tr>
+  <tr>
+    <td valign="top" width="600" class="w600" align="center" style="text-align:center;">
+        {% for image_count in image_count|range %}
+        <img src="{{image_url}}" width="{{width}}" height="{{height}}" style="width:{{width}}px; height:{{height}}px; margin: 0 auto">
+        {% endfor %}
+    </td>
+  </tr>
+</table>
+{% if caption %}
+<!-- image caption -->
+<table cellpadding="0" cellspacing="0" border="0" align="center" class="w600" style="background:#ffffff" bgcolor="#ffffff">
+  {% include "./spacer-block.html" with height="10" colspan="3" width="600" %}
+  <tr>
+    <td valign="top" width="30" class="w50">&nbsp;</td>
+    <td valign="top" width="600" class="w600" align="left" style="text-align:left; font-family: arial; font-style: italic; font-size: 14px; line-height: 16px; color:#888888;">
+        {{caption}}
+    </td>
+    <td valign="top" width="30" class="w50">&nbsp;</td>
+  </tr>
+</table>
+<!-- /image caption -->
+{% endif %}
+<!-- /image -->

@@ -1,0 +1,161 @@
+.redactor-box, .redactor-editor {
+    width: 100%;
+    min-height: 400px;
+}
+.redactor-box.wide {
+    width: 1200px
+}
+.redactor-editor .tip {
+    display:none !important;
+}
+label.redactor_label {
+    float: none;
+    padding-bottom: 10px;
+}
+
+form .aligned .redactor-editor p {
+    margin-left:0;
+    padding-left:0;
+}
+
+.redactor-toolbar li a {
+    font-size: 16px;
+}
+.redactor-toolbar {
+    background-color: #eee;
+}
+
+input[type="color"],
+input.redactor-colorpicker {
+    width: auto;
+    min-width: 50%;
+    height: 3rem;
+    border: medium none;
+    display: inline-block;
+}
+
+.colM .aligned .redactor-box .vLargeTextField {
+    width: 100%;
+}
+
+.form-row .CodeMirror {
+    font-size: 14px;
+}
+
+.redactor-toolbar li a.re-ul-button {
+    background-color: #A1D555;
+    background-image: url("/static/images/sprites.svg");
+    background-position: -33px -393px;
+    width: 0.25rem;
+    height: 0.25rem;
+    background-size: auto auto;
+    border-radius: 0.625rem;
+    margin-top: 6px;
+}
+
+
+
+body .form-row .redactor-editor .text-1,
+body .form-row .redactor-editor h1              { font-size: 4.0625rem; line-height: 4.0625rem; font-weight: 300 }
+body .form-row .redactor-editor .text-2,
+body .form-row .redactor-editor h2              { font-size: 1.3125rem; line-height: 1.5625rem; text-align: center; font-weight: 300; }
+body .form-row .redactor-editor .text-3,
+body .form-row .redactor-editor h3              { font-size: 2.25rem;   line-height: 2.75rem;   text-align: center; font-weight: 300; }
+body .form-row .redactor-editor .text-4,
+body .form-row .redactor-editor h4              { font-size: 2.25rem;   line-height: 2.25rem;   text-align: center; font-weight: 300; }
+body .form-row .redactor-editor .text-5,
+body .form-row .redactor-editor h5              { font-size: 1.5rem;    line-height: 1.875rem;  text-align: center; color: #1b80c4;}
+body .form-row .redactor-editor .text-6,
+body .form-row .redactor-editor h6              { font-size: 1.125rem;  line-height: 1.25rem;   text-align: left; }
+body .form-row .redactor-editor .text-7         { font-size: 1rem;      line-height: 1.25rem;   text-align: left; }
+body .form-row .redactor-editor .text-8,
+body .form-row .redactor-editor p,
+body .form-row .redactor-editor li              { font-size: 1rem;      line-height: 1.25rem;   text-align: left; }
+
+body .form-row .redactor-editor .text-9         { font-size: 0.875rem;  line-height: 1.0625rem; text-align: left; }
+
+body .form-row .redactor-editor {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-style: none;
+}
+
+body .form-row .redactor-editor.text-10,
+body .form-row .redactor-editor code     {
+    font-family: Inconsolata, Courier, monospace;
+    font-style: none;
+    text-transform: none;
+}
+
+
+body .form-row .redactor-editor .left-align {
+    text-align: left;
+}
+
+body .form-row .redactor-editor .red-text { color: #c42414;}
+
+body .form-row .redactor-editor .index {
+    list-style: outside none none;
+    margin: 0px;
+    padding: 0px;
+}
+body .form-row .redactor-editor hr {
+    border-bottom-width: 0.1875rem;
+    border-color: #CCC;
+}
+body .form-row .redactor-editor .feature-index + hr {
+    margin-top: 2.5rem;
+}
+
+
+body .form-row .redactor-editor .feature-index > li {
+    padding-left: 2.25rem;
+    position: relative;
+    list-style-type: none;
+}
+
+body .form-row .redactor-editor .feature-index > li + li {
+    margin-top: 0.375rem;
+}
+
+body .form-row .redactor-editor .feature-index > li::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: #A1D555;
+    background-image: url('/static/images/sprites.svg');
+    background-position: -35px -393px;
+    background-size: auto;
+    border-radius: 0.625rem;
+}
+
+body .form-row .redactor-editor .plus-feature-index > li::before {
+    background-position: -86px -393px;
+}
+.re-info_bubble {
+    position: relative;
+}
+.re-info_bubble::after
+ {
+    content: "i";
+    background-color: #C42414;
+    color: #FFF;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 0px;
+    border-radius: 50%;
+    font-style: italic;
+}
+.redactor-editor .info-button {
+    display: inline-block;
+    background-image: none;
+    color: white;
+    width: 1rem;
+    height: 1rem;
+    text-align: center;
+}

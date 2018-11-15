@@ -1,22 +1,23 @@
 {
-  "name": "project",
-  "title": "Project",
-  "description": "A front-end toolkit of classes and evented behaviours.",
+  "name": "{{project_name}}",
+  "title": "{{project_name}}",
+  "description": "",
   "version": "0.0.1",
   "author": "@cruncher",
   "repository": {
     "type": "git",
     "url": ""
   },
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-header": "^1.7.1",
-    "gulp-sass": "^2.2.0",
-    "kss": "^2.4.0",
-    "run-sequence": "^1.1.4"
+  "license": "private",
+  "scripts": {
+    "lint": "eslint static/js/*.js static/fn/js/*.js static/sparky/js/*.js static/breakpoint/js/*.js apps/*/static/js/*.js",
+    "sass": "node-sass --output-style compact --indent-type tab --indent-width 1 -o static/2016-css static/scss/respond.scss && node-sass --output-style compact --indent-type tab --indent-width 1 -o static/2016-css static/scss/grid.scss"
   },
-  "license": "None"
+  "dependencies": {
+    "babel-minify": "^0.5.0",
+    "rollup": "^0.66.5"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^4.2.1"
+  }
 }

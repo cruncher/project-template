@@ -1,0 +1,12 @@
+
+html .inline-group .form-row input.vDateField,
+html .inline-group .form-row input.vTimeField {
+    width: calc(100% - 118px) !important;
+    vertical-align: top !important;
+}
+
+html .calendar-shortcuts a,
+html span.datetimeshortcuts a {
+    margin-top: 0 !important;
+}
+

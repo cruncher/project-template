@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 import os
 
 gettext = lambda s: s
 _ = lambda x: x
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
 
@@ -57,6 +57,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, '..', 'tmp', 'static')
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+STATICFILES_STORAGE = 'apps.cruncher.rollup.StaticFilesStorage'
+ROLLUP_BASE = ''
+
+ROLLUP_BIN = os.path.join(
+    PROJECT_DIR,
+    '..',
+    'node_modules/rollup/bin/rollup'
+)
+MINIFY_BIN = os.path.join(
+    PROJECT_DIR,
+    '..',
+    'node_modules/babel-minify/bin/minify.js'
+)
+
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
