@@ -91,17 +91,17 @@ COMPRESS_CSS_FILTERS = [
 SECRET_KEY = '{{secret_key}}'
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+]
+
 
 
 TEMPLATES = [
@@ -158,7 +158,7 @@ INSTALLED_APPS = (
     'compressor',
     'gunicorn',
     'django_extensions',
-    'raven.contrib.django.raven_compat',
+    # 'raven.contrib.django.raven_compat',
     'crispy_forms',
     'front',
 )
