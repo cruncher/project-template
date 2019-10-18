@@ -14,7 +14,7 @@ admin.autodiscover()
 urlpatterns = i18n_patterns(
     url(r'^$', home, name='home'),
     url(r'^admin$', RedirectView.as_view(url='/admin/')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 )
 
 urlpatterns += [
