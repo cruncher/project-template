@@ -1,5 +1,5 @@
 from django import template
-from django.core.urlresolvers import resolve, reverse
+from django.urls import reverse, resolve
 from django.utils.translation import activate, get_language
 from ..timestamps import to_timestamp
 from django.utils.safestring import mark_safe
