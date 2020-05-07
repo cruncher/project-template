@@ -1,10 +1,17 @@
-from django import template
-from django.urls import reverse, resolve
-from django.utils.translation import activate, get_language
-from ..timestamps import to_timestamp
-from django.utils.safestring import mark_safe
-from decimal import Decimal
 import datetime
+import json
+import os
+from decimal import Decimal
+
+from django import template
+from django.conf import settings
+from django.urls import resolve, reverse
+from django.utils.html import format_html_join
+from django.utils.safestring import mark_safe
+from django.utils.timesince import timesince
+from django.utils.translation import activate, get_language
+
+from ..timestamps import to_timestamp
 
 
 register = template.Library()
@@ -13,7 +20,12 @@ register = template.Library()
 @register.filter
 def dispaly_navigation(page):
     # page is level 1 and has children or we're on a leaf page
-    return page and page.get_ancestors() and page.get_children_count() or page.get_ancestors().count() >= 2
+    return (
+        page
+        and page.get_ancestors()
+        and page.get_children_count()
+        or page.get_ancestors().count() >= 2
+    )
 
 
 @register.simple_tag(takes_context=True)
@@ -87,3 +99,32 @@ def int_div(a, b):
 @register.filter
 def add_hours(dt, hours):
     return dt + datetime.timedelta(hours=int(hours))
+
+
+@register.filter(name='str')
+def to_str(v):
+    return str(v)
+
+
+@register.simple_tag(takes_context=False)
+def render_json_static(static_type):
+    with open(os.path.join(settings.BASE_DIR, 'package.json'), 'r') as json_file:
+        data = json.load(json_file).get(static_type)
+        if data:
+            if static_type == 'style':
+                return format_html_join(
+                    '\n', '<link rel="stylesheet" href="/{}" />', [[d] for d in data]
+                )
+    return ''
+
+
+@register.filter
+def shorter_timesince(dt):
+    return timesince(dt).split(',', 1)[0].strip()
+
+
+@register.filter
+def get(dct, key):
+    if type(dct) is not dict:
+        return None
+    return dct.get(str(key), None)

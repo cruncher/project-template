@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags %}
+
+{% block body %}class=""{% endblock %}
+
+{% block headtitle %}{% page_attribute "title" %} — {{block.super}}{% endblock headtitle %}
+
+{% block content %}
+{% endblock %}

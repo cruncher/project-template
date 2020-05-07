@@ -1,11 +1,21 @@
 import os
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+COMPRESS_ENABLED = False
 
 DEBUG = True
 
 # DEBUG=False
-INTERNAL_IPS = ('127.0.0.1', )
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+INTERNAL_IPS = ('127.0.0.1',)
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    '127.0.0.1',
+    'localhost',
+    'marco.local',
+    '.ngrok.io',
+    '192.168.1.117',
+]
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
 # SESSION_COOKIE_SECURE = True
@@ -23,12 +33,12 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 # RAVEN_CONFIG = {'dsn': 'https://25e37a7cfab648fcb78d175366d96391:f03c3608addb4b83a59dedd4531c18df@app.getsentry.com/70082',}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '{{project_name}}',                      # Or path to database file if using sqlite3.
-    }
-}
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': '{{project_name}}',                      # Or path to database file if using sqlite3.
+#    }
+# }
 
 #CACHES = {
 #    'default': {
@@ -38,3 +48,8 @@ DATABASES = {
 #}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'eml_email_backend.EmailBackend'
+EMAIL_FILE_PATH = '/home/marco/Desktop'
+
+QUERYCOUNT = {'IGNORE_REQUEST_PATTERNS': [r'^/static/', r'^/source/', r'^/media/']}

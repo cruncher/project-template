@@ -1,13 +1,14 @@
 # encoding: utf-8
 import datetime
-from decimal import Decimal, ROUND_UP
 import re
+from decimal import ROUND_UP, Decimal
 
 from django import template
-from django.utils.encoding import smart_text
-from django.utils.safestring import mark_safe
 from django.template.defaultfilters import date
+from django.utils.encoding import smart_text
 from django.utils.formats import number_format
+from django.utils.safestring import mark_safe
+
 
 register = template.Library()
 
@@ -24,6 +25,8 @@ def intapos(value):
         return mark_safe(new)
     else:
         return intapos(new)
+
+
 intapos.is_safe = True
 
 
@@ -64,7 +67,9 @@ def enumerate(list):
 @register.filter
 def line_break_after(words, word):
     split_words = words.split(' ')
-    return mark_safe(' '.join(split_words[:int(word)]) + '<br />' + ' '.join(split_words[int(word):]))
+    return mark_safe(
+        ' '.join(split_words[: int(word)]) + '<br />' + ' '.join(split_words[int(word) :])
+    )
 
 
 @register.filter
@@ -99,7 +104,9 @@ def asterisks(how_many):
 
 @register.filter
 def round_up(val, to_):
-    return (Decimal(val) / Decimal(to_)).quantize(Decimal('1'), rounding=ROUND_UP) * Decimal(to_)
+    return (Decimal(val) / Decimal(to_)).quantize(
+        Decimal('1'), rounding=ROUND_UP
+    ) * Decimal(to_)
 
 
 @register.filter(name='str')
