@@ -1,66 +1,86 @@
 <!doctype html>{% load sekizai_tags compress i18n static %}
-<html lang="en" itemscope itemtype="http://schema.org/Article">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="author" content="" />
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.75, maximum-scale=1.66" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8" />
+    <meta name="author" content="{[author.name]}" />
+    <meta name="description" content="Documentation for {[title]}. {[description]}" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2" />
 
-  {% block extra_head_meta %}{% endblock extra_head_meta %}
+    <meta name="twitter:card" content="summary"></meta>
+    <meta name="twitter:site" content="@{[author.twitter]}"></meta>
+    <meta property="og:url" content="{[homepage]}" />
+    <meta property="og:title" content="{[title]}" />
+    <meta property="og:description" content="{[description]}" />
+    <meta property="og:image" content="{[image]}" />
 
-  <title>{% block headtitle %}{% endblock headtitle %}</title>
+    {% block extra_head_meta %}{% endblock extra_head_meta %}
 
-  {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
-  {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
+    <title>{% block headtitle %}{% endblock headtitle %}</title>
 
-  <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" />
+    <script title="load">
+    document.documentElement.className += ' js content-loading loading';
+    window.addEventListener('DOMContentLoaded', () => document.documentElement.classList.remove('content-loading'));
+    window.addEventListener('load', () => document.documentElement.classList.remove('loading'));
+    </script>
 
-  <script title="config">
-  document.documentElement.className = 'js notransition loading';
-  {% if debug %}window.DEBUG = true;{% endif %}
-  window.config = {};
-  {% render_block "config" %}
-  </script>
+    <script title="config">
+    {% if debug %}window.DEBUG = true;{% endif %}
+    window.config = {};
+    {% render_block "config" %}
+    </script>
 
-  {% compress css %}
-  {% if debug %}
-  <link rel="stylesheet" href="/source/style.css" />
-  {% else %}
-  <link rel="stylesheet" href="{{STATIC_URL}}style.min.css" />
-  {% endif %}
-  {% endcompress %}
+    <link rel="shortcut icon" href="images/logo-64x64.ico" />
+    <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" />
+    <link rel="icon" type="image/png" href="images/logo-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/logo-64x64.png" sizes="64x64">
+    <link rel="icon" type="image/png" href="images/logo-128x128.png" sizes="128x128">
 
-  {% render_block "css" %}
-  {% block extrahead %}{% endblock %}
+    {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
+    {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
+
+    {% compress css %}
+    {% if debug %}
+    <link rel="stylesheet" href="/source/style.css" />
+    {% else %}
+    <link rel="stylesheet" href="{{STATIC_URL}}style.min.css" />
+    {% endif %}
+    {% endcompress %}
+
+    {% render_block "css" %}
+    {% block extrahead %}{% endblock %}
 </head>
 
-<body>
-  {% include "includes/site-header.html" %}
-  {% block body %}{% endblock body %}
-  {% include "includes/site-nav.html" %}
-  {% include "includes/site-footer.html" %}
+<body {% block body %}{% endblock body %}>
+    {% include "includes/header.html" %}
+    {% block body %}{% endblock body %}
+    {% include "includes/nav.html" %}
+    {% include "includes/footer.html" %}
 
-  {% if debug %}<!-- templates -->{% endif %}
-  {% render_block "templates" %}
+    {% if debug %}<!-- templates -->{% endif %}
+    {% render_block "templates" %}
 
+    {% if debug %}<!-- scripts -->{% endif %}
+    {% addtoblock "script" %}
+    {% if debug %}
+    import '/source/module.js';
+    {% else %}
+    import '/static/module.rolled.js';
+    {% endif %}
+    {% endaddtoblock %}
+    <script type="module" title="Module">
+      {% render_block "js" postprocessor "apps.cruncher.rollup.rollup_compress" %}
+    </script>
+    {% render_block "script" %}
+    {% render_block "js_nocompress" %}
 
-  <script type="module" title="Module">
-    {% render_block "js" postprocessor "apps.cruncher.rollup.rollup_compress" %}
-  </script>
-
-  {% render_block "script" %}
-  {% render_block "js_nocompress" %}
-
-  {% if not debug %}
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129018304-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-129018304-1');
-  </script>
-  {% endif %}
-
+    {% if not debug %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129018304-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-129018304-1');
+    </script>
+    {% endif %}
 </body>
 </html>

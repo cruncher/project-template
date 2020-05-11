@@ -29,6 +29,14 @@ DEV_STATIC_URLS = {
 }
 ```
 
+The `templates/base.html` template contains conditionals that serve source files
+when `debug` is true, otherwise static files. To set `debug`, `settings_local.py`
+must contain local IPs:
+
+```
+INTERNAL_IPS = ['127.0.0.1', '0.0.0.0']
+```
+
 `pym/static/`
 
 Static files for production.

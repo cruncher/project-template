@@ -4,8 +4,6 @@
 
 import './dom/js/device.js';
 import './dom/js/fullscreenable.js';
-import './dom/js/swipeable.js';
-import './dom/js/switchable.js';
 import './dom/js/toggleable.js';
 import './dom/js/locateable.js';
 import './dom/js/validateable.js';
