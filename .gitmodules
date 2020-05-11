@@ -10,3 +10,6 @@
 [submodule "project_name/static/dom"]
 	path = project_name/source/dom
 	url = https://github.com/stephband/dom.git
+[submodule "project_name/source/bolt"]
+	path = project_name/source/bolt
+	url = git@github.com:stephband/bolt.git
