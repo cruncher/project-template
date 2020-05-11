@@ -10,7 +10,11 @@ Usage:
 
 # {{project_name}}
 
-`https://{{project_name}}.com/`
+`https://{{project_name}}.ch/` – prod
+
+`https://{{project_name}}.cruncher.ch/` – staging
+
+`https://{{project_name}}.cruncher.ch/static/index.html` – styleguide
 
 
 ## Project structure
@@ -60,7 +64,8 @@ Builds JS modules from `source/module.js` to `static/module.rolled.js`.
 
 `npm run build-docs`
 
-Builds documentation – a component styleguide – from `source/index.template.html` to `static/index.html`.
+Builds documentation – a component styleguide – from `source/index.template.html`
+to `static/index.html`. Front-end documentation is served at `/static/index.html`.
 
 `npm run build-sass`
 
