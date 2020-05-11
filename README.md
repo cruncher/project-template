@@ -37,7 +37,7 @@ must contain local IPs:
 INTERNAL_IPS = ['127.0.0.1', '0.0.0.0']
 ```
 
-`pym/static/`
+`{{project_name}}/static/`
 
 Static files for production.
 
