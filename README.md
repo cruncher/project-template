@@ -22,10 +22,10 @@ Usage:
 `{{project_name}}/source/`
 
 Contains source files for building front-end assets. The `source/` directory
-is only served in local development. It requires `settings_local.py` to contain:
+is only served in local development. It requires `settings/local.py` to contain:
 
 ```python
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 DEV_STATIC_URLS = {
     r'^static/(?P<path>.*)$': os.path.join(BASE_DIR, 'static'),
