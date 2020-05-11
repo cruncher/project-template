@@ -1,15 +1,12 @@
 [submodule "project_name/static/bolt"]
 	path = project_name/static/bolt
 	url = https://github.com/stephband/bolt.git
-[submodule "project_name/static/breakpoint"]
-	path = project_name/static/breakpoint
-	url = https://github.com/stephband/window.breakpoint.git
 [submodule "project_name/static/sparky"]
-	path = project_name/static/sparky
+	path = project_name/source/sparky
 	url = https://github.com/cruncher/sparky.git
 [submodule "project_name/static/fn"]
-	path = project_name/static/fn
+	path = project_name/source/fn
 	url = https://github.com/stephband/Fn.git
 [submodule "project_name/static/dom"]
-	path = project_name/static/dom
+	path = project_name/source/dom
 	url = https://github.com/stephband/dom.git

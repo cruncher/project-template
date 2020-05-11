@@ -1,23 +1,34 @@
+
 {
   "name": "{{project_name}}",
   "title": "{{project_name}}",
-  "description": "",
-  "version": "0.0.1",
+  "description": "{{project_name}} build process and docs.",
+  "version": "0.1.0",
   "author": "@cruncher",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/cruncher/{{project_name}}"
   },
-  "license": "private",
-  "scripts": {
-    "lint": "eslint static/js/*.js static/fn/js/*.js static/sparky/js/*.js static/breakpoint/js/*.js apps/*/static/js/*.js",
-    "sass": "node-sass --output-style compact --indent-type tab --indent-width 1 -o static/2016-css static/scss/respond.scss && node-sass --output-style compact --indent-type tab --indent-width 1 -o static/2016-css static/scss/grid.scss"
+  "bugs": {
+    "url": "https://github.com/cruncher/{{project_name}}/issues"
   },
+  "license": "",
   "dependencies": {
-    "babel-minify": "^0.5.0",
-    "rollup": "^0.66.5"
   },
   "devDependencies": {
-    "clean-css-cli": "^4.2.1"
+    "babel-minify": "^0.5.1",
+    "clean-css": "^4.2.3",
+    "clean-css-cli": "^4.3.0",
+    "eslint": "^6.5.1",
+    "node-sass": "^4.13.1",
+    "rollup": "^1.32.1"
+  },
+  "scripts": {
+    "lint": "eslint ./source/components/*.js",
+    "build": "npm run build-sass && npm run build-css && npm run build-module && npm run build-docs",
+    "build-sass": "node-sass --output-style compact --indent-width 4 ./source/sass/grid.scss ./source/components/grid.css && node-sass --output-style compact --indent-width 4 ./source/sass/respond.scss ./source/components/respond.css",
+    "build-module": "rollup ./source/module.js --o static/module.rolled.js --f esm",
+    "build-css": "node ./source/fn/build-css.js source/style.css static/style.min.css",
+    "build-docs": "node ./source/fn/build-html.js source/index.template.html source/index.html"
   }
 }
