@@ -2,6 +2,7 @@
 *.pot
 *.pyc
 settings/local.py
+local.py
 .venv
 tmp/*
 node_modules

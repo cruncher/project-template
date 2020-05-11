@@ -51,6 +51,8 @@
 </head>
 
 <body {% block body_tag %}{% endblock body_tag %}>
+    {% cms_toolbar %}
+
     {% include "includes/header.html" %}
     {% block body %}{% endblock body %}
     {% include "includes/nav.html" %}
