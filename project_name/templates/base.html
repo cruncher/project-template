@@ -50,7 +50,9 @@
     {% block extrahead %}{% endblock %}
 </head>
 
-<body {% block body %}{% endblock body %}>
+<body {% block body_tag %}{% endblock body_tag %}>
+    {% cms_toolbar %}
+
     {% include "includes/header.html" %}
     {% block body %}{% endblock body %}
     {% include "includes/nav.html" %}
@@ -68,9 +70,9 @@
     {% endif %}
     {% endaddtoblock %}
     <script type="module" title="Module">
-      {% render_block "js" postprocessor "apps.cruncher.rollup.rollup_compress" %}
+      {% render_block "script" postprocessor "apps.cruncher.rollup.rollup_compress" %}
     </script>
-    {% render_block "script" %}
+    {% render_block "js" %}
     {% render_block "js_nocompress" %}
 
     {% if not debug %}
