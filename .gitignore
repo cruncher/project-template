@@ -1,6 +1,7 @@
 *.log
 *.pot
 *.pyc
+*.code-workspace
 settings/local.py
 .venv
 tmp/*

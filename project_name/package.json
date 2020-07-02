@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/cruncher/{{project_name}}/issues"
   },
-  "license": "",
+  "license": "UNLICENSED",
   "dependencies": {
   },
   "devDependencies": {
@@ -21,7 +21,8 @@
     "clean-css-cli": "^4.3.0",
     "eslint": "^6.5.1",
     "node-sass": "^4.13.1",
-    "rollup": "^1.32.1"
+    "rollup": "^1.32.1",
+    "madge": "^3.9.2"
   },
   "scripts": {
     "lint": "eslint ./source/components/*.js",
@@ -29,6 +30,7 @@
     "build-sass": "node-sass --output-style compact --indent-width 4 ./source/sass/grid.scss ./source/components/grid.css && node-sass --output-style compact --indent-width 4 ./source/sass/respond.scss ./source/components/respond.css",
     "build-module": "rollup ./source/module.js --o static/module.rolled.js --f esm",
     "build-css": "node ./source/fn/build-css.js source/style.css static/style.min.css",
-    "build-docs": "node ./source/fn/build-html.js source/index.template.html source/index.html"
+    "build-docs": "node ./source/fn/build-html.js source/index.template.html source/index.html",
+    "graph": "madge --image ./source/module.svg ./source/module.js"
   }
 }
