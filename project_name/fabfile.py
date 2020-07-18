@@ -105,6 +105,7 @@ def sync_get():
         with prefix(env.activate):
             run('pg_dump -f ~/backup/%s.dmp %s' % (env.remote_db, env.remote_db))
     local('scp %s:backup/%s.dmp .' % (env.hosts[0], env.remote_db))
+    local('mkdir -p ../tmp/media')
     local('rsync -avz -e ssh %s:%s/tmp/media/ ../tmp/media/' % (env.hosts[0], BASE_DIR))
     local('dropdb %s' % env.local_db)
     local('createdb -E utf8 %s' % env.local_db)
