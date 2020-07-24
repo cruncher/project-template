@@ -81,7 +81,7 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters',
 )
 
-
+## https://github.com/divio/djangocms-text-ckeditor#configuration
 # CMS_EDITOR_STYLE_SET = [
 #     {'name': 'Titre 0 (300px)', 'element': 'h1', 'attributes': {'class': 'text-00'}},
 #     {'name': 'Titre 1 (150px)', 'element': 'h1', 'attributes': {'class': 'text-01'}},
