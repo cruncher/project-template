@@ -60,7 +60,7 @@ def clear_cache():
 
 def load():
     run('w')
-
+    run('df -h')
 
 def compilemessages(do_reload=True):
     with(cd(CODE_DIR)):
