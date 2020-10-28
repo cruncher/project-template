@@ -14,14 +14,14 @@ pudb
 
 black==19.3b0
 
--e git+https://github.com/pawelmarkowski/cmsplugin-filer@09c85f56197f906996a6cf49f39861533cdddcef#egg=cmsplugin_filer
+-e git+https://github.com/pawelmarkowski/cmsplugin-filer@54ae2e27e460a4d05a4735955838422611008098#egg=cmsplugin_filer
 boto==2.49.0
 botocore==1.15.0
 django-cms>=3.7.1,<3.8
 djangocms-googlemap
 djangocms-snippet
 django-eml-email-backend
-django-filer==1.5.0
+django-filer==2.0.2
 django-impersonate==1.4.1
 django-sekizai==1.0.0
 django-storages==1.7.1
