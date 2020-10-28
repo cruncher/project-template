@@ -24,7 +24,7 @@ django-eml-email-backend
 django-filer==2.0.2
 django-impersonate==1.4.1
 django-sekizai==1.0.0
-django-storages==1.7.1
+django-storages==1.8
 djangocms-text-ckeditor
 easy-thumbnails
 Fabric3
