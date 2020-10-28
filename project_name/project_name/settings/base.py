@@ -29,7 +29,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch']
+ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch', '127.0.0.1', '0.0.0.0']
 
 
 CACHES = {
