@@ -13,11 +13,12 @@ env.gunicorn_process = '{{project_name}}_gunicorn'
 env.forward_agent = True
 
 
-def migrate():
+def migrate(do_reload=True):
     with(cd(CODE_DIR)):
         with prefix(env.activate):
             run('python manage.py migrate')
-    reload_server()
+    if do_reload:
+        reload_server()
 
 
 def collectstatic():
@@ -78,7 +79,9 @@ def requirements():
 
 def deploy():
     pull_code()
+    requirements()
     collectstatic()
+    migrate(False)
     compilemessages(False)
     reload_server()
 
