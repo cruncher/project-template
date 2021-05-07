@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 import os
 
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 gettext = lambda s: s
 
@@ -11,7 +10,7 @@ CMS_PAGE_CACHE = True
 CMS_PLACEHOLDER_CACHE = True
 CMS_PLUGIN_CACHE = True
 
-CMS_CACHE_DURATIONS = {'content': 60, 'menus': 3600, 'permissions': 3600}
+CMS_CACHE_DURATIONS = {"content": 60, "menus": 3600, "permissions": 3600}
 
 
 # CMS_PLACEHOLDER_CONF = {
@@ -29,59 +28,59 @@ INTERNAL_IPS = []
 MIDDLEWARE = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'cms.middleware.utils.ApphookReloadMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'impersonate.middleware.ImpersonateMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'querycount.middleware.QueryCountMiddleware',
+    "cms.middleware.utils.ApphookReloadMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "impersonate.middleware.ImpersonateMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "cms.middleware.user.CurrentUserMiddleware",
+    "cms.middleware.page.CurrentPageMiddleware",
+    "cms.middleware.toolbar.ToolbarMiddleware",
+    "cms.middleware.language.LanguageCookieMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "querycount.middleware.QueryCountMiddleware",
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(PROJECT_DIR, '..', 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.request',
-                'django.template.context_processors.media',
-                'django.template.context_processors.debug',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages',
-                'sekizai.context_processors.sekizai',
-                'cms.context_processors.cms_settings',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(PROJECT_DIR, "..", "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.request",
+                "django.template.context_processors.media",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+                "sekizai.context_processors.sekizai",
+                "cms.context_processors.cms_settings",
             ],
-            'debug': False,
+            "debug": False,
         },
     }
 ]
 
-CMS_TEMPLATES = (('cms/home.html', 'Page template'),)
+CMS_TEMPLATES = (("cms/home.html", "Page template"),)
 
 
 THUMBNAIL_PROCESSORS = (
-    'easy_thumbnails.processors.colorspace',
-    'easy_thumbnails.processors.autocrop',
-    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
-    'easy_thumbnails.processors.filters',
+    "easy_thumbnails.processors.colorspace",
+    "easy_thumbnails.processors.autocrop",
+    "filer.thumbnail_processors.scale_and_crop_with_subject_location",
+    "easy_thumbnails.processors.filters",
 )
 
-## https://github.com/divio/djangocms-text-ckeditor#configuration
+# # https://github.com/divio/djangocms-text-ckeditor#configuration
 # CMS_EDITOR_STYLE_SET = [
 #     {'name': 'Titre 0 (300px)', 'element': 'h1', 'attributes': {'class': 'text-00'}},
 #     {'name': 'Titre 1 (150px)', 'element': 'h1', 'attributes': {'class': 'text-01'}},
@@ -102,13 +101,14 @@ THUMBNAIL_PROCESSORS = (
 #         'attributes': {'class': 'text-08'},
 #     },
 #     {'name': 'Titre 6 (14px)', 'element': 'p', 'attributes': {'class': 'text-09'}},
-#     {'name': 'Caché sur desktop', 'element': 'p', 'attributes': {'class': '@1-hidden'}},
+#     {'name': 'Caché sur desktop', 'element': 'p',
+#           'attributes': {'class': '@1-hidden'}},
 # ]
 
 
 # # for plugin
 # CKEDITOR_SETTINGS = {
-#     'language': '{{ language }}',
+#     'language': '',
 #     'toolbar': 'CMS',
 #     'skin': 'moono-lisa',
 #     'toolbarCanCollapse': False,

@@ -1,6 +1,5 @@
 import uuid
 
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
@@ -9,7 +8,7 @@ class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
 
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError("Users must have an email address")
 
         user = self.model(email=self.normalize_email(email))
         if password:
@@ -32,14 +31,14 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     uuid = models.UUIDField(default=uuid.uuid4)
     username = models.CharField(max_length=512, blank=True, null=True, editable=False)
-    email = models.EmailField(verbose_name='email address', max_length=512, unique=True)
+    email = models.EmailField(verbose_name="email address", max_length=512, unique=True)
     mobile_phone = models.CharField(max_length=50, blank=True, null=True)
 
     mobile_phone_validated = models.BooleanField(default=False)
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     def __str__(self):

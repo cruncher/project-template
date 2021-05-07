@@ -20,7 +20,7 @@ def intapos(value):
     For example, 3000 becomes '3,000' and 45000 becomes '45,000'.
     """
     orig = smart_text(value)
-    new = re.sub("^(-?\d+)(\d{3})", '\g<1>\'\g<2>', orig)
+    new = re.sub(r"^(-?\d+)(\d{3})", r"\g<1>'\g<2>", orig)
     if orig == new:
         return mark_safe(new)
     else:
@@ -34,7 +34,7 @@ intapos.is_safe = True
 def starts_with(a, b):
     try:
         return smart_text(a).startswith(smart_text(b))
-    except:
+    except Exception:
         return False
 
 
@@ -42,7 +42,7 @@ def starts_with(a, b):
 def gt(a, b):
     try:
         return int(a) > int(b)
-    except:
+    except Exception:
         return False
 
 
@@ -50,13 +50,13 @@ def gt(a, b):
 def lt(a, b):
     try:
         return int(a) < int(b)
-    except:
+    except Exception:
         return False
 
 
 @register.filter
 def fancy_strip_tags(str_):
-    return re.sub(r'<[^>]*?>', ' ', smart_text(str_))
+    return re.sub(r"<[^>]*?>", " ", smart_text(str_))
 
 
 @register.filter
@@ -66,9 +66,11 @@ def enumerate(list):
 
 @register.filter
 def line_break_after(words, word):
-    split_words = words.split(' ')
+    split_words = words.split(" ")
     return mark_safe(
-        ' '.join(split_words[: int(word)]) + '<br />' + ' '.join(split_words[int(word) :])
+        " ".join(split_words[: int(word)])
+        + "<br />"
+        + " ".join(split_words[int(word) :])
     )
 
 
@@ -89,7 +91,7 @@ def fmulti(a, b):
 
 @register.filter
 def invert(a):
-    return float(1) / float(a or '1.0')
+    return float(1) / float(a or "1.0")
 
 
 @register.filter
@@ -105,17 +107,17 @@ def asterisks(how_many):
 @register.filter
 def round_up(val, to_):
     return (Decimal(val) / Decimal(to_)).quantize(
-        Decimal('1'), rounding=ROUND_UP
+        Decimal("1"), rounding=ROUND_UP
     ) * Decimal(to_)
 
 
-@register.filter(name='str')
+@register.filter(name="str")
 def to_str(v):
     return str(v)
 
 
 @register.simple_tag
-def days_in_future(days=0, format=''):
+def days_in_future(days=0, format=""):
     return date(datetime.date.today() + datetime.timedelta(days=days), format)
 
 
@@ -129,7 +131,7 @@ def sub_days(date_, days):
     try:
         days = int(days)
         return date_ - datetime.timedelta(days=days)
-    except:
+    except Exception:
         return date_
 
 

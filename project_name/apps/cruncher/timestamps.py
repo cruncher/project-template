@@ -3,7 +3,6 @@ import pytz
 
 
 def to_timestamp(dt):
-    # Ref: http://stackoverflow.com/questions/8777753/converting-datetime-date-to-utc-timestamp-in-python
     if dt is None:
         return None
 

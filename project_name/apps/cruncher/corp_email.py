@@ -62,9 +62,11 @@ def forge_corporate_email(subject, html_body, text_body, to, extra_images={}, **
             subtype = 'jpeg'
             if img_path.lower().endswith('png'):
                 subtype = 'png'
-            logo_image.add_header('Content-Type', 'image/{}'.format(subtype), name=img_id)
+            logo_image.add_header(
+                'Content-Type', 'image/{}'.format(subtype), name=img_id
+            )
             email.attach(logo_image)
-        except:
+        except Exception:
             pass
 
     email.mixed_subtype = "related"

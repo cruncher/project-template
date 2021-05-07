@@ -20,16 +20,20 @@ LANGUAGES = [
 
 DEFAULT_LANGUAGE = 0
 
-# create user {{project_name}} with password '{{project_name}}';
-# create database {{project_name}} with encoding='UTF-8' owner={{project_name}};
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '{{project_name}}',  # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{project_name}}',
     }
 }
 
-ALLOWED_HOSTS = ['.cruncher.ch', '.test.cruncher.ch', '.{{project_name}}.ch', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = [
+    '.cruncher.ch',
+    '.test.cruncher.ch',
+    '.{{project_name}}.ch',
+    '127.0.0.1',
+    '0.0.0.0',
+]
 
 
 CACHES = {
@@ -193,5 +197,5 @@ except ImportError:
 
 try:
     INSTALLED_APPS = INSTALLED_APPS + ADDITIONAL_INSTALLED_APPS
-except:
+except Exception:
     pass
