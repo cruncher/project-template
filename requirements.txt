@@ -1,4 +1,4 @@
-Django>=2.2.10,<3.0
+Django>=2.2.22,<3.0
 
 Pillow
 django-crispy-forms
@@ -37,3 +37,5 @@ xlrd
 xlwt
 django-querycount
 django-rosetta
+
+pre-commit==2.12.1
