@@ -178,6 +178,10 @@ LOGGING = {
     },
 }
 
+# Default primary key field type to use for models that don’t have a field with primary_key=True.
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 # Set your DSN value
 RAVEN_CONFIG = {'dsn': None}
