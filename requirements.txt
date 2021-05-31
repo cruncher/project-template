@@ -15,15 +15,14 @@ pudb
 black==19.3b0
 
 -e git+https://github.com/pawelmarkowski/cmsplugin-filer@54ae2e27e460a4d05a4735955838422611008098#egg=cmsplugin_filer
-boto==2.49.0
-botocore==1.15.0
+boto3==1.17.84
 django-cms==3.9.0rc2
 djangocms-snippet
 django-eml-email-backend
 django-filer==2.0.2
 django-impersonate==1.7.1
 django-sekizai==2.0.0
-django-storages==1.8
+django-storages==1.11.1
 djangocms-text-ckeditor
 Fabric3
 psycopg2-binary
