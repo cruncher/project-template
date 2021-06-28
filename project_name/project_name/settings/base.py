@@ -192,6 +192,9 @@ RQ_SHOW_ADMIN_LINK = True
 
 SHELL_PLUS = "ipython"
 
+# Required for django-cms on 3.2
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 
 try:
     from .settings_local import *  # NOQA
