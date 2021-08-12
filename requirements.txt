@@ -1,4 +1,4 @@
-Django>=3.2.0,<3.3.0
+Django~=3.2.0
 
 Pillow
 django-crispy-forms
@@ -16,7 +16,7 @@ black==19.3b0
 
 -e git+https://github.com/pawelmarkowski/cmsplugin-filer@54ae2e27e460a4d05a4735955838422611008098#egg=cmsplugin_filer
 boto3==1.17.84
-django-cms>=3.9.0,3.10
+django-cms~=3.9.0
 djangocms-snippet
 django-eml-email-backend
 django-filer==2.0.2
