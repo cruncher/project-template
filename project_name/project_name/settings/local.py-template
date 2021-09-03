@@ -57,4 +57,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'eml_email_backend.EmailBackend'
 EMAIL_FILE_PATH = '/home/marco/Desktop'
 
+# Or, web interface:
+# docker run  --publish 8025:8025 --publish 1025:1025 mailhog/mailhog
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_PORT = 1025
+
+
 QUERYCOUNT = {'IGNORE_REQUEST_PATTERNS': [r'^/static/', r'^/source/', r'^/media/']}
