@@ -1,4 +1,4 @@
-<!doctype html>{% load sekizai_tags compress i18n static cms_tags %}
+<!doctype html>{% load sekizai_tags compress i18n static cms_tags cache_buster_tags %}
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -38,16 +38,17 @@
     {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
     {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
 
-    {% compress css %}
     {% if debug %}
-    <link rel="stylesheet" href="/source/style.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}module.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/debug.css" />
     {% else %}
-    <link rel="stylesheet" href="{{STATIC_URL}}style.min.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}build/module.css?{% cache_buster %}" />
     {% endif %}
-    {% endcompress %}
 
     {% render_block "css" %}
     {% block extrahead %}{% endblock %}
+    {% render_block "templates" %}
+
 </head>
 
 <body {% block body_tag %}{% endblock body_tag %}>
@@ -58,23 +59,18 @@
     {% include "includes/nav.html" %}
     {% include "includes/footer.html" %}
 
-    {% if debug %}<!-- templates -->{% endif %}
-    {% render_block "templates" %}
-
     {% if debug %}<!-- scripts -->{% endif %}
-    {% addtoblock "script" %}
-    {% if debug %}
-    import '/source/module.js';
-    {% else %}
-    import '/static/module.rolled.js';
-    {% endif %}
-    {% endaddtoblock %}
     <script type="module" title="Module">
-      {% render_block "script" postprocessor "apps.cruncher.rollup.rollup_compress" %}
+        {% if debug %}
+        import '{{STATIC_URL}}module.js';
+        {% else %}
+        import '{{STATIC_URL}}build/module.js?{% cache_buster %}';
+        {% endif %}
+        {% render_block "script" %}
     </script>
     {% render_block "js" %}
     {% render_block "js_nocompress" %}
-
+    
     {% if not debug %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129018304-1"></script>
     <script>
