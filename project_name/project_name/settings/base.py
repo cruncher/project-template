@@ -126,8 +126,12 @@ INSTALLED_APPS = (
     "easy_thumbnails",
     "storages",
     "django_otp",
+    # https://django-otp-official.readthedocs.io/en/stable/overview.html#plugins-and-devices
     "django_otp.plugins.otp_totp",
+    # "django_otp.plugins.otp_hotp",
+    # "django_otp.plugins.otp_email",
     "django_otp.plugins.otp_static",
+    # SMS: https://django-otp-twilio.readthedocs.io/en/latest/
 )
 
 FILER_CANONICAL_URL = "c/"
