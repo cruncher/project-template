@@ -8,7 +8,7 @@ PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 DEBUG = True
 
-ADMINS = ("Marco", "marco@cruncher.ch")
+ADMINS = [("Marco", "marco@cruncher.ch"), ]
 
 MANAGERS = ADMINS
 LANGUAGES = [
