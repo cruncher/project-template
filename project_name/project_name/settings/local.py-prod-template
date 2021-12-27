@@ -1,0 +1,24 @@
+DEBUG = False
+COMPRESS_ENABLED = True
+
+CSRF_TRUSTED_ORIGINS = ['https://*.cruncher.ch','https://*.127.0.0.1', 'https://*.{{project_name}}.ch']
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+
+
+INTERNAL_IPS = ('127.0.0.1',)
+# ALLOWED_HOSTS = [
+#     '0.0.0.0',
+#     '127.0.0.1',
+# ]
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://31a22f6ea6d741379508da83b374bda6@o333.ingest.sentry.io/5575486",
+    integrations=[DjangoIntegration()],
+)
