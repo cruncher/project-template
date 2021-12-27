@@ -1,4 +1,4 @@
-Django~=3.2.0
+Django~=4.0
 
 Pillow
 django-crispy-forms
@@ -15,14 +15,14 @@ pudb
 black==19.3b0
 
 -e git+https://github.com/pawelmarkowski/cmsplugin-filer@54ae2e27e460a4d05a4735955838422611008098#egg=cmsplugin_filer
-boto3==1.17.84
+boto3
 django-cms~=3.9.0
 djangocms-snippet
 django-eml-email-backend
-django-filer==2.0.2
-django-impersonate==1.7.1
-django-sekizai==2.0.0
-django-storages==1.11.1
+django-filer
+django-impersonate
+django-sekizai
+django-storages
 djangocms-text-ckeditor
 Fabric3
 psycopg2-binary
@@ -35,7 +35,7 @@ xlwt
 django-querycount
 django-rosetta
 
-pre-commit==2.12.1
+pre-commit~=2.12.1
 
 # For django OTP admin
 django-otp
