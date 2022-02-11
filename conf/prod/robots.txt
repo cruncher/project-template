@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow:
+
+Sitemap: https://{{project_name}}.com/sitemap.xml
