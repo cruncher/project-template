@@ -8,6 +8,22 @@ Usage:
     django-admin.py startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  new_project_name
 
 
+# Local project setup
+```
+git clone git@github.com:cruncher/{{project_name}}.git  
+cd {{project_name}}
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip wheel 
+pip install -r requirements.txt
+cd {{project_name}}   
+git submodule update --init
+createdb {{project_name}}    
+python manage.py migrate
+cp {{project_name}}/settings/local.py-template {{project_name}}/settings/local.py  
+python manage.py runserver
+```
+
 # {{project_name}}
 
 `https://{{project_name}}.ch/` – prod
