@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block bodytag %}class="site-body"{% endblock %}
+
+{% block body %}
+    {#% include "includes/site-header.html" %#}
+
+    {% block page %}
+    {% endblock %}
+
+    {#% if DISPLAY_COOKIE_BANNER %#}
+    {#% include "cookies/banner.html" %#}
+    {#% endif %#}
+
+    {#% include "includes/site-footer.html" %#}
+    {% include "includes/defs.svg" %}
+{% endblock body %}

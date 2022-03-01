@@ -1,17 +1,14 @@
 <!doctype html>{% load sekizai_tags compress i18n static cms_tags cache_buster_tags %}
-<html lang="en">
+<html lang="{{request.LANGUAGE_CODE}}">
 <head>
     <meta charset="utf-8" />
-    <meta name="author" content="{[author.name]}" />
-    <meta name="description" content="Documentation for {[title]}. {[description]}" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2" />
+    <meta name="author" content="" />
 
-    <meta name="twitter:card" content="summary"></meta>
-    <meta name="twitter:site" content="@{[author.twitter]}"></meta>
-    <meta property="og:url" content="{[homepage]}" />
-    <meta property="og:title" content="{[title]}" />
-    <meta property="og:description" content="{[description]}" />
-    <meta property="og:image" content="{[image]}" />
+    {% page_attribute "meta_description" as meta_description %}
+    {% trans "DEFAULT DESCRIPTION" as default_description %}
+    <meta name="description" content="{{meta_description|default:default_description}}" />
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2" />
 
     {% block extra_head_meta %}{% endblock extra_head_meta %}
 
@@ -24,61 +21,77 @@
     </script>
 
     <script title="config">
-    {% if debug %}window.DEBUG = true;{% endif %}
+    {% if debug %}
+    window.DEBUG = true;
+    {% else %}
+    window.elementOverflowToggleStylesheet = '/static/build/bolt/elements/overflow-toggle/shadow.css';
+    window.elementSlideShowStylesheet = '/static/build/bolt/elements/slide-show/shadow.css';
+    {% endif %}
+
     window.config = {};
     {% render_block "config" %}
     </script>
 
-    <link rel="shortcut icon" href="images/logo-64x64.ico" />
-    <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" />
-    <link rel="icon" type="image/png" href="images/logo-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="images/logo-64x64.png" sizes="64x64">
-    <link rel="icon" type="image/png" href="images/logo-128x128.png" sizes="128x128">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700;900&display=swap" rel="stylesheet">
 
-    {% if LANGUAGE_CODE != "en" %}<link rel="alternate" hreflang="en" href="http://cruncher.ch/en/" />{% endif %}
-    {% if LANGUAGE_CODE != "fr" %}<link rel="alternate" hreflang="fr" href="http://cruncher.ch/fr/" />{% endif %}
+    <!--link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 163dpi)" href="/static/icons/57-touch-icon-iphone.png" />
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 132dpi)" href="/static/icons/72-touch-icon-iphone.png" />
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 326dpi)" href="/static/icons/114-touch-icon-iphone.png" />
+    <link rel="manifest" href="/static/icons/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff"-->
 
     {% if debug %}
-    <link rel="stylesheet" href="{{STATIC_URL}}module.css" />
-    <link rel="stylesheet" href="{{STATIC_URL}}bolt/css/debug.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}site/module.css?v={% cache_buster %}" />
+    <link rel="stylesheet" href="{{STATIC_URL}}bolt/debug/debug.css" />
     {% else %}
-    <link rel="stylesheet" href="{{STATIC_URL}}build/module.css?{% cache_buster %}" />
+    <link rel="stylesheet" href="{{STATIC_URL}}build/site/module.css?v={% cache_buster %}" />
+    {% endif %}
+
+    {% if request.user.is_superuser %}
+    {# Warn admins about empty elements, buttons without type, images with no alt #}
+    <link rel="stylesheet" href="{{STATIC_URL}}site/classes/warn-not-cms.css" />
     {% endif %}
 
     {% render_block "css" %}
+    {% block head %}{% endblock %}
     {% block extrahead %}{% endblock %}
     {% render_block "templates" %}
-
 </head>
 
-<body {% block body_tag %}{% endblock body_tag %}>
+<body {% block bodytag %}{% endblock bodytag %}>
     {% cms_toolbar %}
-
-    {% include "includes/header.html" %}
     {% block body %}{% endblock body %}
-    {% include "includes/nav.html" %}
-    {% include "includes/footer.html" %}
 
     {% if debug %}<!-- scripts -->{% endif %}
     <script type="module" title="Module">
         {% if debug %}
-        import '{{STATIC_URL}}module.js';
+        import '{{STATIC_URL}}site/module.js?v={% cache_buster %}';
         {% else %}
-        import '{{STATIC_URL}}build/module.js?{% cache_buster %}';
+        import '{{STATIC_URL}}build/site/module.js?v={% cache_buster %}';
         {% endif %}
         {% render_block "script" %}
     </script>
     {% render_block "js" %}
     {% render_block "js_nocompress" %}
-    
+
+    {% if debug or request.user.is_superuser %}
+    {# Warn admins about empty elements #}
+    <script type="module" src="{{STATIC_URL}}site/classes/warn-not-cms.js"></script>
+    {% endif %}
+
     {% if not debug %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129018304-1"></script>
+    <!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-129018304-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'UA-129018304-1');
-    </script>
+    </script-->
     {% endif %}
 </body>
 </html>
