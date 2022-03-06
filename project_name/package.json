@@ -16,21 +16,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "babel-minify": "^0.5.1",
-    "clean-css": "^4.2.3",
-    "clean-css-cli": "^4.3.0",
-    "eslint": "^6.5.1",
-    "node-sass": "^4.13.1",
-    "rollup": "^1.32.1",
-    "madge": "^3.9.2"
   },
   "scripts": {
-    "lint": "eslint ./source/components/*.js",
-    "build": "npm run build-sass && npm run build-css && npm run build-module && npm run build-docs",
-    "build-sass": "node-sass --output-style compact --indent-width 4 ./source/sass/grid.scss ./source/components/grid.css && node-sass --output-style compact --indent-width 4 ./source/sass/respond.scss ./source/components/respond.css",
-    "build-module": "rollup ./source/module.js --o static/module.rolled.js --f esm",
-    "build-css": "node ./source/fn/build-css.js source/style.css static/style.min.css",
-    "build-docs": "node ./source/fn/build-html.js source/index.template.html source/index.html",
-    "graph": "madge --image ./source/module.svg ./source/module.js"
   }
 }
