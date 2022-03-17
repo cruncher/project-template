@@ -40,3 +40,7 @@ pre-commit~=2.12.1
 # For django OTP admin
 django-otp
 qrcode
+
+# pretty console
+rich
+
