@@ -28,11 +28,7 @@ def url_to_filer(url, folder=None, headers=None):
         return inst
     except Exception:
         pass
-
-    # return local_file_filer(
-    #     url.replace("https://www.ecal.ch/download/", "/tmp/ftp-mnt/"), folder
-    # )
-
+    
     with NamedTemporaryFile() as tempfile:
         with requests.get(url, headers=headers, stream=True) as img_res:
             for chunk in img_res.iter_content(chunk_size=1024):
