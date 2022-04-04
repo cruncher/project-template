@@ -1,0 +1,23 @@
+.pill {
+    padding: 8px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    height: 12px;
+    line-height: 12px;
+    border-radius: 4px;
+    display: inline-block;
+    color: white;
+    white-space: nowrap;
+    font-size: 11px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.pill a:hover {
+    text-decoration: none;
+ }
+ .pill + .pill,
+.related-lookup + .pill {margin-left: 0.5rem;}
+.pill .deletelink {
+    margin-left: 0.25rem;
+}

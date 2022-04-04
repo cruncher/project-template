@@ -1,17 +1,14 @@
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.backends import ModelBackend
+
+from apps.users.models import User
 
 
-class EmailBackend(object):
-    def authenticate(self, email="", password=""):
+class EmailBackend(ModelBackend):
+    def authenticate(self, request, email="", password="", **kwargs):
+
         users = User.objects.filter(email=email)
         for user in users:
-            if user.is_active and check_password(password, user.password):
+            if user.check_password(password) and self.user_can_authenticate(user):
                 return user
-        return None
 
-    def get_user(self, user_id):
-        try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
-            return None
+        return None
