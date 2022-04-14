@@ -24,7 +24,7 @@ django-impersonate
 django-sekizai
 django-storages
 djangocms-text-ckeditor
-Fabric3
+-e git+https://github.com/cruncher/fabric.git@1c60d21b37af4cdf2ce9cc6ef334cc7a978ee3e9#egg=fabric3
 psycopg2-binary
 python-dateutil
 requests
