@@ -6,11 +6,10 @@ from fabric.operations import run
 
 
 BASE_DIR = "/home/projects/{{project_name}}/{{project_name}}"
-TEMPLATES_DIR = "%s/res" % BASE_DIR
 CODE_DIR = BASE_DIR + "/{{project_name}}"
 
 env.hosts = ["{{project_name}}@{{project_name}}.cruncher.ch"]
-env.activate = "source %s/.venv/bin/activate" % BASE_DIR
+env.activate = f"source {BASE_DIR}/.venv/bin/activate"
 env.remote_db = "{{project_name}}"
 env.local_db = "{{project_name}}"
 env.git_branch = "master"
@@ -34,7 +33,7 @@ def collectstatic():
 
 def pull_code():
     with (cd(BASE_DIR)):
-        run("git pull origin %s" % env.git_branch)
+        run(f"git pull origin {env.git_branch}")
         run("git submodule update --init --recursive")
 
 
@@ -51,11 +50,11 @@ def git_commit():
 
 def git_push():
     with (cd(BASE_DIR)):
-        run("git push origin %s" % env.git_branch)
+        run(f"git push origin {env.git_branch}")
 
 
 def reload_server():
-    run("sudo supervisorctl restart %s" % env.gunicorn_process)
+    run(f"sudo supervisorctl restart {env.gunicorn_process}")
 
 
 def clear_cache():
@@ -153,20 +152,20 @@ def generate_cache_buster():
 def get_remote_db():
     with (cd(CODE_DIR)):
         with prefix(env.activate):
-            run("pg_dump -f ~/backup/%s.dmp %s" % (env.remote_db, env.remote_db))
+            run(f"pg_dump -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
 
     local(
         "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-        " %s:backup/%s.dmp ." % (env.hosts[0], env.remote_db)
+        f" {env.hosts[0]}:backup/{env.remote_db}.dmp ."
     )
 
 
 def sync_get():
     get_remote_db()
-    local("dropdb %s" % env.local_db)
-    local("createdb -E utf8 %s" % env.local_db)
-    local("psql -q -d %s -f %s.dmp" % (env.local_db, env.remote_db))
-    # local("mysql -u psql -q -d %s -f %s.dmp" % (env.local_db, env.remote_db))
+    local(f"dropdb {env.local_db}")
+    local(f"createdb -E utf8 {env.local_db}")
+    local(f"psql -q -d {env.local_db} -f {env.remote_db}.dmp")
+    local(f'rm {env.remote_db}.dmp')
     local("python manage.py migrate")
     local('python manage.py set_fake_passwords --password="admin"')
     local(
