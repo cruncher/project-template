@@ -153,11 +153,7 @@ def get_remote_db():
     with (cd(CODE_DIR)):
         with prefix(env.activate):
             run(f"pg_dump -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
-
-    local(
-        "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-        f" {env.hosts[0]}:backup/{env.remote_db}.dmp ."
-    )
+    local(f"rsync -avz -e ssh {env.hosts[0]}:backup/{env.remote_db}.dmp .")
 
 
 def sync_get():
