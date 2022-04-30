@@ -158,7 +158,7 @@ def get_remote_db():
 
 def sync_get():
     get_remote_db()
-    local(f"dropdb {env.local_db}")
+    local(f"dropdb --if-exists {env.local_db}")
     local(f"createdb -E utf8 {env.local_db}")
     local(f"psql -q -d {env.local_db} -f {env.remote_db}.dmp")
     local(f'rm {env.remote_db}.dmp')
