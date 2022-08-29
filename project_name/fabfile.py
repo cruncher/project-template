@@ -13,7 +13,7 @@ env.activate = f"source {BASE_DIR}/.venv/bin/activate"
 env.remote_db = "{{project_name}}"
 env.local_db = "{{project_name}}"
 env.git_branch = "master"
-env.gunicorn_process = "{{project_name}}_gunicorn"
+env.gunicorn_process = ["{{project_name}}_gunicorn", ]
 env.forward_agent = True
 
 
@@ -54,8 +54,8 @@ def git_push():
 
 
 def reload_server():
-    run(f"sudo supervisorctl restart {env.gunicorn_process}")
-
+    for procs in env.gunicorn_process:
+        run(f"sudo supervisorctl restart {procs}")
 
 def clear_cache():
     with (cd(CODE_DIR)):
