@@ -1,4 +1,4 @@
-Django~=4.0
+Django>4.0,<4.1
 
 Pillow
 django-crispy-forms
@@ -8,13 +8,14 @@ django-compressor
 easy-thumbnails
 django-extensions
 python-memcached
+pymemcache
 raven
 IPython
 pudb
 
 black==19.3b0
 
--e git+https://github.com/pawelmarkowski/cmsplugin-filer@54ae2e27e460a4d05a4735955838422611008098#egg=cmsplugin_filer
+-e git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
 boto3
 django-cms~=3.9.0
 djangocms-snippet
@@ -43,4 +44,4 @@ qrcode
 
 # pretty console
 rich
-
+pytz

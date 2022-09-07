@@ -8,7 +8,7 @@ from django.template import engines
 
 
 # Some shenigans required
-base_template_name = '{' + '% exten' + 'ds "base' + '.html" %' + '}'
+base_template_name_extends = '{' + '% exten' + 'ds "base' + '.html" %' + '}'
 
 INDEX = f"""
 "{base_template_name_extends}"

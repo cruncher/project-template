@@ -1,11 +1,10 @@
-# encoding: utf-8
 import datetime
 import re
 from decimal import ROUND_UP, Decimal
 
 from django import template
 from django.template.defaultfilters import date
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 from django.utils.formats import number_format
 from django.utils.safestring import mark_safe
 
@@ -19,7 +18,7 @@ def intapos(value):
     Converts an integer to a string containing commas every three digits.
     For example, 3000 becomes '3,000' and 45000 becomes '45,000'.
     """
-    orig = smart_text(value)
+    orig = smart_str(value)
     new = re.sub(r"^(-?\d+)(\d{3})", r"\g<1>'\g<2>", orig)
     if orig == new:
         return mark_safe(new)
@@ -33,7 +32,7 @@ intapos.is_safe = True
 @register.filter
 def starts_with(a, b):
     try:
-        return smart_text(a).startswith(smart_text(b))
+        return smart_str(a).startswith(smart_str(b))
     except Exception:
         return False
 
@@ -56,7 +55,7 @@ def lt(a, b):
 
 @register.filter
 def fancy_strip_tags(str_):
-    return re.sub(r"<[^>]*?>", " ", smart_text(str_))
+    return re.sub(r"<[^>]*?>", " ", smart_str(str_))
 
 
 @register.filter

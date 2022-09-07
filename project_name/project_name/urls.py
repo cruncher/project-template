@@ -1,7 +1,7 @@
 from django.conf import settings
-from django.conf.urls import include, re_path
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.urls import include, re_path
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django.views.static import serve as static_serve
