@@ -7,8 +7,11 @@ from django.shortcuts import Http404, render
 from django.template import engines
 
 
-INDEX = """
-{% extends "base.html" %}
+# Some shenigans required
+base_template_name = '{' + '% exten' + 'ds "base' + '.html" %' + '}'
+
+INDEX = f"""
+"{base_template_name_extends}"
 {% block bodytag %}style="padding:2rem" class=""{% endblock %}
 {% block body %}
 <h1>Index of {{path}}</h1>
