@@ -13,11 +13,11 @@ raven
 IPython
 pudb
 
-black==19.3b0
+black~=22.10
 
 -e git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
 boto3
-django-cms~=3.9.0
+django-cms~=3.11.0
 djangocms-snippet
 django-eml-email-backend
 django-filer
@@ -36,7 +36,7 @@ xlwt
 django-querycount
 django-rosetta
 
-pre-commit~=2.12.1
+pre-commit~=2.20.0
 
 # For django OTP admin
 django-otp

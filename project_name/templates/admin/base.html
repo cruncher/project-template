@@ -1,0 +1,10 @@
+{% extends "admin/base.html" %}
+
+
+{% block userlinks %}
+    {{block.super}}
+
+    {% if request.user.is_impersonate %}
+        / <a href="/impersonate/stop/?next=/admin/users/user/">Arrêter l'impersonification</a>
+    {% endif %}
+{% endblock %}
