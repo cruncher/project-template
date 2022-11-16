@@ -1,15 +1,15 @@
 [submodule "project_name/static/bolt"]
 	path = project_name/static/bolt
-	url = https://github.com/stephband/bolt.git
-[submodule "project_name/static/sparky"]
-	path = project_name/source/sparky
-	url = https://github.com/cruncher/sparky.git
+	url = git@github.com:stephband/bolt-2.git
+[submodule "project_name/static/literal"]
+	path = project_name/static/literal
+	url = git@github.com:stephband/literal.git
 [submodule "project_name/static/fn"]
-	path = project_name/source/fn
-	url = https://github.com/stephband/Fn.git
+	path = project_name/static/fn
+	url = git@github.com:stephband/Fn.git
 [submodule "project_name/static/dom"]
-	path = project_name/source/dom
-	url = https://github.com/stephband/dom.git
-[submodule "project_name/source/bolt"]
-	path = project_name/source/bolt
+	path = project_name/static/dom
+	url = git@github.com:stephband/dom.git
+[submodule "project_name/static/bolt"]
+	path = project_name/static/bolt
 	url = git@github.com:stephband/bolt.git
