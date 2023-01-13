@@ -12,9 +12,11 @@ env.hosts = ["{{project_name}}@{{project_name}}.cruncher.ch"]
 env.activate = f"source {BASE_DIR}/.venv/bin/activate"
 env.remote_db = "{{project_name}}"
 env.local_db = "{{project_name}}"
-env.git_branch = "master"
+env.git_branch = "main"
 env.gunicorn_process = ["{{project_name}}_gunicorn", ]
 env.forward_agent = True
+env.sentry_project_slug = "{{project_name}}"
+env.senty_org_slug = "cruncher"
 
 
 def migrate(do_reload=True):
@@ -103,6 +105,12 @@ def build_static():
         local("make literal site")
         local(f"rsync -avz -e ssh static/build {env.hosts[0]}:{BASE_DIR}/tmp/static/")
 
+def sentry_new_release():
+    rev = local("/usr/bin/git rev-parse HEAD", capture=True)
+    local(
+        f"sentry-cli releases --org {env.senty_org_slug} "
+        f"--project {env.sentry_project_slug}  new {rev} --finalize"
+    )
 
 def deploy():
     local_git_pull()
@@ -118,6 +126,7 @@ def deploy():
     compilemessages(False)
     reload_server()
     # fix_cms()
+    sentry_new_release()
 
 
 def crontab():
@@ -155,7 +164,7 @@ def get_remote_db():
             run(f"pg_dump -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
     local(f"rsync -avz -e ssh {env.hosts[0]}:backup/{env.remote_db}.dmp .")
 
-
+    
 def sync_get():
     get_remote_db()
     local(f"dropdb --if-exists {env.local_db}")
