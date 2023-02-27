@@ -5,6 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import Http404, render
 from django.template import engines
+from django.template.exceptions import TemplateDoesNotExist
 
 
 # Some shenigans required
@@ -29,6 +30,8 @@ def template_folder(request, path, document_root="", show_indexes=False):
     actual_path = os.path.join(document_root, path)
     try:
         return render(request, actual_path)
+    except TemplateDoesNotExist:
+        raise Http404
     except IsADirectoryError:
         if show_indexes:
             template_dir = os.path.abspath(settings.TEMPLATES[0].get("DIRS")[0])
