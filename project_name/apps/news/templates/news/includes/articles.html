@@ -1,0 +1,31 @@
+{% load i18n %}
+<div class="x1 y1 text-flex flex">
+    <h2 class="red-fg">{% trans "News" %}</h2>
+{% for category in categories %}
+    {% if current_category == category %}
+    <a href="{% url "news.home" %}" class="filter-button button {{category.color}}-bg white-fg text-05">{{category}}</a>
+    {% else %}
+    <a href="{% url "news.home.category" category_id=category.id slug=category|slugify %}" class="filter-button button text-05 red-fg white-bg">{{category}}</a>
+    {% endif %}
+{% endfor %}
+</div>
+
+<div class="@m-x2 block">
+{% for article in articles %}
+    {% if forloop.counter == 6 %}
+    <button class="more-button button" type="button" name="toggle-class" value="on" id="read-more">
+        {% include "linklist/includes/more.svg" %}
+        {% trans "More news" %}
+    </button>
+    {% endif %}
+
+    <a class="l-news-block news-block block {{article.category.color}}-fg" href="{{article.get_absolute_url}}">
+        <span class="s-button button white-fg {{article.category.color}}-bg text-10">{{article.category.name}}</span>
+        <p class="text-08 {{article.category.color}}-fg">{{article}}</p>
+        <p class="text-10">
+            {% if article.source %}{{article.source}} — {% endif %}
+            <time  datetime="{{article.publication_date|date:"Y-m-d"}}">Published on {{article.publication_date|date:"F jS, Y"}}</time></p>
+        <p class="text-10">{% trans "Read more" %}</p>
+    </a>
+{% endfor %}
+</div>

@@ -1,0 +1,13 @@
+{% extends "cms/home.html" %}
+{% load cms_tags sekizai_tags %}
+{% block body %}
+{% static_placeholder "news_intro" %}
+<section id="articles-block" class="column-block block">
+    {% include "news/includes/articles.html" %}
+</section>
+{% static_placeholder "news_outro" %}
+
+{% addtoblock "script" %}
+import '/static/module.news.js';
+{% endaddtoblock %}
+{% endblock body %}

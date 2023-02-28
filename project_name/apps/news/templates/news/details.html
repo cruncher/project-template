@@ -1,0 +1,72 @@
+{% extends "cms/base.html" %}
+{% load cms_tags i18n thumbnail share_tags meta %}
+
+
+{% block headtitle %}{{article}} — {{block.super}}{% endblock %}
+
+{% block page_meta %}
+{% include 'meta/meta.html' %}
+{% endblock page_meta %}
+
+
+
+
+{% block body %}
+<article class="page-block block">
+    <h1>{{article}}</h1>
+    {% if article.chapeau %}
+        {{article.chapeau|linebreaks}}
+    {% endif %}
+    {% render_placeholder article.content %}
+
+    <header class="block">
+        <h3 class="s-button button {{article.category.color}}-bg white-fg text-11">{{article.category}}</h3>
+
+        {% if article.publication_date %}<time class="text-11" datetime="{{article.publication_date|date:"Y-m-d"}}">{% trans "Published" %} {{article.publication_date|date:"F jS, Y"}}</time>{% endif %}
+
+        <div class="thumbs-block block">
+            <a class="s-thumb thumb" href="javascript:window.print();">
+                <svg viewbox="0 0 24 24">
+                    <use href="#print"></use>
+                </svg>
+                Print
+            </a>
+
+            <a class="s-thumb thumb" href="{{article|share_by_email}}">
+                <svg viewbox="0 0 24 24">
+                    <use href="#email"></use>
+                </svg>
+                Email
+            </a>
+            <a class="s-thumb thumb" href="{{article|share_on_twitter}}">
+                <svg viewbox="0 0 24 24">
+                    <use href="#twitter"></use>
+                </svg>
+                Twitter
+            </a>
+            <a class="s-thumb thumb" href="{{article|share_on_linkedin}}">
+                <svg viewbox="0 0 24 24">
+                    <use href="#linkedin"></use>
+                </svg>
+                LinkedIn
+            </a>
+            <a class="s-thumb thumb" href="{{article|share_on_facebook}}">
+                <svg viewbox="0 0 24 24">
+                    <use href="#facebook"></use>
+                </svg>
+                Facebook
+            </a>
+        </div>
+    </header>
+</article>
+
+{% if article.related_news.exists %}
+<aside class="cards-block block white-bg">
+    <h2 class="red-fg">Related news</h2>
+    {% for obj in article.related_news %}
+        {% include "./news-card.html" %}
+    {% endfor %}
+</aside>
+{% endif %}
+
+{% endblock body %}

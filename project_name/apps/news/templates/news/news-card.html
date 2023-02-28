@@ -1,0 +1,6 @@
+{% load thumbnail i18n %}
+<a class="news-card card white-fg" style="background-image: url({% thumbnail obj.image 768x768 crop %});" href="{{obj.get_absolute_url}}">
+    <p class="s-button button {{obj.category.color}}-bg white-fg text-09">{{obj.category}}</p>
+    {% if obj.publication_date %}<time class="text-11" datetime="{{obj.publication_date|date:"Y-m-d"}}">{% trans "Published" %} {{obj.publication_date|date:"F jS, Y"}}</time>{% endif %}
+    <p class="text-10">{{obj|truncatewords:15}}</p>
+</a>

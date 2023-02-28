@@ -1,0 +1,40 @@
+{% load sekizai_tags thumbnail embed_video_tags i18n share_tags %}
+
+{% addtoblock "script" %}
+import '/static/classes/leader-block.js';
+{% endaddtoblock %}
+
+<slide-show class="lead-slide-show" loop autoplay controls="pagination">
+{% for slide in instance.slides.all %}
+    {% if slide.video_background %}
+    <article class="lead-article white-fg" id="lead-ss-{{slide.pk}}" style="--duration: {{slide.duration}}s">
+        {% video slide.video_background is_secure=True as slide_video %}
+        <iframe src="{{slide_video.url}}?autoplay=1&byline=0&controls=0&dnt=1&loop=1&mute=1&muted=1&api=1"  frameborder="0" allowfullscreen="true"></iframe>
+        {% endvideo %}
+    {% else %}
+    <article class="lead-article white-fg" style="--s-image: url('{% thumbnail slide.article.image 768x1024 upscale crop subject_location=slide.article.image.subject_location quality=40 %}'); --m-image: url('{% thumbnail slide.article.image 1920x800 upscale crop subject_location=slide.article.image.subject_location quality=90 %}'); --duration: {{slide.duration}}s;" id="lead-ss-{{slide.pk}}">
+    {% endif %}
+        <div>
+            <span class="lead-button button white-fg {{slide.article.category.color}}-bg text-10 @m-text-09">{{slide.article.category}}</span>
+            <span class="thumbs-block block">
+                <a href="{{slide.article|share_on_twitter}}" class="s-thumb thumb">
+                    <svg viewbox="0 0 24 24"><use href="#twitter"></use></svg>
+                    {% trans "Share on Twitter" %}
+                </a>
+
+                <a href="{{slide.article|share_on_linkedin}}" class="s-thumb thumb">
+                    <svg viewbox="0 0 24 24"><use href="#linkedin"></use></svg>
+                    {% trans "Share on LinkedIn" %}
+                </a>
+
+                <a href="{{slide.article|share_on_facebook}}" class="s-thumb thumb">
+                    <svg viewbox="0 0 24 24"><use href="#facebook"></use></svg>
+                    {% trans "Share on Facebook" %}
+                </a>
+            </span>
+        </div>
+        <time class="text-09" datetime="{{slide.article.publication_date|date:" Y-m-d"}}">{% trans "Published on" %} {{slide.article.publication_date|date:"F jS, Y"}}</time>
+        <a class="block text-06 @m-text-05" href="{{slide.article.get_absolute_url}}">{{slide.article}}</a>
+    </article>
+{% endfor %}
+</slide-show>

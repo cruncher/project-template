@@ -1,4 +1,4 @@
-Django>4.0,<4.1
+Django>4.1,<4.2
 
 Pillow
 django-crispy-forms
@@ -45,3 +45,7 @@ qrcode
 # pretty console
 rich
 pytz
+
+# comms
+-e git+https://github.com/cruncher/djangocms-page-meta.git#egg=djangocms_page_meta
+-e git+https://github.com/cruncher/django-check-seo.git#egg=django_check_seo

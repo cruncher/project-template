@@ -20,6 +20,15 @@ LANGUAGES = [
     ("it", _("Italian")),
 ]
 
+
+PARLER_LANGUAGES = {
+    1: ({"code": "en"}, {"code": "de"}, {"code": "fr"}, {"code": "it"}),
+    "default": {"fallback": "fr", "hide_untranslated": False},
+}
+
+PARLER_DEFAULT_LANGUAGE_CODE = "fr"
+
+
 DEFAULT_LANGUAGE = 0
 
 DATABASES = {
@@ -35,6 +44,7 @@ ALLOWED_HOSTS = [
     ".{{project_name}}.ch",
     "127.0.0.1",
     "0.0.0.0",
+    "testserver",
 ]
 
 
@@ -110,6 +120,8 @@ INSTALLED_APPS = (
     "django.forms",
     "apps.users",
     "apps.cruncher",
+    "apps.news",
+    "parler",
     # Djano-cms
     "cms",
     "treebeard",
@@ -134,6 +146,10 @@ INSTALLED_APPS = (
     # "django_otp.plugins.otp_email",
     "django_otp.plugins.otp_static",
     # SMS: https://django-otp-twilio.readthedocs.io/en/latest/
+    # Comms
+    "django_check_seo",
+    "meta",
+    "djangocms_page_meta",
 )
 
 FILER_CANONICAL_URL = "c/"

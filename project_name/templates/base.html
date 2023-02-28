@@ -1,5 +1,5 @@
-<!doctype html>{% load sekizai_tags compress i18n static cms_tags cache_buster_tags %}
-<html lang="{{request.LANGUAGE_CODE}}">
+<!doctype html>{% load sekizai_tags compress i18n static cms_tags cache_buster_tags page_meta_tags meta %}{% page_meta request.current_page as page_meta %}
+{% autoescape off %}<html {% schemaorg_html_scope page_meta.schemaorg_type %} lang="{{request.LANGUAGE_CODE}}">{% endautoescape %}
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="" />
@@ -51,6 +51,10 @@
     {% else %}
     <link rel="stylesheet" href="{{STATIC_URL}}build/site/module.css?v={% cache_buster %}" />
     {% endif %}
+
+    {% block page_meta %}
+    {% include 'djangocms_page_meta/meta.html' with meta=page_meta %}
+    {% endblock page_meta %}
 
     {% if request.user.is_superuser %}
     {# Warn admins about empty elements, buttons without type, images with no alt #}

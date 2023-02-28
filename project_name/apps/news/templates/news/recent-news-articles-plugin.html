@@ -1,0 +1,10 @@
+{% load i18n %}
+<slide-show class="news-slide-show" loop controls="navigation" style="color:var(--{{instance.fg_color}})">
+    {% for slide in slides %}
+    <a class="news-block block {{slide.category.color}}-fg" href="{{slide.get_absolute_url}}" id="news-{{instance.pk}}-{{slide.pk}}">
+        <span class="s-button button white-fg {{slide.category.color}}-bg text-13">{{slide.category}}</span>
+        <time class="text-14 @m-text-13" datetime="{{slide.publication_date|date:" Y-m-d"}}">{% trans "Published on" %} {{slide.publication_date|date:"F jS, Y"}}</time>
+        <p class="text-10 line-clamp">{{slide.slideshow_title|default:slide.title}}</p>
+    </a>
+    {% endfor %}
+</slide-show>
