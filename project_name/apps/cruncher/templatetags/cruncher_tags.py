@@ -5,6 +5,7 @@ from decimal import Decimal
 
 from django import template
 from django.conf import settings
+from django.template.base import Node
 from django.urls import resolve, reverse
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
@@ -128,3 +129,32 @@ def get(dct, key):
     if type(dct) is not dict:
         return None
     return dct.get(str(key), None)
+
+
+class RemoveLinebreaksNode(Node):
+    def __init__(self, nodelist, indent=0):
+        self.nodelist = nodelist
+        self.indent = indent
+
+    def render(self, context):
+        from django.utils.html import strip_spaces_between_tags
+
+        return strip_spaces_between_tags(self.nodelist.render(context).strip()).replace(
+            "><", f">\n{self.indent * ' '}<"
+        )
+
+
+@register.tag
+def remove_linebreaks(parser, token):
+    contents = token.split_contents()
+    indent = 0
+    if len(contents) == 2:
+        args = contents[1]
+        split_args = args.split("=")
+        if len(split_args) == 2:
+            if split_args[0] == "indent" and split_args[1].isdigit():
+                indent = int(split_args[1])
+
+    nodelist = parser.parse(("end_remove_linebreaks",))
+    parser.delete_first_token()
+    return RemoveLinebreaksNode(nodelist, indent)
