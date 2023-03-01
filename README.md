@@ -11,7 +11,6 @@ source .venv/bin/activate
 pip install --upgrade pip wheel
 pip install -r requirements.txt
 cd $NEW_PROJECT_NAME
-mv $NEW_PROJECT_NAME/templates/base.html-template $NEW_PROJECT_NAME/templates/base.html 
 createdb $NEW_PROJECT_NAME
 git submodule add   git@github.com:stephband/bolt-2.git static/bolt
 git submodule add   git@github.com:stephband/Fn.git static/fn
