@@ -2,8 +2,9 @@
 
 ```
 export NEW_PROJECT_NAME=fancy_new_project
-django-admin.py startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml,html-template  $NEW_PROJECT_NAME
+django-admin.py startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  $NEW_PROJECT_NAME
 cd $NEW_PROJECT_NAME
+sed -i s/{{project_name}}/$NEW_PROJECT_NAME/g $NEW_PROJECT_NAME/templates/base.html
 git init
 ~/.pyenv/versions/3.10.*/bin/python -m venv .venv
 source .venv/bin/activate
