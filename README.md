@@ -2,14 +2,15 @@
 
 ```
 export NEW_PROJECT_NAME=fancy_new_project
-django-admin.py startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml,html  $NEW_PROJECT_NAME
+django-admin.py startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml,html-template  $NEW_PROJECT_NAME
 cd $NEW_PROJECT_NAME
 git init
 ~/.pyenv/versions/3.10.*/bin/python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip wheel
 pip install -r requirements.txt
-cd $new_project_name
+cd $NEW_PROJECT_NAME
+mv $NEW_PROJECT_NAME/templates/base.html-template $NEW_PROJECT_NAME/templates/base.html 
 createdb $NEW_PROJECT_NAME
 git submodule add   git@github.com:stephband/bolt-2.git static/bolt
 git submodule add   git@github.com:stephband/Fn.git static/fn
