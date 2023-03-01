@@ -12,6 +12,7 @@ pymemcache
 raven
 IPython
 pudb
+django-parler~=2.3
 
 black~=22.10
 
