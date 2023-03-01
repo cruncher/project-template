@@ -9,7 +9,7 @@
     {% endblock page_meta %}
     {% end_remove_linebreaks %}
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2">
-    
+
     {% block extra_head_meta %}{% endblock extra_head_meta %}
 
     <title>{% block headtitle %}{% endblock headtitle %}</title>
@@ -46,15 +46,15 @@
     <meta name="theme-color" content="#ffffff"-->
 
     {% if debug %}
-    <link rel="stylesheet" href="{{STATIC_URL}}site/module.css?v={% cache_buster %}" />
+    <link rel="stylesheet" href="{{STATIC_URL}}{{project_name}}/module.css?v={% cache_buster %}" />
     <link rel="stylesheet" href="{{STATIC_URL}}bolt/debug/debug.css" />
     {% else %}
-    <link rel="stylesheet" href="{{STATIC_URL}}build/site/module.css?v={% cache_buster %}" />
+    <link rel="stylesheet" href="{{STATIC_URL}}build/{{project_name}}/module.css?v={% cache_buster %}" />
     {% endif %}
 
     {% if request.user.is_superuser %}
     {# Warn admins about empty elements, buttons without type, images with no alt #}
-    <link rel="stylesheet" href="{{STATIC_URL}}site/classes/warn-not-cms.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}{{project_name}}/classes/warn-not-cms.css" />
     {% endif %}
 
     {% render_block "css" %}
@@ -70,9 +70,9 @@
     {% if debug %}<!-- scripts -->{% endif %}
     <script type="module" title="Module">
         {% if debug %}
-        import '{{STATIC_URL}}site/module.js?v={% cache_buster %}';
+        import '{{STATIC_URL}}{{project_name}}/module.js?v={% cache_buster %}';
         {% else %}
-        import '{{STATIC_URL}}build/site/module.js?v={% cache_buster %}';
+        import '{{STATIC_URL}}build/{{project_name}}/module.js?v={% cache_buster %}';
         {% endif %}
         {% render_block "script" %}
     </script>
@@ -81,7 +81,7 @@
 
     {% if debug or request.user.is_superuser %}
     {# Warn admins about empty elements #}
-    <script type="module" src="{{STATIC_URL}}site/classes/warn-not-cms.js"></script>
+    <script type="module" src="{{STATIC_URL}}{{project_name}}/classes/warn-not-cms.js"></script>
     {% endif %}
 
     {% if not debug %}
