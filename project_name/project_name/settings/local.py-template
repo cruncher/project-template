@@ -44,6 +44,7 @@ ALLOWED_HOSTS = [
     'marco.local',
     '.ngrok.io',
     '192.168.1.117',
+    'testserver'
 ]
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
