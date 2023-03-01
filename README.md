@@ -1,7 +1,18 @@
 # Getting started
 
 ```
-django-admin.py startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  new_project_name
+django-admin.py startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  $new_project_name
+cd $new_project_name
+git init
+~/.pyenv/versions/3.10.*/bin/python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip wheel
+pip install -r requirements.txt
+cd $new_project_name
+createdb $new_project_name
+git submodule add   git@github.com:stephband/bolt-2.git static/bolt
+git submodule add   git@github.com:stephband/Fn.git static/fn
+git submodule add   git@github.com:stephband/dom.git static/dom
 ```
 
 # Resources
