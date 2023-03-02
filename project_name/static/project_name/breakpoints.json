@@ -1,0 +1,7 @@
+
+[
+    { "prefix": "",      "width": "0em",  "column-gap": 8, "row-gap": 10, "columns": 3, "rows": 6 },
+    { "prefix": "\\@s-", "width": "30em", "column-gap": 8, "row-gap": 10, "columns": 6, "rows": 6 },
+    { "prefix": "\\@m-", "width": "60em", "column-gap": 8, "row-gap": 10, "columns": 9, "rows": 6 },
+    { "prefix": "\\@l-", "width": "90em", "column-gap": 8, "row-gap": 10, "columns": 9, "rows": 6 }
+]

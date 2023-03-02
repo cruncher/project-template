@@ -22,19 +22,18 @@
 
     <script title="config">
     {% if debug %}
-    window.DEBUG = true;
+    window.DEBUG = { literal: false };
+    //window.slideshowStylesheet      = '/static/slide-show/shadow.css';
     {% else %}
-    window.elementOverflowToggleStylesheet = '/static/build/bolt/elements/overflow-toggle/shadow.css';
-    window.elementSlideShowStylesheet = '/static/build/bolt/elements/slide-show/shadow.css';
+    //window.slideshowStylesheet      = '/static/build/slide-show/shadow.css';
     {% endif %}
 
-    window.config = {};
+    window.config = {
+        csrf: '{{ csrf_token }}'
+    };
+
     {% render_block "config" %}
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700;900&display=swap" rel="stylesheet">
 
     <!--link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
@@ -70,9 +69,9 @@
     {% if debug %}<!-- scripts -->{% endif %}
     <script type="module" title="Module">
         {% if debug %}
-        import '{{STATIC_URL}}{{project_name}}/module.js?v={% cache_buster %}';
+        import { validationMessages } from '{{STATIC_URL}}{{project_name}}/module.js?v={% cache_buster %}';
         {% else %}
-        import '{{STATIC_URL}}build/{{project_name}}/module.js?v={% cache_buster %}';
+        import { validationMessages } from '{{STATIC_URL}}build/{{project_name}}/module.js?v={% cache_buster %}';
         {% endif %}
         {% render_block "script" %}
     </script>

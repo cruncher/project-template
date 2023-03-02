@@ -1,0 +1,43 @@
+/**
+.class
+**/
+
+.class {
+
+}
+
+.class > .child {
+    /* Layout of descendants */
+}
+
+.class > .child + .child {
+    /* Layout of descendants relative to one another */
+    margin-top: 0;
+}
+
+.class:focus-visible {
+    /* Focus style excluding touch devices, whose focus state is
+       persistent */
+}
+
+* + .class {
+    /* Default spacing */
+    margin-top: 0;
+}
+
+.class + .class {
+    /* Sibling-specific spacing */
+    margin-top: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .class:hover {
+
+    }
+}
+
+@media (min-width: 30em) {
+    .class {
+
+    }
+}

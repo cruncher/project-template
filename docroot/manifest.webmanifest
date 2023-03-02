@@ -1,12 +1,12 @@
 {
-  "name": "Plan Your Move",
-  "short_name": "PYM",
+  "name": "project_name",
+  "short_name": "project_name",
   "background_color": "#9060EB",
-  "description": "Organise your house move and tell everybody who needs to know about it.",
+  "description": "Description",
   "theme_color": "#9060EB",
   "display": "minimal-ui",
   "icons": [{
-      "src": "/static/images/cropped-P-Y-M-logo-picto-big-blanc-RVB-V2-192x192.jpg",
+      "src": "/static/project_name/images/logo.png",
       "sizes": "192x192",
       "type": "image/png"
   }],

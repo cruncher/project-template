@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no"?>
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            :root > * { display: none; }
+            :root > :target { display: inline; }
+        </style>
+    </defs>
+
+    <symbol viewBox="-5 -2 20 20" style="overflow: visible;" id="icon-name">
+        <!-- Icon paths -->
+    </symbol>
+</svg>

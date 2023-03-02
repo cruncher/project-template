@@ -1,17 +1,16 @@
-const name = 'plan-your-move';
+const name = 'project_name';
 
 self.addEventListener('install', function(e) {
+    /* Cache offline dependencies */
     e.waitUntil(
         caches
         .open(name)
-        .then(function(cache) {
-            return cache.addAll([
-                '/static/images/logo.svg',
-                '/static/images/icons.svg',
-                '/static/module.js',
-                '/static/style.min.css'
-            ]);
-        })
+        .then((cache) => cache.addAll([
+            '/static/images/logo.svg',
+            '/static/images/icons.svg',
+            '/static/build/module.js',
+            '/static/build/module.css'
+        ]))
     );
 });
 

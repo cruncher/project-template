@@ -1,9 +1,9 @@
 {
   "excludes": [
-    "static/literal/",
     "static/bolt/",
     "static/fn/",
     "static/dom/",
+    "static/literal/",
     "templates/"
   ]
 }
