@@ -4,3 +4,4 @@
 # @daily ~/{{project_name}}/.venv/bin/python ~/{{project_name}}/{{project_name}}/manage.py update_index -r -v0
 
 @daily pg_dump -f ~/backup/{{project_name}}.daily.dmp {{project_name}}
+1 * * * * /bin/bash -c 'pg_dump -f  ~/backup/{{project_name}}.hourly.`date +"\%H"`.dmp {{project_name}}'
