@@ -50,3 +50,8 @@ pytz
 # comms
 -e git+https://github.com/cruncher/djangocms-page-meta.git#egg=djangocms_page_meta
 -e git+https://github.com/cruncher/django-check-seo.git#egg=django_check_seo
+
+# admin honeypot
+git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf#egg=django-admin-honeypot
+
+
