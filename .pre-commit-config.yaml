@@ -17,13 +17,12 @@ repos:
       additional_dependencies: [toml]
 
 -   repo: https://github.com/psf/black
-    rev: 2d0c14989dca41676fc83fb36f2d652cf93fad58
+    rev: 22.12.0
     hooks:
     - id: black
 
--   repo: https://gitlab.com/pycqa/flake8
-    rev: 3.8.4
+-   repo: https://github.com/charliermarsh/ruff-pre-commit
+    # Ruff version.
+    rev: "v0.0.265"
     hooks:
-    - id: flake8
-      args: ['--config', '.flake8']
-      exclude: '.*/migrations/.*|conf'
+        - id: ruff
