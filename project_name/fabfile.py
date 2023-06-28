@@ -164,7 +164,9 @@ def get_remote_db():
             run(f"pg_dump -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
     local(f"rsync -avz -e ssh {env.hosts[0]}:backup/{env.remote_db}.dmp .")
 
-    
+def sync_media():
+    local(f"rsync -avz -e ssh {env.hosts[0]}:{BASE_DIR}/tmp/media/ ../tmp/media/")
+
 def sync_get():
     get_remote_db()
     local(f"dropdb --if-exists {env.local_db}")
