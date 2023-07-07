@@ -20,6 +20,7 @@ admin.autodiscover()
 
 
 urlpatterns = i18n_patterns(
+    re_path(r"^admin/scheduler/", include("scheduler.urls")),
     re_path(r"^admin/rosetta/", include("rosetta.urls")),
     re_path(r"^admin$", RedirectView.as_view(url="/admin/")),
     re_path(r"^admin/", admin.site.urls),

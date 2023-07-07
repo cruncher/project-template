@@ -1,8 +1,14 @@
 import os
 
 
-gettext = lambda s: s
-_ = lambda x: x
+def gettext(s):
+    return s
+
+
+def _(x):
+    return x
+
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -150,6 +156,7 @@ INSTALLED_APPS = (
     "django_check_seo",
     "meta",
     "djangocms_page_meta",
+    "scheduler",
 )
 
 FILER_CANONICAL_URL = "c/"
@@ -203,7 +210,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 # Set your DSN value
 RAVEN_CONFIG = {"dsn": None}
 RQ = {"DEFAULT_RESULT_TTL": 2678400}
-RQ_QUEUES = {
+SCHEDULER_QUEUES = {
     "default": {"HOST": "localhost", "PORT": 6379, "DB": 0, "DEFAULT_TIMEOUT": 360}
 }
 RQ_SHOW_ADMIN_LINK = True
