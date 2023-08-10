@@ -32,6 +32,10 @@ TEMPLATES = [
                 "sekizai.context_processors.sekizai",
             ],
             "debug": True,
+            "loaders": [
+                'django.template.loaders.filesystem.Loader',
+                "django.template.loaders.app_directories.Loader",
+            ],
         },
     }
 ]
