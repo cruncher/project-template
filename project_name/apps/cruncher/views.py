@@ -27,6 +27,9 @@ INDEX = f"""
 
 
 def template_folder(request, path, document_root="", show_indexes=False):
+    if not settings.DEBUG and not request.user.is_staff:
+        raise Http404
+
     actual_path = os.path.join(document_root, path)
     try:
         return render(request, actual_path)
