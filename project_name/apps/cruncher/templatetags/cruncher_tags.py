@@ -46,7 +46,7 @@ def change_lang(context, lang=None, *args, **kwargs):
     if context['request'] and context['request'].GET:
         ret += '?'
         get_items = []
-        for k, v in context['request'].GET.iteritems():
+        for k, v in context['request'].GET.items():
             get_items.append('{}={}'.format(k, v))
         ret += '&'.join(get_items)
     return ret
