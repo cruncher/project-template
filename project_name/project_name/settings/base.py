@@ -221,12 +221,3 @@ SHELL_PLUS = "ipython"
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 
-try:
-    from .settings_local import *  # NOQA
-except ImportError:
-    pass
-
-try:
-    INSTALLED_APPS = INSTALLED_APPS + ADDITIONAL_INSTALLED_APPS
-except Exception:
-    pass
