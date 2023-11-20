@@ -96,6 +96,24 @@ COMPRESS_CLEAN_CSS_BINARY = os.path.join(
     BASE_DIR, "node_modules/clean-css-cli/bin/cleancss"
 )
 
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
+THUMBNAIL_DEFAULT_STORAGE = "easy_thumbnails.storage.ThumbnailFileSystemStorage"
+THUMBNAIL_ALIASES = {
+    "": {
+        # "team-member": {"size": (1200, 900), "crop": True, "upscale": True},
+    }
+}
+
+
 SECRET_KEY = "{{secret_key}}"
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
