@@ -81,7 +81,8 @@ def compilemessages(do_reload=True):
 def requirements():
     with (cd(CODE_DIR)):
         with prefix(env.activate):
-            run("pip install -q -r ../requirements.txt")
+            run("pip install -q --upgrade pip wheel pip-tools")
+            run("pip-sync -q")
 
 
 def local_git_pull():
