@@ -52,7 +52,6 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(PROJECT_DIR, "..", "templates")],
-        "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.contrib.auth.context_processors.auth",
@@ -69,10 +68,10 @@ TEMPLATES = [
             "debug": False,
             "loaders": [
                 (
-                    'django.template.loaders.cached.Loader',
+                    "django.template.loaders.cached.Loader",
                     [
-                        'django.template.loaders.filesystem.Loader',
-                        'django.template.loaders.app_directories.Loader',
+                        "django.template.loaders.filesystem.Loader",
+                        "django.template.loaders.app_directories.Loader",
                     ],
                 ),
             ],

@@ -9,6 +9,7 @@ git init
 ~/.pyenv/versions/3.10.*/bin/python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip wheel pip-tools
+pip-compile
 pip-sync
 cd $NEW_PROJECT_NAME
 createdb $NEW_PROJECT_NAME
@@ -33,6 +34,7 @@ cd {{project_name}}
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip wheel pip-tools
+pip-compile
 pip-sync
 cd {{project_name}}
 git submodule update --init
