@@ -85,15 +85,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
-)
-
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.cleancss.CleanCSSFilter",
-    "compressor.filters.css_default.CssAbsoluteFilter",
-]
-COMPRESS_CLEAN_CSS_BINARY = os.path.join(
-    BASE_DIR, "node_modules/clean-css-cli/bin/cleancss"
 )
 
 
@@ -157,7 +148,6 @@ INSTALLED_APPS = (
     "cmsplugin_filer_file",
     # Common
     "sekizai",
-    "compressor",
     "gunicorn",
     "django_extensions",
     "impersonate",
