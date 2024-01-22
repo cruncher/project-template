@@ -1,9 +1,7 @@
 Django>=4.2,<4.3
 
 Pillow
-cssmin
 gunicorn
-django-compressor
 easy-thumbnails
 django-extensions
 python-memcached
@@ -12,8 +10,7 @@ raven
 IPython
 pudb
 django-parler~=2.3
-
-black
+redis
 
 git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
 boto3
@@ -37,6 +34,7 @@ django-querycount
 django-rosetta
 
 pre-commit
+black
 
 # For django OTP admin
 django-otp
@@ -45,8 +43,6 @@ qrcode
 # pretty console
 rich
 pytz
-
-redis
 
 
 # comms
@@ -57,9 +53,5 @@ unidecode
 # admin honeypot
 git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf#egg=django-admin-honeypot
 
-# rq
-
 # task scheduler
 django-tasks-scheduler~=1.3
-
-

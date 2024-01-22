@@ -1,5 +1,4 @@
 DEBUG = False
-# COMPRESS_ENABLED = True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.cruncher.ch','https://*.127.0.0.1', 'https://*.{{project_name}}.ch']
 
