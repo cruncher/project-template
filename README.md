@@ -8,8 +8,8 @@ sed -i s/{{project_name}}/$NEW_PROJECT_NAME/g $NEW_PROJECT_NAME/templates/base.h
 git init
 ~/.pyenv/versions/3.10.*/bin/python -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip wheel
-pip install -r requirements.txt
+pip install --upgrade pip wheel pip-tools
+pip-sync
 cd $NEW_PROJECT_NAME
 createdb $NEW_PROJECT_NAME
 git submodule add   git@github.com:stephband/bolt-2.git static/bolt
@@ -32,8 +32,8 @@ git clone git@github.com:cruncher/{{project_name}}.git
 cd {{project_name}}
 python3 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip wheel
-pip install -r requirements.txt
+pip install --upgrade pip wheel pip-tools
+pip-sync
 cd {{project_name}}
 git submodule update --init
 createdb {{project_name}}
