@@ -1,0 +1,23 @@
+name: Test installation from project template
+
+on:
+  push:
+    branches: [2024/test-installation]
+
+jobs:
+  test-installation:
+    # Disables this workflow from running in a repository that is not part of the indicated organization/user
+    if: github.repository_owner == 'cruncher'
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test installation
+        run: |
+          sh tests/test_installations.sh
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

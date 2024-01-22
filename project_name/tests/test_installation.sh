@@ -10,6 +10,8 @@ cd .test_tmp
 mkdir test_project
 cd test_project
 
+PROJECT_DIR=`pwd`
+
 
 test_installation() {
     export NEW_PROJECT_NAME=test_create_from_project_template
@@ -19,7 +21,7 @@ test_installation() {
     return
 }
 test_create_virtualenv() {
-    cd ..
+    cd $PROJECT_DIR
     ~/.pyenv/versions/3.11.*/bin/python -m venv .venv
     ls -la | grep .venv
     return
@@ -69,5 +71,4 @@ fi
 
 dropdb $NEW_PROJECT_NAME
 cd $BASE_DIR
-ls -la
 rm -rf .test_tmp/
