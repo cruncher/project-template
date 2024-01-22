@@ -231,11 +231,8 @@ RQ = {"DEFAULT_RESULT_TTL": 2678400}
 SCHEDULER_QUEUES = {
     "default": {"HOST": "localhost", "PORT": 6379, "DB": 0, "DEFAULT_TIMEOUT": 360}
 }
-RQ_SHOW_ADMIN_LINK = True
 
 SHELL_PLUS = "ipython"
 
 # Required for django-cms on 3.2
 X_FRAME_OPTIONS = "SAMEORIGIN"
-
-

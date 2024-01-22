@@ -1,7 +1,6 @@
 Django>=4.2,<4.3
 
 Pillow
-django-crispy-forms
 cssmin
 gunicorn
 django-compressor
@@ -14,9 +13,9 @@ IPython
 pudb
 django-parler~=2.3
 
-black~=23.3.0
+black
 
--e git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
+git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
 boto3
 django-cms~=3.11.3
 djangocms-snippet
@@ -26,7 +25,7 @@ django-impersonate
 django-sekizai
 django-storages
 djangocms-text-ckeditor
--e git+https://github.com/cruncher/fabric.git@1c60d21b37af4cdf2ce9cc6ef334cc7a978ee3e9#egg=fabric3
+git+https://github.com/cruncher/fabric.git@1c60d21b37af4cdf2ce9cc6ef334cc7a978ee3e9#egg=fabric3
 psycopg2-binary
 python-dateutil
 requests
@@ -47,11 +46,11 @@ qrcode
 rich
 pytz
 
-redis~=4.5.5
+redis
 
 
 # comms
-djangocms-page-meta~=1.2.0
+djangocms-page-meta~=1.4.4
 django-check-seo>=0.6.2
 unidecode
 
@@ -60,9 +59,7 @@ git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa8
 
 # rq
 
-# django-rq
-django-rq~=2.8.1
-django-rq-scheduler~=2023.6.2
-rq~=1.15.1
+# task scheduler
+django-tasks-scheduler~=1.3
 
 
