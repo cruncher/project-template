@@ -13,7 +13,6 @@ cd test_project
 PROJECT_DIR=`pwd`
 
 export NEW_PROJECT_NAME=test_create_from_project_template
-export DJANGO_SETTINGS_MODULE=$NEW_PROJECT_NAME.$NEW_PROJECT_NAME.settings.test
 export PGPASSWORD=postgres
 
 pip install django
