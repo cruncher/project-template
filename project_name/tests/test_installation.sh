@@ -19,7 +19,7 @@ export PGPASSWORD=postgres
 pip install django
 
 test_installation() {
-    django-admin startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  $NEW_PROJECT_NAME
+    django-admin startproject --template=https://github.com/cruncher/project-template/zipball/2024/test-installation --extension=conf,py,sh,py-template,toml  $NEW_PROJECT_NAME
     cd $NEW_PROJECT_NAME
     sed -i s/{{project_name}}/$NEW_PROJECT_NAME/g $NEW_PROJECT_NAME/templates/base.html
     return
