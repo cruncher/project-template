@@ -7,7 +7,7 @@ on:
 jobs:
   test-installation:
     # Disables this workflow from running in a repository that is not part of the indicated organization/user
-    if: github.repository_name == 'project-template'
+    # if: github.repository_name == 'project-template'
 
     runs-on: ubuntu-latest
     services:
