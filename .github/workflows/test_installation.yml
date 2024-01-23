@@ -9,8 +9,9 @@ on:
 
 jobs:
   test-installation:
-    # Disables this workflow from running in a repository that is not part of the indicated organization/user
-    # if: github.repository_name == 'project-template'
+    # Only run this action in the actual project-template
+    # and not in projects derived from this template
+    if: github.repository == 'cruncher/project-template'
 
     runs-on: ubuntu-latest
     services:
