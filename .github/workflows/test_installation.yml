@@ -6,7 +6,6 @@ on:
 
   pull_request:
     branches: [ master ]
-  
 
 jobs:
   test-installation:
@@ -37,4 +36,4 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get install curl
       - name: Test installation
-        run: sh ${PWD}/project_name/tests/test_installation.sh
+        run: sh ${PWD}/.github/workflows/test_installation.sh
