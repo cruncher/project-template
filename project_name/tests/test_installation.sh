@@ -12,9 +12,10 @@ cd test_project
 
 PROJECT_DIR=`pwd`
 
+export NEW_PROJECT_NAME=test_create_from_project_template
+export DJANGO_SETTINGS_MODULE=$NEW_PROJECT_NAME.settings.test
 
 test_installation() {
-    export NEW_PROJECT_NAME=test_create_from_project_template
     ~/.pyenv/versions/3.11.*/bin/django-admin startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  $NEW_PROJECT_NAME
     cd $NEW_PROJECT_NAME
     sed -i s/{{project_name}}/$NEW_PROJECT_NAME/g $NEW_PROJECT_NAME/templates/base.html
@@ -53,7 +54,7 @@ test_cp_local() {
 }
 
 test_django_check() {
-    python manage.py check --fail-level WARNING
+    python manage.py check --fail-level WARNING --settings=test_settings.py
     return
 }
 
