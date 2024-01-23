@@ -81,4 +81,4 @@ test_server_runs() {
 
 
 
-test_installation && test_create_virtualenv && test_activate_virtualenv && test_activate_virtualenv && test_pip && test_db  && test_cp_local && test_django_check && test_migrate
+test_installation && test_create_virtualenv && test_activate_virtualenv && test_activate_virtualenv && test_pip && test_db  && test_cp_local && test_django_check && test_migrate && test_runserver && test_server_runs
