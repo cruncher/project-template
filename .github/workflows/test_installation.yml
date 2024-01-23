@@ -2,7 +2,11 @@ name: Test installation from project template
 
 on:
   push:
-    branches: [2024/test-installation]
+    branches: [ master ]
+
+  pull_request:
+    branches: [ master ]
+  
 
 jobs:
   test-installation:
@@ -31,8 +35,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install Dependencies
-        run: |
-          sudo apt-get install curl
+        run: sudo apt-get install curl
       - name: Test installation
-        run: |
-          sh ${PWD}/project_name/tests/test_installation.sh
+        run: sh ${PWD}/project_name/tests/test_installation.sh
