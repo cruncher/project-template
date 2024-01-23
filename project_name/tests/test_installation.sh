@@ -68,7 +68,7 @@ test_migrate() {
 }
 
 test_runserver() {
-    python manage.py runserver 0.0.0.0:8000 &!
+    python manage.py runserver 0.0.0.0:8000 &
     sleep 3
     return
 }
