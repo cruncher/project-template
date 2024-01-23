@@ -13,6 +13,7 @@ cd test_project
 PROJECT_DIR=`pwd`
 
 export NEW_PROJECT_NAME=test_create_from_project_template
+export DJANGO_SETTINGS_MODULE=test_create_from_project_template.settings.base
 export PGPASSWORD=postgres
 
 pip install django
@@ -52,12 +53,13 @@ test_db() {
 
 test_cp_local() {
     cp $NEW_PROJECT_NAME/settings/local.py-template $NEW_PROJECT_NAME/settings/local.py
+    cat $NEW_PROJECT_NAME/settings/local.py
     return
 }
 
 test_django_check() {
-    pwd
-    python manage.py check --fail-level WARNING -v2
+    echo $DJANGO_SETTINGS_MODULE
+    python manage.py check --fail-level WARNING --settings=$DJANGO_SETTINGS_MODULE
     return
 }
 
