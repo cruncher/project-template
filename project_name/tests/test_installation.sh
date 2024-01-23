@@ -57,7 +57,7 @@ test_cp_local() {
 }
 
 test_django_check() {
-    python manage.py check --fail-level WARNING --settings=test_settings.py
+    python manage.py check --fail-level WARNING
     return
 }
 
