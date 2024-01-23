@@ -15,15 +15,17 @@ PROJECT_DIR=`pwd`
 export NEW_PROJECT_NAME=test_create_from_project_template
 export DJANGO_SETTINGS_MODULE=$NEW_PROJECT_NAME.settings.test
 
+pip install django
+
 test_installation() {
-    ~/.pyenv/versions/3.11.*/bin/django-admin startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  $NEW_PROJECT_NAME
+    django-admin startproject --template=https://github.com/cruncher/project-template/zipball/master --extension=conf,py,sh,py-template,toml  $NEW_PROJECT_NAME
     cd $NEW_PROJECT_NAME
     sed -i s/{{project_name}}/$NEW_PROJECT_NAME/g $NEW_PROJECT_NAME/templates/base.html
     return
 }
 test_create_virtualenv() {
     cd $PROJECT_DIR
-    ~/.pyenv/versions/3.11.*/bin/python -m venv .venv
+    python -m venv .venv
     ls -la | grep .venv
     return
 }
