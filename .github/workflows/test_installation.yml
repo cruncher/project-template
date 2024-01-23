@@ -17,7 +17,7 @@ jobs:
           python-version: "3.11"
       - name: Test installation
         run: |
-          sh ${PWD}/tests/test_installations.sh
+          sh ${PWD}/project_name/tests/test_installations.sh
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
