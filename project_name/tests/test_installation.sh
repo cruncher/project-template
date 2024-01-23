@@ -14,6 +14,7 @@ PROJECT_DIR=`pwd`
 
 export NEW_PROJECT_NAME=test_create_from_project_template
 export DJANGO_SETTINGS_MODULE=$NEW_PROJECT_NAME.settings.test
+export PGPASSWORD=postgres
 
 pip install django
 
@@ -44,9 +45,9 @@ test_pip() {
 }
 test_db() {
     cd $NEW_PROJECT_NAME
-    if ! createdb $NEW_PROJECT_NAME; then
-    dropdb $NEW_PROJECT_NAME
-    createdb $NEW_PROJECT_NAME
+    if ! createdb -h localhost -p 5432 -U postgres -w $NEW_PROJECT_NAME; then
+    dropdb -h localhost -p 5432 -U postgres -w $NEW_PROJECT_NAME
+    createdb -h localhost -p 5432 -U postgres -w $NEW_PROJECT_NAME
     fi
 }
 
@@ -65,13 +66,4 @@ test_migrate() {
     return
 }
 
-if ! test_installation || ! test_create_virtualenv || ! test_activate_virtualenv || ! test_activate_virtualenv || ! test_pip || ! test_db  || ! test_cp_local || ! test_django_check || ! test_migrate; then
-    dropdb $NEW_PROJECT_NAME
-    cd $BASE_DIR
-    rm -rf .test_tmp/
-    return
-fi
-
-dropdb $NEW_PROJECT_NAME
-cd $BASE_DIR
-rm -rf .test_tmp/
+test_installation && test_create_virtualenv && test_activate_virtualenv && test_activate_virtualenv && test_pip && test_db  && test_cp_local && test_django_check && test_migrate
