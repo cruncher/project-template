@@ -17,6 +17,8 @@ jobs:
           python-version: "3.11"
       - name: Test installation
         run: |
+          pwd
+          find .. -name \*.sh
           sh ${PWD}/project_name/tests/test_installations.sh
 
         env:
