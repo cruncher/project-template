@@ -30,9 +30,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install Dependencies
+        run: |
+          sudo apt-get install curl
       - name: Test installation
         run: |
           sh ${PWD}/project_name/tests/test_installation.sh
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

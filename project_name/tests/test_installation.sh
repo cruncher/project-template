@@ -58,7 +58,6 @@ test_cp_local() {
 }
 
 test_django_check() {
-    echo $DJANGO_SETTINGS_MODULE
     python manage.py check --fail-level WARNING --settings=$DJANGO_SETTINGS_MODULE
     return
 }
@@ -67,5 +66,19 @@ test_migrate() {
     python manage.py migrate
     return
 }
+
+test_runserver() {
+    python manage.py runserver 0.0.0.0:8000 &!
+    sleep 3
+    return
+}
+
+
+test_server_runs() {
+    curl -I  http://127.0.0.1:8000/fr/
+    return
+}
+
+
 
 test_installation && test_create_virtualenv && test_activate_virtualenv && test_activate_virtualenv && test_pip && test_db  && test_cp_local && test_django_check && test_migrate
