@@ -46,7 +46,7 @@ pytz
 
 
 # comms
-djangocms-page-meta~=1.4.4
+# djangocms-page-meta~=1.4.4 # Doesn't work woth djangoCMS 4 (feb 2024)
 django-check-seo>=0.6.2
 unidecode
 
