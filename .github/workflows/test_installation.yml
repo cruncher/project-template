@@ -2,10 +2,10 @@ name: Test installation from project template
 
 on:
   push:
-    branches: [ master djangocms4 ]
+    branches: [ djangocms4 ]
 
   pull_request:
-    branches: [ master djangocms4 ]
+    branches: [ djangocms4 ]
 
 jobs:
   test-installation:
