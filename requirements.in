@@ -15,6 +15,7 @@ redis
 git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
 boto3
 django-cms~=4.0
+djangocms-versioning
 djangocms-snippet
 django-eml-email-backend
 django-filer
@@ -46,7 +47,7 @@ pytz
 
 
 # comms
-# djangocms-page-meta~=1.4.4 # Doesn't work woth djangoCMS 4 (feb 2024)
+# djangocms-page-meta~=1.4.4 # Doesn't work with djangoCMS 4 (feb 2024)
 django-check-seo>=0.6.2
 unidecode
 
