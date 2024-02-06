@@ -164,7 +164,6 @@ INSTALLED_APPS = (
     # Comms
     "django_check_seo",
     "meta",
-    "djangocms_page_meta",
     "scheduler",
 )
 
