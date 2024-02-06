@@ -6,12 +6,12 @@ on:
 
   pull_request:
     branches: [ master ]
-  
 
 jobs:
   test-installation:
-    # Disables this workflow from running in a repository that is not part of the indicated organization/user
-    # if: github.repository_name == 'project-template'
+    # Only run this action in the actual project-template
+    # and not in projects derived from this template
+    if: github.repository == 'cruncher/project-template'
 
     runs-on: ubuntu-latest
     services:
@@ -37,4 +37,4 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get install curl
       - name: Test installation
-        run: sh ${PWD}/project_name/tests/test_installation.sh
+        run: sh ${PWD}/.github/workflows/test_installation.sh

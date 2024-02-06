@@ -30,7 +30,7 @@ test_create_virtualenv() {
     ls -la | grep .venv
     return
 }
-test_activate_virtualenv() { 
+test_activate_virtualenv() {
     PWD=`pwd`
     . $PWD/.venv/bin/activate
     return
@@ -39,8 +39,8 @@ test_activate_virtualenv() {
 test_pip() {
     cd $NEW_PROJECT_NAME
     pip install --upgrade pip wheel pip-tools
-    pip-compile
-    pip-sync
+    pip-compile --upgrade -q
+    pip-sync -q
     return
 }
 test_db() {
