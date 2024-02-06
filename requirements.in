@@ -14,7 +14,7 @@ redis
 
 git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
 boto3
-django-cms~=3.11.3
+django-cms~=4.0
 djangocms-snippet
 django-eml-email-backend
 django-filer
