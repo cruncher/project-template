@@ -80,7 +80,7 @@ TEMPLATES = [
 ]
 
 CMS_TEMPLATES = (("cms/home.html", "Page template"),)
-
+CMS_CONFIRM_VERSION4 = True
 
 THUMBNAIL_PROCESSORS = (
     "easy_thumbnails.processors.colorspace",
