@@ -35,6 +35,7 @@ django-rosetta
 
 pre-commit
 black
+flake8
 
 # For django OTP admin
 django-otp
