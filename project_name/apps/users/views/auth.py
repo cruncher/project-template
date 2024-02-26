@@ -4,7 +4,7 @@ from django.contrib.auth.views import PasswordResetView as DjangoPasswordResetVi
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
-
+from django.conf import settings
 from ..forms.auth import UserLoginForm
 
 
@@ -28,6 +28,7 @@ def login_view(request):
             "next": next_,
             "page_title_override": _("Connexion"),
             "current_page": "auth.login",
+            "use_passkeys": "passkeys" in settings.INSTALLED_APPS,
         },
     )
 

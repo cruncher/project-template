@@ -63,4 +63,7 @@ urlpatterns += i18n_patterns(
     re_path("^django-check-seo/", include("django_check_seo.urls"))
 )
 
+if "passkeys" in settings.INSTALLED_APPS:
+    urlpatterns.append(re_path(r'^passkeys/', include('passkeys.urls')),)
+
 urlpatterns += i18n_patterns(re_path(r"^", include("cms.urls")))

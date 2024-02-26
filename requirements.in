@@ -56,3 +56,5 @@ git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa8
 
 # task scheduler
 django-tasks-scheduler~=1.3
+
+django-passkeys
