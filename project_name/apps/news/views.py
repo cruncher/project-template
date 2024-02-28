@@ -49,6 +49,10 @@ def home(request, category_id=None, slug=None):
     )
 
 
+def render_details(request, obj):  # Used by django cms
+    return render(request, "news/details.html", {"article": obj, "meta": obj.as_meta()})
+
+
 def details(request, id, slug):
     if request.user.is_staff:
         article = get_object_or_404(
@@ -63,6 +67,4 @@ def details(request, id, slug):
     if hasattr(request, "toolbar"):
         request.toolbar.set_object(article)
 
-    return render(
-        request, "news/details.html", {"article": article, "meta": article.as_meta()}
-    )
+    return render_details(request, article)

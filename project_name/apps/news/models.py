@@ -1,5 +1,6 @@
 from cms.models import CMSPlugin
-from cms.models.fields import PlaceholderField
+from cms.models.fields import PlaceholderRelationField
+from cms.utils.placeholder import get_placeholder_from_slot
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -40,7 +41,7 @@ class Article(ModelMeta, TranslatableModel):
     publication_date = models.DateTimeField(blank=True, null=True)
 
     image = FilerImageField(on_delete=models.PROTECT)
-    content = PlaceholderField("content")
+    placeholders = PlaceholderRelationField()
     translations = TranslatedFields(
         title=models.CharField(_("Title"), max_length=512),
         chapeau=models.TextField(blank=True, null=True),
@@ -51,6 +52,13 @@ class Article(ModelMeta, TranslatableModel):
         "description": "get_meta_description",
         "image": "get_meta_image",
     }
+
+    def get_template(self):
+        return "news/includes/structure.html"
+
+    @cached_property
+    def content(self):
+        return get_placeholder_from_slot(self.placeholders, "content")
 
     def get_meta_description(self):
         return (self.chapeau or "")[
