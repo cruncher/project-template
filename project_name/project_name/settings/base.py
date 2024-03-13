@@ -191,14 +191,32 @@ BASE_URL = "https://{{project_name}}.cruncher.ch"
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
+def suppress_allowed_hosts(record):
+    from django.core.exceptions import SuspiciousOperation
+
+    if record.name == "django.security.DisallowedHost":
+        return False
+    if record.exc_info:
+        exc_value = record.exc_info[1]
+        if isinstance(exc_value, SuspiciousOperation):
+            return False
+    return True
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
+    "filters": {
+        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},
+        "suppress_allowed_hosts": {
+            "()": "django.utils.log.CallbackFilter",
+            "callback": suppress_allowed_hosts,
+        },
+    },    
     "handlers": {
         "mail_admins": {
             "level": "ERROR",
-            "filters": ["require_debug_false"],
+            "filters": ["require_debug_false", "suppress_allowed_hosts"],
             "class": "django.utils.log.AdminEmailHandler",
         }
     },
