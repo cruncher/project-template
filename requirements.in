@@ -12,7 +12,7 @@ pudb
 django-parler~=2.3
 redis
 
-git+https://github.com/cruncher/cmsplugin-filer@0c3755cad42fa713cc75017d0322270c888a90a3#egg=cmsplugin_filer
+git+https://github.com/cruncher/cmsplugin-filer@1cfeeaa4a7756327bc3505205f60218a324d8fce#egg=cmsplugin_filer
 boto3
 django-cms~=4.0
 djangocms-versioning
