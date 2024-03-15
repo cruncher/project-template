@@ -228,15 +228,19 @@ SHELL_PLUS = "ipython"
 # Required for django-cms on 3.2
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
-
-#Passkeys
+# Passkeys
 
 USE_PASSKEYS = True
 
 if USE_PASSKEYS:
-    INSTALLED_APPS += ["passkeys"]
-    AUTHENTICATION_BACKENDS = ['passkeys.backend.PasskeyModelBackend'] # Change your authentication backend
-    FIDO_SERVER_ID="{{project_name}}.ch"      # Server rp id for FIDO2, it the full domain of your project
-    FIDO_SERVER_NAME="{{project_name}}"
-    import passkeys
-    KEY_ATTACHMENT = None | passkeys.Attachment.CROSS_PLATFORM | passkeys.Attachment.PLATFORM
+    INSTALLED_APPS += ("passkeys",)
+    AUTHENTICATION_BACKENDS += (
+        "passkeys.backend.PasskeyModelBackend",
+    )  # Change your authentication backend
+    FIDO_SERVER_ID = "{{project_name}}.ch"  # Server rp id for FIDO2, it the full domain of your project
+    # Server rp id for FIDO2, it the full domain of your project
+    FIDO_SERVER_NAME = "{{project_name}}"
+    PASSKEY_TIMEOUT = 12000  # miliseconds
+
+    DEFAULT_FROM_EMAIL = "info@cruncher.ch"
+    KEY_ATTACHMENT = None
