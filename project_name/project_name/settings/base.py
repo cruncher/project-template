@@ -192,14 +192,15 @@ BASE_URL = "https://{{project_name}}.cruncher.ch"
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 
-def suppress_allowed_hosts(record):
-    from django.core.exceptions import SuspiciousOperation
 
-    if record.name == "django.security.DisallowedHost":
-        return False
+def suppress_allowed_hosts(record):
+    from django.core.exceptions import SuspiciousOperation, DisallowedHost
+
     if record.exc_info:
         exc_value = record.exc_info[1]
         if isinstance(exc_value, SuspiciousOperation):
+            return False
+        if isinstance(exc_value, DisallowedHost):
             return False
     return True
 
