@@ -1,0 +1,9 @@
+{% load widget_tweaks_fork %}
+
+{% with id=widget.attrs.id %}
+{% for group, options, index in widget.optgroups %}
+    {% for option in options %}
+        {% include "./radio-button.html" with widget=option %}
+    {% endfor %}
+{% endfor %}
+{% endwith %}
