@@ -35,7 +35,7 @@ django-querycount
 django-rosetta
 
 pre-commit
-black
+black>=24.3.0
 flake8
 
 # For django OTP admin
