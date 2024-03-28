@@ -53,7 +53,7 @@ django-check-seo>=0.6.2
 unidecode
 
 # admin honeypot
-git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf#egg=django-admin-honeypot
+django-admin-honeypot @ git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf
 
 # task scheduler
 django-tasks-scheduler~=1.3
