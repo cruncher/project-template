@@ -12,9 +12,9 @@ pudb
 django-parler~=2.3
 redis
 
-git+https://github.com/cruncher/cmsplugin-filer@1cfeeaa4a7756327bc3505205f60218a324d8fce#egg=cmsplugin_filer
+cmsplugin-filer @ git+https://github.com/cruncher/cmsplugin-filer@1cfeeaa4a7756327bc3505205f60218a324d8fce
 boto3
-django-cms~=4.0
+django-cms~=4.1
 djangocms-versioning
 djangocms-snippet
 django-eml-email-backend
@@ -23,7 +23,7 @@ django-impersonate
 django-sekizai
 django-storages
 djangocms-text-ckeditor
-git+https://github.com/cruncher/fabric.git@2008803bb540d8ccccb1398c04d4b8637d947ccf#egg=fabric3
+Fabric3 @ git+https://github.com/cruncher/fabric.git@2008803bb540d8ccccb1398c04d4b8637d947ccf
 psycopg2-binary
 python-dateutil
 requests
@@ -56,4 +56,6 @@ unidecode
 django-admin-honeypot @ git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf
 
 # task scheduler
-django-tasks-scheduler~=1.3
+rq~=1.15.1
+django-tasks-scheduler
+
