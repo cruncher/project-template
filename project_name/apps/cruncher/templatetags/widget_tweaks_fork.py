@@ -112,10 +112,10 @@ def set_data(field, data):
 
 
 @register.filter(name="field_type")
-def field_type(field):
+def field_type_function(field):
     """
     Template filter that returns field class name (in lower case).
-    E.g. if field is CharField then {{ field|field_type }} will
+    E.g. if field is CharField then << field|field_type >> will
     return 'charfield'.
     """
     if hasattr(field, "field") and field.field:
@@ -127,7 +127,7 @@ def field_type(field):
 def widget_type(field):
     """
     Template filter that returns field widget class name (in lower case).
-    E.g. if field's widget is TextInput then {{ field|widget_type }} will
+    E.g. if field's widget is TextInput then << field|widget_type >> will
     return 'textinput'.
     """
     if (
