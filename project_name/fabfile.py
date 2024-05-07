@@ -79,7 +79,7 @@ def compilemessages(do_reload=True):
 
 
 def requirements():
-    with (cd(CODE_DIR)):
+    with (cd(BASE_DIR)):
         with prefix(env.activate):
             run("pip install -q --upgrade pip wheel pip-tools")
             run("pip-sync -q")
