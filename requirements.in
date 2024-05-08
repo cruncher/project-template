@@ -56,6 +56,6 @@ unidecode
 django-admin-honeypot @ git+https://github.com/cruncher/django-admin-honeypot.git@1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf
 
 # task scheduler
-rq~=1.15.1
-django-tasks-scheduler
+rq~=1.16.0
+django-tasks-scheduler>=1.3.2
 
