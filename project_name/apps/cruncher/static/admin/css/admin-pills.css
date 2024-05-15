@@ -17,7 +17,12 @@
     text-decoration: none;
  }
  .pill + .pill,
-.related-lookup + .pill {margin-left: 0.5rem;}
+.related-lookup + strong > .pill {margin-left: 0.5rem;}
 .pill .deletelink {
     margin-left: 0.25rem;
+}
+input + .related-lookup {
+  height: 30px;
+  line-height: 30px;
+  background-position: 50%;
 }
