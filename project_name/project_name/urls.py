@@ -27,7 +27,11 @@ urlpatterns = i18n_patterns(
     re_path(r"^login/", login_view, name="auth.login"),
     re_path(r"^logout/", logout_view, name="auth.logout"),
     re_path(r"^password-reset/", include("apps.users.urls.password_reset")),
-    re_path(r"^test/(?P<path>.*)$", template_folder, {"document_root": "test"}),
+    re_path(
+        r"^test/(?P<path>.*)$",
+        template_folder,
+        {"document_root": "test", "show_indexes": True},
+    ),
 )
 
 urlpatterns += [
