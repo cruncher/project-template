@@ -2,32 +2,12 @@ import glob
 import os
 
 from django.conf import settings
-from django.http import HttpResponse
 from django.shortcuts import Http404, render
-from django.template import engines
 from django.template.exceptions import TemplateDoesNotExist
 
 
-# Some shenigans required
-base_template_name_extends = '{' + '% exten' + 'ds "base' + '.html" %' + '}'
-
-INDEX = f"""
-"{base_template_name_extends}"
-{% block bodytag %}style="padding:2rem" class=""{% endblock %}
-{% block body %}
-<h1>Index of {{path}}</h1>
-<hr />
-<ul style="margin:2rem">
-{% for template in index_templates %}
-<li style="margin-top:0.5rem"><a href="{{template}}">{{template}}</a></li>
-{% endfor %}
-</ul>
-{% endblock body %}
-"""
-
-
 def template_folder(request, path, document_root="", show_indexes=False):
-    if not settings.DEBUG and not request.user.is_staff:
+    if not settings.DEBUG:
         raise Http404
 
     actual_path = os.path.join(document_root, path)
@@ -41,13 +21,13 @@ def template_folder(request, path, document_root="", show_indexes=False):
             dir = os.path.abspath(os.path.join(template_dir, document_root))
 
             templates = glob.glob(dir + "/*.html")
+            templates.remove(dir + "/_index.html")
             templates = [t.replace(template_dir, "") for t in templates]
-            index_template = engines["django"].from_string(INDEX)
-            return HttpResponse(
-                index_template.render(
-                    context={"index_templates": templates, "path": document_root},
-                    request=request,
-                )
+
+            return render(
+                request,
+                "test/_index.html",
+                context={"index_templates": templates, "path": document_root},
             )
 
         raise Http404
