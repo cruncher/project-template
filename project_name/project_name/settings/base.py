@@ -137,6 +137,8 @@ INSTALLED_APPS = (
     "apps.users",
     "apps.cruncher",
     "apps.news",
+    "apps.home",
+    "apps.search",
     "parler",
     # Djano-cms
     # "cms",

@@ -13,7 +13,7 @@ django-parler~=2.3
 redis
 
 boto3
-
+django-filer
 Fabric3 @ git+https://github.com/cruncher/fabric.git@2008803bb540d8ccccb1398c04d4b8637d947ccf
 psycopg2-binary
 python-dateutil
@@ -29,6 +29,12 @@ pre-commit
 black>=24.3.0
 flake8
 
+
+
+django-impersonate
+django-sekizai
+django-storages
+
 # For django OTP admin
 django-otp
 qrcode
@@ -38,9 +44,6 @@ django-typer[rich] # https://github.com/bckohan/django-typer?tab=readme-ov-file#
 pytz
 
 
-# comms
-# djangocms-page-meta~=1.4.4 # Doesn't work with djangoCMS 4 (feb 2024)
-django-check-seo>=0.6.2
 unidecode
 
 # admin honeypot

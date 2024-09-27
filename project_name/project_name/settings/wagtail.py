@@ -66,6 +66,16 @@ TEMPLATES = [
 
 
 
+# Search
+# https://docs.wagtail.org/en/stable/topics/search/backends.html
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
+
+
+
 WAGTAIL_SITE_NAME = "{{project_name}}"
 #Add a WAGTAILDOCS_EXTENSIONS setting to specify the file types that Wagtail 
 # will allow to be uploaded as documents. This can be omitted to allow all file types,
