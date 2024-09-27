@@ -27,7 +27,7 @@ urlpatterns = i18n_patterns(
     re_path(r"^admin/scheduler/", include("scheduler.urls")),
     re_path(r"^admin/rosetta/", include("rosetta.urls")),
     re_path(r"^admin$", RedirectView.as_view(url="/admin/")),
-    re_path(r"^admin/", admin.site.urls),
+    re_path(r"^admin/", include(wagtailadmin_urls)),
     re_path(r"^login/", login_view, name="auth.login"),
     re_path(r"^logout/", logout_view, name="auth.logout"),
     re_path(r"^password-reset/", include("apps.users.urls.password_reset")),
@@ -36,6 +36,7 @@ urlpatterns = i18n_patterns(
         template_folder,
         {"document_root": "test", "show_indexes": True},
     ),
+    path('', include(wagtail_urls)),
 )
 
 urlpatterns += [
@@ -67,13 +68,8 @@ if "rosetta" in settings.INSTALLED_APPS:
     urlpatterns += [re_path(r"^rosetta/", include("rosetta.urls"))]
 
 
-urlpatterns += i18n_patterns(
-    re_path("^django-check-seo/", include("django_check_seo.urls"))
-)
-
 
 urlpatterns += [
-    path('cms/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
-    path('pages/', include(wagtail_urls)),
 ]
+

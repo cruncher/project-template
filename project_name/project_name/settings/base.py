@@ -136,7 +136,7 @@ INSTALLED_APPS = (
     "django.forms",
     "apps.users",
     "apps.cruncher",
-    "apps.news",
+    #"apps.news",
     "apps.home",
     "apps.search",
     "parler",
@@ -181,8 +181,8 @@ INSTALLED_APPS = (
     "django_otp.plugins.otp_static",
     # SMS: https://django-otp-twilio.readthedocs.io/en/latest/
     # Comms
-    "django_check_seo",
-    "meta",
+    #"django_check_seo",
+    #"meta",
     "scheduler",
 )
 

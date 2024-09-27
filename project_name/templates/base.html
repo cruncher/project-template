@@ -1,13 +1,10 @@
-<!doctype html>{% load sekizai_tags i18n static cms_tags cache_buster_tags meta cruncher_tags %}
+<!doctype html>{% load sekizai_tags i18n static  cache_buster_tags  cruncher_tags %}
 {% comment %} {% page_meta request.current_page as page_meta %} {% endcomment %}
-{% autoescape off %}<html {% comment %}{% schemaorg_html_scope page_meta.schemaorg_type %}{% endcomment %} lang="{{request.LANGUAGE_CODE}}">{% endautoescape %}
+{% autoescape off %}<html lang="{{request.LANGUAGE_CODE}}">{% endautoescape %}
 <head>
     {% remove_linebreaks indent=4 %}
     <meta charset="utf-8">
     <meta name="author" content="">
-    {% comment %} {% block page_meta %}
-    {% include 'djangocms_page_meta/meta.html' with meta=page_meta %}
-    {% endblock page_meta %} {% endcomment %}
     {% end_remove_linebreaks %}
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2">
 
@@ -64,7 +61,6 @@
 </head>
 
 <body {% block bodytag %}{% endblock bodytag %}>
-    {% cms_toolbar %}
     {% block body %}{% endblock body %}
 
     {% if debug %}<!-- scripts -->{% endif %}
