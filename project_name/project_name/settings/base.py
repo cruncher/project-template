@@ -139,15 +139,31 @@ INSTALLED_APPS = (
     "apps.news",
     "parler",
     # Djano-cms
-    "cms",
-    "treebeard",
-    "menus",
-    "filer",
-    "djangocms_snippet",
-    "djangocms_versioning",
-    "djangocms_text_ckeditor",
-    "cmsplugin_filer_image",
-    "cmsplugin_filer_file",
+    # "cms",
+    # "treebeard",
+    # "menus",
+    # "filer",
+    # "djangocms_snippet",
+    # "djangocms_versioning",
+    # "djangocms_text_ckeditor",
+    # "cmsplugin_filer_image",
+    # "cmsplugin_filer_file",
+
+    #Wagtail
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
+    'modelcluster',
+    'taggit',
+
     # Common
     "sekizai",
     "gunicorn",
@@ -204,6 +220,7 @@ def suppress_allowed_hosts(record):
             return False
     return True
 
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -213,7 +230,7 @@ LOGGING = {
             "()": "django.utils.log.CallbackFilter",
             "callback": suppress_allowed_hosts,
         },
-    },    
+    },
     "handlers": {
         "mail_admins": {
             "level": "ERROR",

@@ -1,5 +1,5 @@
 Django>=4.2,<4.3
-
+wagtail>=6.1,<6.3
 Pillow
 gunicorn
 easy-thumbnails
@@ -12,17 +12,8 @@ pudb
 django-parler~=2.3
 redis
 
-cmsplugin-filer @ git+https://github.com/cruncher/cmsplugin-filer@1cfeeaa4a7756327bc3505205f60218a324d8fce
 boto3
-django-cms~=4.1
-djangocms-versioning
-djangocms-snippet
-django-eml-email-backend
-django-filer
-django-impersonate
-django-sekizai
-django-storages
-djangocms-text-ckeditor
+
 Fabric3 @ git+https://github.com/cruncher/fabric.git@2008803bb540d8ccccb1398c04d4b8637d947ccf
 psycopg2-binary
 python-dateutil
