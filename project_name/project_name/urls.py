@@ -67,10 +67,6 @@ if "rosetta" in settings.INSTALLED_APPS:
     urlpatterns += [re_path(r"^rosetta/", include("rosetta.urls"))]
 
 
-urlpatterns += i18n_patterns(
-    re_path("^django-check-seo/", include("django_check_seo.urls"))
-)
-
 
 urlpatterns += [
     path('cms/', include(wagtailadmin_urls)),
