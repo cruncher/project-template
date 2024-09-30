@@ -1,6 +1,6 @@
 DEBUG = False
 
-CSRF_TRUSTED_ORIGINS = ['https://*.cruncher.ch','https://*.127.0.0.1', 'https://*.{{project_name}}.ch']
+CSRF_TRUSTED_ORIGINS = ['https://*.cruncher.ch','https://*.127.0.0.1', 'https://*.{{cookiecutter.project_slug}}.ch']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True

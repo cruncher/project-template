@@ -5,17 +5,17 @@ from fabric.api import cd, env, local, prefix, settings
 from fabric.operations import run
 
 
-BASE_DIR = "/home/projects/{{project_name}}/{{project_name}}"
-CODE_DIR = BASE_DIR + "/{{project_name}}"
+BASE_DIR = "/home/projects/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}"
+CODE_DIR = BASE_DIR + "/{{cookiecutter.project_slug}}"
 
-env.hosts = ["{{project_name}}@{{project_name}}.cruncher.ch"]
+env.hosts = ["{{cookiecutter.project_slug}}@{{cookiecutter.project_slug}}.cruncher.ch"]
 env.activate = f"source {BASE_DIR}/.venv/bin/activate"
-env.remote_db = "{{project_name}}"
-env.local_db = "{{project_name}}"
+env.remote_db = "{{cookiecutter.project_slug}}"
+env.local_db = "{{cookiecutter.project_slug}}"
 env.git_branch = "main"
-env.gunicorn_process = ["{{project_name}}_gunicorn", ]
+env.gunicorn_process = ["{{cookiecutter.project_slug}}_gunicorn", ]
 env.forward_agent = True
-env.sentry_project_slug = "{{project_name}}"
+env.sentry_project_slug = "{{cookiecutter.project_slug}}"
 env.senty_org_slug = "cruncher"
 
 

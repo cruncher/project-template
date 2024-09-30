@@ -21,7 +21,7 @@ pip install django
 test_installation() {
     django-admin  startproject --template=$BASE_DIR --extension=conf,py,sh,py-template,toml  $NEW_PROJECT_NAME
     cd $NEW_PROJECT_NAME
-    sed -i s/{{project_name}}/$NEW_PROJECT_NAME/g $NEW_PROJECT_NAME/templates/base.html
+    sed -i s/{{cookiecutter.project_slug}}/$NEW_PROJECT_NAME/g $NEW_PROJECT_NAME/templates/base.html
     return
 }
 test_create_virtualenv() {

@@ -26,13 +26,14 @@ LANGUAGES = [
     ("it", _("Italian")),
 ]
 
-
+{%- if cookiecutter.use_parler == 'y' %}
 PARLER_LANGUAGES = {
     1: ({"code": "en"}, {"code": "de"}, {"code": "fr"}, {"code": "it"}),
     "default": {"fallback": "fr", "hide_untranslated": False},
 }
 
 PARLER_DEFAULT_LANGUAGE_CODE = "fr"
+{%- endif %}
 
 
 DEFAULT_LANGUAGE = 0
@@ -40,7 +41,7 @@ DEFAULT_LANGUAGE = 0
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "{{project_name}}",
+        "NAME": "{{cookiecutter.project_slug}}",
     }
 }
 
@@ -48,7 +49,7 @@ DATABASES = {
 ALLOWED_HOSTS = [
     ".cruncher.ch",
     ".test.cruncher.ch",
-    ".{{project_name}}.ch",
+    ".{{cookiecutter.project_slug}}.ch",
     "127.0.0.1",
     "0.0.0.0",
     "testserver",
@@ -59,7 +60,7 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379",
-        "KEY_PREFIX": "{{project_name}}",
+        "KEY_PREFIX": "{{cookiecutter.project_slug}}",
     }
 }
 
@@ -117,12 +118,12 @@ TEST_RUNNER = "django.test.runner.DiscoverRunner"
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 
-ROOT_URLCONF = "{{project_name}}.urls"
+ROOT_URLCONF = "{{cookiecutter.project_slug}}.urls"
 AUTH_USER_MODEL = "users.User"
 
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = "{{project_name}}.wsgi.application"
+WSGI_APPLICATION = "{{cookiecutter.project_slug}}.wsgi.application"
 
 
 INSTALLED_APPS = (
@@ -139,7 +140,10 @@ INSTALLED_APPS = (
     #"apps.news",
     "apps.home",
     "apps.search",
+    {%- if cookiecutter.use_parler %}
     "parler",
+    {%- endif %}
+
     # Djano-cms
     # "cms",
     # "treebeard",
@@ -150,8 +154,7 @@ INSTALLED_APPS = (
     # "djangocms_text_ckeditor",
     # "cmsplugin_filer_image",
     # "cmsplugin_filer_file",
-
-    #Wagtail
+    {%- if cookiecutter.cms == "Wagtail" %}
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -165,6 +168,19 @@ INSTALLED_APPS = (
     'wagtail',
     'modelcluster',
     'taggit',
+    {%- elif cookiecutter.cms == "DjangoCMS" %}
+    "cms",
+    "treebeard",
+    "menus",
+    "filer",
+    "djangocms_snippet",
+    "djangocms_versioning",
+    "djangocms_text_ckeditor",
+    "cmsplugin_filer_image",
+    "cmsplugin_filer_file",
+    "django_check_seo",
+    "meta",
+    {%- endif %}
 
     # Common
     "sekizai",
@@ -180,11 +196,139 @@ INSTALLED_APPS = (
     # "django_otp.plugins.otp_email",
     "django_otp.plugins.otp_static",
     # SMS: https://django-otp-twilio.readthedocs.io/en/latest/
-    # Comms
-    #"django_check_seo",
-    #"meta",
     "scheduler",
 )
+
+{%- if cookiecutter.cms == "DjangoCMS" %}
+CMS_PAGE_CACHE = True
+CMS_PLACEHOLDER_CACHE = True
+CMS_PLUGIN_CACHE = True
+
+CMS_CACHE_DURATIONS = {"content": 60, "menus": 3600, "permissions": 3600}
+
+
+CMS_TEMPLATES = (("cms/home.html", "Page template"),)
+CMS_CONFIRM_VERSION4 = True
+
+# CMS_PLACEHOLDER_CONF = {
+#     'background image': {
+#         'plugins': ['BackgroundImagePlugin'],
+#         'limits': {
+#             'global': 1
+#         }
+#     }
+# }
+
+META_SITE_PROTOCOL = "https"
+META_SITE_DOMAIN = "{{cookiecutter.project_slug}}.ch"
+META_USE_OG_PROPERTIES = True
+META_SITE_TYPE = "website"
+
+PAGE_META_DESCRIPTION_LENGTH = 160
+
+
+# DEFAULTS
+DJANGO_CHECK_SEO_SETTINGS = {
+    "content_words_number": [300, 600],
+    "internal_links": 1,
+    "external_links": 1,
+    "meta_title_length": [30, 60],
+    "meta_description_length": [50, PAGE_META_DESCRIPTION_LENGTH],
+    "keywords_in_first_words": 50,
+    "max_link_depth": 4,
+    "max_url_length": 70,
+}
+
+
+{%- elif cookiecutter.cms == "Wagtail" %}
+# Search
+# https://docs.wagtail.org/en/stable/topics/search/backends.html
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
+
+WAGTAIL_SITE_NAME = "{{ cookiecutter.project_name }}"
+#Add a WAGTAILDOCS_EXTENSIONS setting to specify the file types that Wagtail 
+# will allow to be uploaded as documents. This can be omitted to allow all file types,
+#  but this may present a security risk if untrusted users are allowed to
+#  upload documents - see User Uploaded Files.
+
+WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+{%- endif %}
+
+THUMBNAIL_PROCESSORS = (
+    "easy_thumbnails.processors.colorspace",
+    "easy_thumbnails.processors.autocrop",
+    "filer.thumbnail_processors.scale_and_crop_with_subject_location",
+    "easy_thumbnails.processors.filters",
+)
+INTERNAL_IPS = []
+
+MIDDLEWARE = (
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    "cms.middleware.utils.ApphookReloadMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_otp.middleware.OTPMiddleware",
+    "impersonate.middleware.ImpersonateMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    {%- if cookiecutter.cms == "DjangoCMS" %}
+    "cms.middleware.user.CurrentUserMiddleware",
+    "cms.middleware.page.CurrentPageMiddleware",
+    "cms.middleware.toolbar.ToolbarMiddleware",
+    "cms.middleware.language.LanguageCookieMiddleware",
+    {%- elif cookiecutter.cms == "Wagtail" %}
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    {%- endif %}
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "querycount.middleware.QueryCountMiddleware",
+
+
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
+)
+
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(PROJECT_DIR, "..", "templates")],
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.request",
+                "django.template.context_processors.media",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+                "sekizai.context_processors.sekizai",
+                {%- if cookiecutter.cms == "DjangoCMS" %}
+                "cms.context_processors.cms_settings",
+                {%- elif cookiecutter.cms == "Wagtail" %}
+                "wagtail.contrib.settings.context_processors.settings",
+                {%- endif %}
+            ],
+            "debug": False,
+            "loaders": [
+                (
+                    "django.template.loaders.cached.Loader",
+                    [
+                        "django.template.loaders.filesystem.Loader",
+                        "django.template.loaders.app_directories.Loader",
+                    ],
+                ),
+            ],
+        },
+    }
+]
 
 FILER_CANONICAL_URL = "c/"
 
@@ -201,7 +345,7 @@ IMPERSONATE = {
 }
 FILE_UPLOAD_PERMISSIONS = 0o644
 
-BASE_URL = "https://{{project_name}}.cruncher.ch"
+BASE_URL = "https://{{cookiecutter.domain_name}}"
 
 
 # A sample logging configuration. The only tangible logging
@@ -263,5 +407,8 @@ SCHEDULER_QUEUES = {
 
 SHELL_PLUS = "ipython"
 
+
+{%- elif cookiecutter.cms == "DjangoCMS" %}
 # Required for django-cms on 3.2
 X_FRAME_OPTIONS = "SAMEORIGIN"
+{%- endif %}
