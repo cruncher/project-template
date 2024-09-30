@@ -107,7 +107,7 @@ THUMBNAIL_ALIASES = {
 }
 
 
-SECRET_KEY = "{{secret_key}}"
+SECRET_KEY = "unsecure-secret-key"
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
 
