@@ -9,5 +9,5 @@
     "debug": "n",
     "cms": ["Wagtail", "DjangoCMS", "None"],
     "use_parler": "y",
-    "_copy_without_render": [ "*.html", "*.js", "*.map", "*.css", "*.yaml", "*.tpl" ]
+    "_copy_without_render": [ "*.html", "*.txt","*.js", "*.map", "*.css", "*.yaml", "*.tpl" ]
   }
