@@ -1,16 +1,16 @@
 [Unit]
-Description={{project_name}} gunicorn daemon
+Description={{cookiecutter.project_slug}} gunicorn daemon
 Requires=gunicorn.socket
 After=network.target
 
 [Service]
 Type=notify
 # the specific user that our service will run as
-User={{project_name}}
-Group={{project_name}}
+User={{cookiecutter.project_slug}}
+Group={{cookiecutter.project_slug}}
 RuntimeDirectory=gunicorn
-WorkingDirectory=/home/projects/{{project_name}}/{{project_name}}/{{project_name}}
-ExecStart=/home/projects/{{project_name}}/{{project_name}}/.venv/bin/gunicorn  {{project_name}}.wsgi:application -c /home/projects/{{project_name}}/{{project_name}}/conf/prod/gunicorn.conf.py 
+WorkingDirectory=/home/projects/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}
+ExecStart=/home/projects/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}/.venv/bin/gunicorn  {{cookiecutter.project_slug}}.wsgi:application -c /home/projects/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}/conf/prod/gunicorn.conf.py 
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5

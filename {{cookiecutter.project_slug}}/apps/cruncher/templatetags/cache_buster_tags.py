@@ -8,7 +8,7 @@ from django.utils.crypto import get_random_string
 register = template.Library()
 
 
-CACHE_BUSTER_KEY = "cache-buster-{{project_name}}"
+CACHE_BUSTER_KEY = "cache-buster-{{cookiecutter.project_slug}}"
 
 
 @register.simple_tag

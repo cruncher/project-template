@@ -1,7 +1,7 @@
 # m h  dom mon dow   command
 
-@daily ~/{{project_name}}/.venv/bin/python ~/{{project_name}}/{{project_name}}/manage.py clearsessions
-# @daily ~/{{project_name}}/.venv/bin/python ~/{{project_name}}/{{project_name}}/manage.py update_index -r -v0
+@daily ~/{{cookiecutter.project_slug}}/.venv/bin/python ~/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}/manage.py clearsessions
+# @daily ~/{{cookiecutter.project_slug}}/.venv/bin/python ~/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}/manage.py update_index -r -v0
 
-@daily pg_dump -f ~/backup/{{project_name}}.daily.dmp {{project_name}}
-1 * * * * /bin/bash -c 'pg_dump -f  ~/backup/{{project_name}}.hourly.`date +"\%H"`.dmp {{project_name}}'
+@daily pg_dump -f ~/backup/{{cookiecutter.project_slug}}.daily.dmp {{cookiecutter.project_slug}}
+1 * * * * /bin/bash -c 'pg_dump -f  ~/backup/{{cookiecutter.project_slug}}.hourly.`date +"\%H"`.dmp {{cookiecutter.project_slug}}'

@@ -6,7 +6,7 @@ order_by_type = true
 known_django = "django"
 known_django_third_party = "django_*"
 known_rest_framework = "rest_framework,rest_framework_*"
-known_first_party = "apps,{{project_name}}"
+known_first_party = "apps,{{cookiecutter.project_slug}}"
 sections = "FUTURE,STDLIB,THIRDPARTY,DJANGO,DJANGO_THIRD_PARTY,REST_FRAMEWORK,FIRSTPARTY,LOCALFOLDER"
 skip_glob= "**/migrations/**"
 
