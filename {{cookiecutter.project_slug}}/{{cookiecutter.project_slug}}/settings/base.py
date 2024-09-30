@@ -168,7 +168,7 @@ INSTALLED_APPS = (
     'wagtail',
     'modelcluster',
     'taggit',
-    {%- elif cookiecutter.cms == "DjangoCMS" %}
+    {% elif cookiecutter.cms == "DjangoCMS" %}
     "cms",
     "treebeard",
     "menus",
@@ -240,7 +240,7 @@ DJANGO_CHECK_SEO_SETTINGS = {
 }
 
 
-{%- elif cookiecutter.cms == "Wagtail" %}
+{% elif cookiecutter.cms == "Wagtail" %}
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
@@ -284,7 +284,7 @@ MIDDLEWARE = (
     "cms.middleware.page.CurrentPageMiddleware",
     "cms.middleware.toolbar.ToolbarMiddleware",
     "cms.middleware.language.LanguageCookieMiddleware",
-    {%- elif cookiecutter.cms == "Wagtail" %}
+    {% elif cookiecutter.cms == "Wagtail" %}
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     {%- endif %}
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -312,7 +312,7 @@ TEMPLATES = [
                 "sekizai.context_processors.sekizai",
                 {%- if cookiecutter.cms == "DjangoCMS" %}
                 "cms.context_processors.cms_settings",
-                {%- elif cookiecutter.cms == "Wagtail" %}
+                {% elif cookiecutter.cms == "Wagtail" %}
                 "wagtail.contrib.settings.context_processors.settings",
                 {%- endif %}
             ],
@@ -408,7 +408,7 @@ SCHEDULER_QUEUES = {
 SHELL_PLUS = "ipython"
 
 
-{%- elif cookiecutter.cms == "DjangoCMS" %}
+{% elif cookiecutter.cms == "DjangoCMS" %}
 # Required for django-cms on 3.2
 X_FRAME_OPTIONS = "SAMEORIGIN"
 {%- endif %}
