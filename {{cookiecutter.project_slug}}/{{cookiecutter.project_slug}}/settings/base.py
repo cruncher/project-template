@@ -408,7 +408,7 @@ SCHEDULER_QUEUES = {
 SHELL_PLUS = "ipython"
 
 
-{% elif cookiecutter.cms == "DjangoCMS" %}
+{% if cookiecutter.cms == "DjangoCMS" %}
 # Required for django-cms on 3.2
 X_FRAME_OPTIONS = "SAMEORIGIN"
 {%- endif %}
