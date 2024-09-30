@@ -1,5 +1,5 @@
 from .base import *  # noqa
-from .cms import *  # noqa
+from .djangocms import *  # noqa
 from .s3 import *  # noqa
 
 try:
