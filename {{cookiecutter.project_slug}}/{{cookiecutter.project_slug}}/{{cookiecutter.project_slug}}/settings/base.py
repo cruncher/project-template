@@ -271,7 +271,9 @@ INTERNAL_IPS = []
 MIDDLEWARE = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    {%- if cookiecutter.cms == "DjangoCMS" %}
     "cms.middleware.utils.ApphookReloadMiddleware",
+    {%- endif %}
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
