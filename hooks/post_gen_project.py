@@ -60,7 +60,15 @@ def main():
         remove_wagtail_apps()
         remove_django_cms_apps()
         shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "templates", "cms"))
-
+    static_path = os.path.join("{{cookiecutter.project_slug}}", "static")
+    if "{{cookiecutter.add_submodule_bolt}}":
+        os.system(f"git submodule add git@github.com:stephband/bolt-2.git {os.path.join(static_path, 'bolt')}")
+    if "{{cookiecutter.add_submodule_fn}}":
+        os.system(f"git submodule add git@github.com:stephband/Fn.git {os.path.join(static_path, 'fn')}")
+    if "{{cookiecutter.add_submodule_dom}}":
+        os.system(f"git submodule add git@github.com:stephband/dom.git {os.path.join(static_path, 'dom')}")
+    if "{{cookiecutter.add_submodule_slideshow}}":
+        os.system(f"git submodule add git@github.com:stephband/slide-show.git {os.path.join(static_path, 'slide-show')}")
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
