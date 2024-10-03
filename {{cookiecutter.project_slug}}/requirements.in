@@ -1,5 +1,5 @@
+# COMMON
 Django>=4.2,<4.3
-wagtail>=6.1,<6.3
 Pillow
 gunicorn
 easy-thumbnails
@@ -9,11 +9,16 @@ pymemcache
 raven
 IPython
 pudb
+{%- if cookiecutter.use_parler == "y" %}
 django-parler~=2.3
+{%- endif %}
 redis
-
 boto3
+django-eml-email-backend
 django-filer
+django-impersonate
+django-sekizai
+django-storages
 Fabric3 @ git+https://github.com/cruncher/fabric.git@2008803bb540d8ccccb1398c04d4b8637d947ccf
 psycopg2-binary
 python-dateutil
@@ -24,16 +29,9 @@ xlrd
 xlwt
 django-querycount
 django-rosetta
-
 pre-commit
 black>=24.3.0
 flake8
-
-
-
-django-impersonate
-django-sekizai
-django-storages
 
 # For django OTP admin
 django-otp
@@ -42,7 +40,6 @@ qrcode
 # pretty console
 django-typer[rich] # https://github.com/bckohan/django-typer?tab=readme-ov-file#basic-example
 pytz
-
 
 unidecode
 
@@ -53,3 +50,18 @@ django-admin-honeypot @ git+https://github.com/cruncher/django-admin-honeypot.gi
 rq~=1.16.0
 django-tasks-scheduler>=1.3.2
 
+
+{%- if cookiecutter.cms == "Wagtail" %}
+# WAGTAIL
+wagtail>=6.1,<6.3
+{% elif cookiecutter.cms == "DjangoCMS" %}
+# DJANGO CMS
+cmsplugin-filer @ git+https://github.com/cruncher/cmsplugin-filer@1cfeeaa4a7756327bc3505205f60218a324d8fce
+django-cms~=4.1
+djangocms-versioning
+djangocms-snippet
+djangocms-text-ckeditor
+# comms
+# djangocms-page-meta~=1.4.4 # Doesn't work with djangoCMS 4 (feb 2024)
+django-check-seo>=0.6.2
+{%- endif %}

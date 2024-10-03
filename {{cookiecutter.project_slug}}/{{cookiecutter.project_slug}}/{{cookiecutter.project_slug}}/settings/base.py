@@ -137,9 +137,8 @@ INSTALLED_APPS = (
     "django.forms",
     "apps.users",
     "apps.cruncher",
-    #"apps.news",
-    "apps.home",
-    "apps.search",
+    
+    
     {%- if cookiecutter.use_parler %}
     "parler",
     {%- endif %}
@@ -168,6 +167,8 @@ INSTALLED_APPS = (
     'wagtail',
     'modelcluster',
     'taggit',
+    "apps.home",
+    "apps.search",
     {% elif cookiecutter.cms == "DjangoCMS" %}
     "cms",
     "treebeard",
@@ -180,6 +181,7 @@ INSTALLED_APPS = (
     "cmsplugin_filer_file",
     "django_check_seo",
     "meta",
+    "apps.news",
     {%- endif %}
 
     # Common

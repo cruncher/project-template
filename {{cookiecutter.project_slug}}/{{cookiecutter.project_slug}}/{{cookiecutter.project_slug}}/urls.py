@@ -27,7 +27,13 @@ urlpatterns = i18n_patterns(
     re_path(r"^admin/scheduler/", include("scheduler.urls")),
     re_path(r"^admin/rosetta/", include("rosetta.urls")),
     re_path(r"^admin$", RedirectView.as_view(url="/admin/")),
+    {%- if cookiecutter.cms == 'Wagtail' %}
+    path('', include(wagtail_urls)),
     re_path(r"^admin/", include(wagtailadmin_urls)),
+    {% elif cookiecutter.cms == "DjangoCMS" %}
+    re_path(r"^", include("cms.urls"))
+    {%- endif %}
+
     re_path(r"^login/", login_view, name="auth.login"),
     re_path(r"^logout/", logout_view, name="auth.logout"),
     re_path(r"^password-reset/", include("apps.users.urls.password_reset")),
@@ -36,7 +42,6 @@ urlpatterns = i18n_patterns(
         template_folder,
         {"document_root": "test", "show_indexes": True},
     ),
-    path('', include(wagtail_urls)),
 )
 
 urlpatterns += [
@@ -68,8 +73,9 @@ if "rosetta" in settings.INSTALLED_APPS:
     urlpatterns += [re_path(r"^rosetta/", include("rosetta.urls"))]
 
 
-
+{%- if cookiecutter.cms == 'Wagtail' %}
 urlpatterns += [
     path('documents/', include(wagtaildocs_urls)),
 ]
+{%- endif %}
 
