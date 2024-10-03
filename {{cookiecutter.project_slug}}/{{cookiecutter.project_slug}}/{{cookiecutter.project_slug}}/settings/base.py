@@ -256,7 +256,8 @@ WAGTAIL_SITE_NAME = "{{ cookiecutter.project_name }}"
 # will allow to be uploaded as documents. This can be omitted to allow all file types,
 #  but this may present a security risk if untrusted users are allowed to
 #  upload documents - see User Uploaded Files.
-
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
+WAGTAILADMIN_BASE_URL = "{{cookiecutter.project_slug}}.ch"
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
 {%- endif %}
 

@@ -11,6 +11,9 @@ DEV_STATIC_URLS = {
     r'^source/(?P<path>.*)$': os.path.join(BASE_DIR, 'source'),
 }
 
+
+
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -26,8 +29,11 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "sekizai.context_processors.sekizai",
+                {%- if cookiecutter.cms == "DjangoCMS" %}
+                "cms.context_processors.cms_settings",
+                {% elif cookiecutter.cms == "Wagtail" %}
                 "wagtail.contrib.settings.context_processors.settings",
-
+                {%- endif %}
             ],
             "debug": True,
             "loaders": [
@@ -37,6 +43,7 @@ TEMPLATES = [
         },
     }
 ]
+
 
 INTERNAL_IPS = ('127.0.0.1',)
 ALLOWED_HOSTS = [
