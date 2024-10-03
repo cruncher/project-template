@@ -81,7 +81,8 @@ urlpatterns = i18n_patterns(
     path('', include(wagtail_urls)),
 )
 {% elif cookiecutter.cms == "DjangoCMS" %}
-urlpatterns = i18n_patterns(
+urlpatterns += i18n_patterns(
+    path("admin/", admin.site.urls),
     re_path(r"^", include("cms.urls"))
 )
 {%- endif %}
