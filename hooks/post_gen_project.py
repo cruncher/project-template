@@ -70,8 +70,23 @@ def main():
         os.system(f"git submodule add git@github.com:stephband/dom.git {os.path.join(static_path, 'dom')}")
     if "{{cookiecutter.add_submodule_slideshow}}":
         os.system(f"git submodule add git@github.com:stephband/slide-show.git {os.path.join(static_path, 'slide-show')}")
+    settings_dir = os.path.join("{{cookiecutter.project_slug}}","{{cookiecutter.project_slug}}", "settings")
+
+    shutil.move(os.path.join(settings_dir, "local.py-template"), os.path.join(settings_dir, "local.py"))
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
+    print(HINT + "A git repository is already created. You can continue with:" + TERMINATOR)
+    print(HINT + "- Creating a virtual environment" + TERMINATOR)
+    print(HINT + "- Installing requirements" + TERMINATOR)
+    print(HINT + "- Creating a database" + TERMINATOR)
+    print(HINT + "~/.pyenv/versions/3.11.*/bin/python -m venv .venv" + TERMINATOR)
+    print(HINT + "pip install --upgrade pip wheel pip-tools" + TERMINATOR)
+    print(HINT + "pip-compile" + TERMINATOR)
+    print(HINT + "pip-sync" + TERMINATOR)
+    print(HINT + "cd {{cookiecutter.project_slug}}" + TERMINATOR)
+    print(HINT + "createdb {{cookiecutter.project_slug}}" + TERMINATOR)
+    print(HINT + "python manage.py migrate" + TERMINATOR)
+    print(HINT + "python manage.py createsuperuser" + TERMINATOR)
 
 
 if __name__ == "__main__":

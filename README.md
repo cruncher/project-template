@@ -2,9 +2,8 @@
 
 ```
 export NEW_PROJECT_NAME=fancy_new_project
-cookiecutter https://github.com/halitcelik/project-template/zipball/cookiecutter
+cookiecutter gh:cruncher/project-template
 cd {{cookiecutter.project_slug}}
-git init
 ~/.pyenv/versions/3.11.*/bin/python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip wheel pip-tools
@@ -12,9 +11,7 @@ pip-compile
 pip-sync
 cd {{cookiecutter.project_slug}}
 createdb {{cookiecutter.project_slug}}
-git submodule add   git@github.com:stephband/bolt-2.git static/bolt
-git submodule add   git@github.com:stephband/Fn.git static/fn
-git submodule add   git@github.com:stephband/dom.git static/dom
+
 
 cp {{cookiecutter.project_slug}}/settings/local.py-template {{cookiecutter.project_slug}}/settings/local.py
 
