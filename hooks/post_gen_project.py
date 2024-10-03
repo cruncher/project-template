@@ -61,6 +61,7 @@ def main():
         remove_django_cms_apps()
         shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "templates", "cms"))
     static_path = os.path.join("{{cookiecutter.project_slug}}", "static")
+    os.system("git init")
     if "{{cookiecutter.add_submodule_bolt}}":
         os.system(f"git submodule add git@github.com:stephband/bolt-2.git {os.path.join(static_path, 'bolt')}")
     if "{{cookiecutter.add_submodule_fn}}":
