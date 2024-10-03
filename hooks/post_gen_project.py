@@ -49,7 +49,6 @@ def set_djangocms_base_template():
     os.remove(os.path.join(cms_template_dir, "wagtail_base.html"))
 
 
-
 def main():
     if "{{ cookiecutter.cms }}" == "Wagtail":
         remove_django_cms_apps()

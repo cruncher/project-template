@@ -9,7 +9,7 @@ pymemcache
 raven
 IPython
 pudb
-{%- if cookiecutter.use_parler == "y" %}
+{%- if cookiecutter.use_parler %}
 django-parler~=2.3
 {%- endif %}
 redis
