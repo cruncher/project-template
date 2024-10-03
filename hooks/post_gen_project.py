@@ -35,6 +35,7 @@ def set_wagtail_base_template():
             os.path.join(cms_template_dir, "wagtail_base.html"),
             os.path.join(cms_template_dir, "base.html")
         )
+    os.remove(os.path.join(cms_template_dir, "djangocms_base.html"))
     shutil.rmtree(os.path.join(cms_template_dir, "plugins"))
     shutil.rmtree(os.path.join(cms_template_dir, "snippets"))
 
@@ -45,6 +46,8 @@ def set_djangocms_base_template():
         os.path.join(cms_template_dir, "djangocms_base.html"),
         os.path.join(cms_template_dir, "base.html")
     )
+    os.remove(os.path.join(cms_template_dir, "wagtail_base.html"))
+
 
 
 def main():
