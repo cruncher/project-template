@@ -1,9 +1,7 @@
 
-import json
 import os
 import random
 import shutil
-import string
 
 try:
     # Inspired by
@@ -30,14 +28,37 @@ def remove_wagtail_apps():
     shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "home"))
     shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "search"))
 
+
+def set_wagtail_base_template():
+    cms_template_dir = os.path.join("{{cookiecutter.project_slug}}", "templates", "cms")
+    shutil.move(
+            os.path.join(cms_template_dir, "wagtail_base.html"),
+            os.path.join(cms_template_dir, "base.html")
+        )
+    shutil.rmtree(os.path.join(cms_template_dir, "plugins"))
+    shutil.rmtree(os.path.join(cms_template_dir, "snippets"))
+
+
+def set_djangocms_base_template():
+    cms_template_dir = os.path.join("{{cookiecutter.project_slug}}", "templates", "cms")
+    shutil.move(
+        os.path.join(cms_template_dir, "djangocms_base.html"),
+        os.path.join(cms_template_dir, "base.html")
+    )
+
+
 def main():
     if "{{ cookiecutter.cms }}" == "Wagtail":
         remove_django_cms_apps()
+        set_wagtail_base_template()
     if "{{ cookiecutter.cms }}" == "DjangoCMS":
         remove_wagtail_apps()
+        set_djangocms_base_template()
     if "{{ cookiecutter.cms }}" == "None":
         remove_wagtail_apps()
         remove_django_cms_apps()
+        shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "templates", "cms"))
+
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 

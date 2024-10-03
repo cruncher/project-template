@@ -6,9 +6,11 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django.views.static import serve as static_serve
 
+{%- if cookiecutter.cms == 'Wagtail' %}
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
+{%- endif %}
 
 from django_otp.admin import OTPAdminSite
 

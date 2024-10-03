@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags %}
 
-{% block body_class %}template-searchresults{% endblock %}
+{% block bodytag %}class="template-searchresults"{% endblock %}
 
-{% block title %}Search{% endblock %}
+{% block headtitle %}Search{% endblock %}
 
-{% block content %}
+{% block body %}
 <h1>Search</h1>
 
 <form action="{% url 'search' %}" method="get">
