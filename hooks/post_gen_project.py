@@ -21,7 +21,6 @@ DEBUG_VALUE = "debug"
 
 
 def remove_django_cms_apps():
-    shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "news"))
     shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "news-djangocms"))
 
 
