@@ -138,7 +138,7 @@ INSTALLED_APPS = (
     "apps.users",
     "apps.cruncher",
 
-    {%- cookiecutter.include_news_app and cookiecutter.cms != "None"%}
+    {%- if cookiecutter.include_news_app and cookiecutter.cms != "None"%}
     "apps.news",
     {%- endif %}
     
