@@ -142,10 +142,6 @@ INSTALLED_APPS = (
     "apps.news",
     {%- endif %}
     
-    {%- if cookiecutter.use_parler %}
-    "parler",
-    {%- endif %}
-
     # Djano-cms
     # "cms",
     # "treebeard",
