@@ -63,7 +63,6 @@ def main():
     static_path = os.path.join("{{cookiecutter.project_slug}}", "static")
     os.system("git init")
     if {{cookiecutter.add_submodule_bolt}}:
-        
         os.system(f"git submodule add git@github.com:stephband/bolt-2.git {os.path.join(static_path, 'bolt')}")
     if {{cookiecutter.add_submodule_fn}}:
         os.system(f"git submodule add git@github.com:stephband/Fn.git {os.path.join(static_path, 'fn')}")
@@ -81,7 +80,7 @@ def main():
     print(HINT + "- Installing requirements" + TERMINATOR)
     print(HINT + "- Creating a database" + TERMINATOR)
     print("cd {{cookiecutter.project_slug}}")
-    print("~/.pyenv/versions/3.11.*/bin/python -m venv .venv")
+    print("~/.pyenv/versions/3.12.*/bin/python -m venv .venv")
     print("source .venv/bin/activate")
     print("pip install --upgrade pip wheel pip-tools")
     print("pip-compile")
