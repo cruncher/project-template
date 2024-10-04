@@ -1,7 +1,6 @@
 # Getting started
 
 ```
-export NEW_PROJECT_NAME=fancy_new_project
 cookiecutter gh:cruncher/project-template
 cd {{cookiecutter.project_slug}}
 ~/.pyenv/versions/3.11.*/bin/python -m venv .venv
