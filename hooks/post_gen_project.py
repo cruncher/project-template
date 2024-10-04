@@ -63,6 +63,7 @@ def main():
     static_path = os.path.join("{{cookiecutter.project_slug}}", "static")
     os.system("git init")
     if "{{cookiecutter.add_submodule_bolt}}":
+        print("ADD BOLT","{{cookiecutter.add_submodule_bolt}}")
         os.system(f"git submodule add git@github.com:stephband/bolt-2.git {os.path.join(static_path, 'bolt')}")
     if "{{cookiecutter.add_submodule_fn}}":
         os.system(f"git submodule add git@github.com:stephband/Fn.git {os.path.join(static_path, 'fn')}")
