@@ -189,7 +189,6 @@ INSTALLED_APPS = (
     "cmsplugin_filer_file",
     "django_check_seo",
     "meta",
-    "apps.news",
     {%- endif %}
 
     # Common
