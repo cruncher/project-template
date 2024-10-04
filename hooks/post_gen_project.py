@@ -57,12 +57,12 @@ def main():
         remove_django_cms_apps()
         set_wagtail_base_template()
         if {{cookiecutter.include_news_app}}:
-            shutil.move(os.path.join(apps_dir, "news-wagtail"), os.path.join(apps_dir, "news"))
+            os.rename(os.path.join(apps_dir, "news-wagtail"), os.path.join(apps_dir, "news"))
     if "{{ cookiecutter.cms }}" == "DjangoCMS":
         remove_wagtail_apps()
         set_djangocms_base_template()
         if {{cookiecutter.include_news_app}}:
-            shutil.move(os.path.join(apps_dir, "news-djangocms"), os.path.join(apps_dir, "news"))
+            os.rename(os.path.join(apps_dir, "news-djangocms"), os.path.join(apps_dir, "news"))
     if "{{ cookiecutter.cms }}" == "None":
         remove_wagtail_apps()
         remove_django_cms_apps()
