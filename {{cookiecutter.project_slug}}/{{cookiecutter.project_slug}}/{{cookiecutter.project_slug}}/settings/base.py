@@ -158,7 +158,6 @@ INSTALLED_APPS = (
     {%- if cookiecutter.multilanguage %}
     "wagtail_localize",
     "wagtail_localize.locales", 
-    "wagtail_localize.modeladmin",
     {%- if cookiecutter.use_parler %}
     "parler",
     {%- endif %}
