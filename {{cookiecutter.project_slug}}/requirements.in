@@ -54,6 +54,10 @@ django-tasks-scheduler>=1.3.2
 {%- if cookiecutter.cms == "Wagtail" %}
 # WAGTAIL
 wagtail>=6.1,<6.3
+{%- if cookiecutter.multilanguage %}
+wagtail-localize
+{%- endif %}
+
 {% elif cookiecutter.cms == "DjangoCMS" %}
 # DJANGO CMS
 cmsplugin-filer @ git+https://github.com/cruncher/cmsplugin-filer@1cfeeaa4a7756327bc3505205f60218a324d8fce
