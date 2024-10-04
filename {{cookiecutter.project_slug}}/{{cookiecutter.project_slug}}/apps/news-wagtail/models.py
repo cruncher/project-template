@@ -46,7 +46,7 @@ class ArticlePage(Page):
         ("heading", blocks.CharBlock(form_classname="title")),
         ("paragraph", blocks.RichTextBlock()),
         ("image", ImageChooserBlock()),
-        {%- if cookiecutter.add_slideshow_submodule %}
+        {%- if cookiecutter.add_submodule_slideshow %}
         ("slideshow", SlideShowBlock())
         {%- endif %}
         ])
