@@ -137,7 +137,10 @@ INSTALLED_APPS = (
     "django.forms",
     "apps.users",
     "apps.cruncher",
-    
+
+    {%- cookiecutter.include_news_app and cookiecutter.cms != "None"%}
+    "apps.news",
+    {%- endif %}
     
     {%- if cookiecutter.use_parler %}
     "parler",
@@ -154,7 +157,18 @@ INSTALLED_APPS = (
     # "cmsplugin_filer_image",
     # "cmsplugin_filer_file",
     {%- if cookiecutter.cms == "Wagtail" %}
+    "apps.home",
+    "apps.search",
+    {%- if cookiecutter.multilanguage %}
+    "wagtail_localize",
+    "wagtail_localize.locales", 
+    "wagtail_localize.modeladmin",
+    {%- if cookiecutter.use_parler %}
+    "parler",
+    {%- endif %}
+    {%- endif %}
     'wagtail.contrib.forms',
+    'wagtail.contrib.settings',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
     'wagtail.sites',
@@ -167,8 +181,7 @@ INSTALLED_APPS = (
     'wagtail',
     'modelcluster',
     'taggit',
-    "apps.home",
-    "apps.search",
+    
     {% elif cookiecutter.cms == "DjangoCMS" %}
     "cms",
     "treebeard",
@@ -256,9 +269,14 @@ WAGTAIL_SITE_NAME = "{{ cookiecutter.project_name }}"
 # will allow to be uploaded as documents. This can be omitted to allow all file types,
 #  but this may present a security risk if untrusted users are allowed to
 #  upload documents - see User Uploaded Files.
-WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
 WAGTAILADMIN_BASE_URL = "{{cookiecutter.project_slug}}.ch"
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+{%- if cookiecutter.multilanguage %}
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
+WAGTAIL_I18N_ENABLED = True
+{%- endif %}
+
 {%- endif %}
 
 THUMBNAIL_PROCESSORS = (
@@ -293,7 +311,6 @@ MIDDLEWARE = (
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     {%- endif %}
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "querycount.middleware.QueryCountMiddleware",
 
 
     # 'django.middleware.cache.FetchFromCacheMiddleware',

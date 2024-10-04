@@ -22,11 +22,13 @@ DEBUG_VALUE = "debug"
 
 def remove_django_cms_apps():
     shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "news"))
+    shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "news-djangocms"))
 
 
 def remove_wagtail_apps():
     shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "home"))
     shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "search"))
+    shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "apps", "news-wagtail"))
 
 
 def set_wagtail_base_template():
@@ -50,12 +52,17 @@ def set_djangocms_base_template():
 
 
 def main():
+    apps_dir = os.path.join("{{cookiecutter.project_slug}}", "apps")
     if "{{ cookiecutter.cms }}" == "Wagtail":
         remove_django_cms_apps()
         set_wagtail_base_template()
+        if {{cookiecutter.include_news_app}}:
+            shutil.move(os.path.join(apps_dir, "news-wagtail"), os.path.join(apps_dir, "news"))
     if "{{ cookiecutter.cms }}" == "DjangoCMS":
         remove_wagtail_apps()
         set_djangocms_base_template()
+        if {{cookiecutter.include_news_app}}:
+            shutil.move(os.path.join(apps_dir, "news-djangocms"), os.path.join(apps_dir, "news"))
     if "{{ cookiecutter.cms }}" == "None":
         remove_wagtail_apps()
         remove_django_cms_apps()

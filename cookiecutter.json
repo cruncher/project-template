@@ -5,13 +5,14 @@
     "author_name": "Cruncher",
     "domain_name": "{{cookiecutter.project_slug}}.cruncher.ch",
     "email": "{{ cookiecutter.author_name.lower() | trim() |replace(' ', '-') }}@{{ cookiecutter.domain_name.lower() | trim() }}",
-    "version": "0.1.0",
     "debug": true,
     "cms": ["Wagtail", "DjangoCMS", "None"],
+    "multilanguage": true,
     "use_parler": true,
     "add_submodule_bolt": true,
     "add_submodule_fn": true,
     "add_submodule_dom": true,
     "add_submodule_slideshow": true,
+    "include_news_app": true,
     "_copy_without_render": [ "*.html", "*.txt","*.js", "*.map", "*.css", "*.yaml", "*.tpl" ]
   }
