@@ -85,5 +85,9 @@ urlpatterns += i18n_patterns(
     path("admin/", admin.site.urls),
     re_path(r"^", include("cms.urls"))
 )
+{% else %}
+urlpatterns += i18n_patterns(
+    path("admin/", admin.site.urls),
+)
 {%- endif %}
 
