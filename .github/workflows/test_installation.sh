@@ -18,9 +18,8 @@ export PGPASSWORD=postgres
 
 pip install django
 pip install pytest-cookies
+
 test_installation() {
-    cd ..
-    cd ..
     pytest 
 }
 test_installation
