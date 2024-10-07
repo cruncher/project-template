@@ -1,5 +1,5 @@
 {% raw %}
-<!doctype html>{% load sekizai_tags i18n static  cache_buster_tags  cruncher_tags %}
+<!doctype html>{% load sekizai_tags i18n static  cache_buster_tags  cruncher_tags {% endraw %} {%- if cookiecutter.cms == "DjangoCMS" %}cms_tags{%- endif %}{% raw %} %}
 {% comment %} {% page_meta request.current_page as page_meta %} {% endcomment %}
 {% autoescape off %}<html lang="{{request.LANGUAGE_CODE}}">{% endautoescape %}
 <head>
@@ -63,6 +63,7 @@
 </head>
 
 <body {% block bodytag %}{% endblock bodytag %}>
+    {% cms_toolbar %}
     {% block body %}{% endblock body %}
 
     {% if debug %}<!-- scripts -->{% endif %}

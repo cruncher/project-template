@@ -77,9 +77,9 @@ def main():
     if {{cookiecutter.add_submodule_slideshow}}:
         os.system(f"git submodule add git@github.com:stephband/slide-show.git {os.path.join(static_path, 'slide-show')}")
     settings_dir = os.path.join("{{cookiecutter.project_slug}}","{{cookiecutter.project_slug}}", "settings")
-
+    os.system("echo \"Site.objects.all().update(domain='{{cookiecutter.domain_name}}')\" | python manage.py shell_plus")
     shutil.move(os.path.join(settings_dir, "local.py-template"), os.path.join(settings_dir, "local.py"))
-
+    
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
     print(HINT + "A git repository is already created. You can continue with:" + TERMINATOR)
     print(HINT + "- Creating a virtual environment" + TERMINATOR)
