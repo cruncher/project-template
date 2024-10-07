@@ -3,7 +3,6 @@
 # from domain/email values
 """
 {{ cookiecutter.update({ "domain_name": cookiecutter.domain_name | trim }) }}
-{{ cookiecutter.update({ "email": cookiecutter.email | trim }) }}
 """
 
 project_slug = "{{ cookiecutter.project_slug }}"

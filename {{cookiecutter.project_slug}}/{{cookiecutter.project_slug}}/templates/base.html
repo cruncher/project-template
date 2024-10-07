@@ -1,3 +1,4 @@
+{% raw %}
 <!doctype html>{% load sekizai_tags i18n static  cache_buster_tags  cruncher_tags %}
 {% comment %} {% page_meta request.current_page as page_meta %} {% endcomment %}
 {% autoescape off %}<html lang="{{request.LANGUAGE_CODE}}">{% endautoescape %}
@@ -43,15 +44,16 @@
     <meta name="theme-color" content="#ffffff"-->
 
     {% if debug %}
-    <link rel="stylesheet" href="{{STATIC_URL}}{{cookiecutter.project_slug}}/module.css?v={% cache_buster %}" />
+
+    <link rel="stylesheet" href="{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.css?v={% cache_buster %}" />
     <link rel="stylesheet" href="{{STATIC_URL}}bolt/debug/debug.css" />
     {% else %}
-    <link rel="stylesheet" href="{{STATIC_URL}}build/{{cookiecutter.project_slug}}/module.css?v={% cache_buster %}" />
+    <link rel="stylesheet" href="{{STATIC_URL}}build/{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.css?v={% cache_buster %}" />
     {% endif %}
 
     {% if request.user.is_superuser %}
     {# Warn admins about empty elements, buttons without type, images with no alt #}
-    <link rel="stylesheet" href="{{STATIC_URL}}{{cookiecutter.project_slug}}/classes/warn-not-cms.css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/classes/warn-not-cms.css" />
     {% endif %}
 
     {% render_block "css" %}
@@ -66,9 +68,9 @@
     {% if debug %}<!-- scripts -->{% endif %}
     <script type="module" title="Module">
         {% if debug %}
-        import { validationMessages } from '{{STATIC_URL}}{{cookiecutter.project_slug}}/module.js?v={% cache_buster %}';
+        import { validationMessages } from '{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.js?v={% cache_buster %}';
         {% else %}
-        import { validationMessages } from '{{STATIC_URL}}build/{{cookiecutter.project_slug}}/module.js?v={% cache_buster %}';
+        import { validationMessages } from '{{STATIC_URL}}build/{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.js?v={% cache_buster %}';
         {% endif %}
         {% render_block "script" %}
     </script>
@@ -76,7 +78,7 @@
 
     {% if debug or request.user.is_superuser %}
     {# Warn admins about empty elements #}
-    <script type="module" src="{{STATIC_URL}}{{cookiecutter.project_slug}}/classes/warn-not-cms.js"></script>
+    <script type="module" src="{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/classes/warn-not-cms.js"></script>
     {% endif %}
 
     {% if not debug %}
@@ -90,3 +92,4 @@
     {% endif %}
 </body>
 </html>
+{% endraw %}
