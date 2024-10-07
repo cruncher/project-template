@@ -36,5 +36,7 @@ jobs:
           python-version: "3.11"
       - name: Install Dependencies
         run: sudo apt-get install curl
+      - name: Install Python Dependencies
+        run: python -m pip install --upgrade pytest-cookies
       - name: Test installation
         run: pytest
