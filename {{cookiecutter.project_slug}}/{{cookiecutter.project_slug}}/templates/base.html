@@ -63,7 +63,13 @@
 </head>
 
 <body {% block bodytag %}{% endblock bodytag %}>
+    {% endraw %}
+    {%- if cookiecutter.cms == "DjangoCMS" %}
+    {% raw %}
     {% cms_toolbar %}
+    {% endraw %}
+    {%- endif %}
+    {% raw %}
     {% block body %}{% endblock body %}
 
     {% if debug %}<!-- scripts -->{% endif %}
