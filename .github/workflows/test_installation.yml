@@ -37,4 +37,4 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get install curl
       - name: Test installation
-        run: sh ${PWD}/.github/workflows/test_installation.sh
+        run: pytest
