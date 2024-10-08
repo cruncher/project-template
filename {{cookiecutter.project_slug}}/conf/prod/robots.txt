@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow:
+
+Sitemap: https://{{cookiecutter.project_slug}}.com/sitemap.xml

@@ -1,0 +1,11 @@
+{% raw %}
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+    {{block.super}}
+    <li class="last">
+        <a href="/impersonate/{{original.pk}}/">Impersonifier</a>
+    </li>
+{% endblock %}
+{% endraw %}

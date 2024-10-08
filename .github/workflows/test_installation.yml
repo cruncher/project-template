@@ -33,8 +33,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
       - name: Install Dependencies
         run: sudo apt-get install curl
+      - name: Install Python Dependencies
+        run: python -m pip install --upgrade pytest-cookies
       - name: Test installation
-        run: sh ${PWD}/.github/workflows/test_installation.sh
+        run: pytest -s

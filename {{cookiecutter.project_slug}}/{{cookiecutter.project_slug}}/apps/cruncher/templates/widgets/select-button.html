@@ -1,0 +1,7 @@
+{% raw %}
+{% load widget_tweaks_fork %}
+
+<label class="select-button button {{widget.attrs.class|default:""}}" for="{{widget.attrs.id}}">
+    {% include "django/forms/widgets/select.html" %}
+</label>
+{% endraw %}
