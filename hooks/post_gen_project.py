@@ -81,7 +81,10 @@ def main():
     if exit_code:
         print("Project generation failed. Cannot cd in {{cookiecutter.project_slug}}")
         return exit_code
-    exit_code = os.system("python3.12 -m venv .venv")
+    if os.environ.get("GITHUB_WORKFLOW"):
+        exit_code = os.system("python3.12 -m venv .venv")
+    else:
+        exit_code = os.system("~/.pyenv/versions/3.12.*/bin/python -m venv .venv")
     if exit_code:
         print("Project generation failed. Cannot create virtualenv")
         return exit_code
