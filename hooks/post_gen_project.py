@@ -69,33 +69,54 @@ def main():
     static_path = os.path.join("{{cookiecutter.project_slug}}", "static")
     os.system("git init")
     if {{cookiecutter.add_submodule_bolt}}:
-        os.system(f"git submodule add git@github.com:stephband/bolt-2.git {os.path.join(static_path, 'bolt')}")
+        os.system(f"git submodule add https://github.com/stephband/bolt-2.git {os.path.join(static_path, 'bolt')}")
     if {{cookiecutter.add_submodule_fn}}:
-        os.system(f"git submodule add git@github.com:stephband/Fn.git {os.path.join(static_path, 'fn')}")
+        os.system(f"git submodule add https://github.com/stephband/Fn.git {os.path.join(static_path, 'fn')}")
     if {{cookiecutter.add_submodule_dom}}:
-        os.system(f"git submodule add git@github.com:stephband/dom.git {os.path.join(static_path, 'dom')}")
+        os.system(f"git submodule add https://github.com/stephband/dom.git {os.path.join(static_path, 'dom')}")
     if {{cookiecutter.add_submodule_slideshow}}:
-        os.system(f"git submodule add git@github.com:stephband/slide-show.git {os.path.join(static_path, 'slide-show')}")
+        os.system(f"git submodule add https://github.com/stephband/slide-show.git {os.path.join(static_path, 'slide-show')}")
     settings_dir = os.path.join("{{cookiecutter.project_slug}}","{{cookiecutter.project_slug}}", "settings")
-    os.system("echo \"Site.objects.all().update(domain='{{cookiecutter.domain_name}}')\" | python manage.py shell_plus")
     shutil.move(os.path.join(settings_dir, "local.py-template"), os.path.join(settings_dir, "local.py"))
-    
+    exit_code = os.system("cd {{cookiecutter.project_slug}}")
+    if exit_code:
+        print("There was an error generating project. Cannot cd in folder {{cookiecutter.project_slug}}")
+        return
+    exit_code = os.system("~/.pyenv/versions/3.12.*/bin/python -m venv .venv")
+    if exit_code:
+        print("There was an error generating project. Cannot create virtual environment.")
+        return
+    exit_code = os.system("source .venv/bin/activate")
+    if exit_code:
+        print("There was an error generating project. Cannot activate virtual environment.")
+        return
+    exit_code = os.system("pip install --upgrade pip wheel pip-tools")
+    if exit_code:
+        print("There was an error generating project. Cannot install pip-tools.")
+        return
+    exit_code = os.system("pip-compile")
+    if exit_code:
+        print("There was an error generating project. Cannot install requirements with pip-compile.")
+        return
+    exit_code = os.system("pip-sync")
+    if exit_code:
+        print("There was an error generating project. Cannot install requirements with pip-sync.")
+        return
+    os.system("cd {{cookiecutter.project_slug}}")
+    exit_code = os.system("createdb {{cookiecutter.project_slug}}")
+    if exit_code:
+        print("There was an error generating project. Cannot install create database {{cookiecutter.project_slug}}.")
+        return
+    exit_code = os.system("echo \"Site.objects.all().update(domain='{{cookiecutter.domain_name}}')\" | python manage.py shell_plus")
+    if exit_code:
+        print("There was an error generating project. Cannot run shell_plus to alter domain name of Site.")
+        return
+    exit_code = os.system("python manage.py migrate")
+    if exit_code:
+        print("There was an error generating project. Cannot migrations.")
+        return
+    exit_code = os.system("echo \"User.objects.create_superuser('info@cruncher.ch','admin' )\" | python manage.py shell_plus")
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
-    print(HINT + "A git repository is already created. You can continue with:" + TERMINATOR)
-    print(HINT + "- Creating a virtual environment" + TERMINATOR)
-    print(HINT + "- Installing requirements" + TERMINATOR)
-    print(HINT + "- Creating a database" + TERMINATOR)
-    print("cd {{cookiecutter.project_slug}}")
-    print("~/.pyenv/versions/3.12.*/bin/python -m venv .venv")
-    print("source .venv/bin/activate")
-    print("pip install --upgrade pip wheel pip-tools")
-    print("pip-compile")
-    print("pip-sync")
-    print("cd {{cookiecutter.project_slug}}")
-    print("createdb {{cookiecutter.project_slug}}")
-    print("python manage.py migrate")
-    print("python manage.py createsuperuser")
-
-
+    
 if __name__ == "__main__":
     main()

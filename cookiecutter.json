@@ -7,6 +7,8 @@
     "cms": ["Wagtail", "DjangoCMS", "None"],
     "multilanguage": true,
     "use_parler": true,
+    "use_s3_storage": true,
+    "use_check_seo": true,
     "add_submodule_bolt": true,
     "add_submodule_fn": true,
     "add_submodule_dom": true,

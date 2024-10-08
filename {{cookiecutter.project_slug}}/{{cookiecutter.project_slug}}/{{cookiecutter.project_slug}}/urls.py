@@ -91,3 +91,9 @@ urlpatterns += i18n_patterns(
 )
 {%- endif %}
 
+
+
+
+{%- if cookiecutter.use_check_seo %}
+urlpatterns += [path("django-check-seo/", include("django_check_seo.urls"))]
+{%- endif %}

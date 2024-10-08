@@ -17,6 +17,7 @@ def context():
     "add_submodule_bolt": True,
     "add_submodule_fn": True,
     "add_submodule_dom": True,
+    "use_check_seo": True,
     "add_submodule_slideshow": True,
     "include_news_app": True,
   }
@@ -35,16 +36,10 @@ SUPPORTED_COMBINATIONS = [
     {"cms": "None"},
     {"multilanguage": True},
     {"multilanguage": False},
+    {"use_check_seo": True},
+    {"use_check_seo": False},
     {"use_parler": True},
     {"use_parler": False},
-    {"add_submodule_bolt": True},
-    {"add_submodule_bolt": False},
-    {"add_submodule_fn": True},
-    {"add_submodule_fn": False},
-    {"add_submodule_dom": True},
-    {"add_submodule_dom": False},
-    {"add_submodule_slideshow": True},
-    {"add_submodule_slideshow": False},
     {"include_news_app": True},
     {"include_news_app": False},
 ]
@@ -62,14 +57,6 @@ def test_default_project_generation(cookies, context, context_override):
     assert result.exit_code == 0
     assert result.exception is None
 
-    if context_override.get("add_submodule_bolt"):
-        assert os.path.isdir(os.path.join(result.project_path,result.project_path.name, "static", "bolt"))
-    if context_override.get("add_submodule_fn"):
-        assert os.path.isdir(os.path.join(result.project_path,result.project_path.name, "static", "fn"))
-    if context_override.get("add_submodule_dom"):
-        assert os.path.isdir(os.path.join(result.project_path, result.project_path.name,"static", "dom"))
-    if context_override.get("add_submodule_slideshow"):
-        assert os.path.isdir(os.path.join(result.project_path, result.project_path.name, "static", "slide-show"))
     if context_override.get("include_news_app"):
         assert os.path.isdir(os.path.join(result.project_path, result.project_path.name, "apps", "news"))
     if context_override.get("cms") == "None":

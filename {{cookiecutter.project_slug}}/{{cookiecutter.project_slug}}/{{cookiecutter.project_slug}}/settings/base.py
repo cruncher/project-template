@@ -26,7 +26,7 @@ LANGUAGES = [
     ("it", _("Italian")),
 ]
 
-{%- if cookiecutter.use_parler == 'y' %}
+{%- if cookiecutter.use_parler %}
 PARLER_LANGUAGES = {
     1: ({"code": "en"}, {"code": "de"}, {"code": "fr"}, {"code": "it"}),
     "default": {"fallback": "fr", "hide_untranslated": False},
@@ -158,9 +158,6 @@ INSTALLED_APPS = (
     {%- if cookiecutter.multilanguage %}
     "wagtail_localize",
     "wagtail_localize.locales", 
-    {%- if cookiecutter.use_parler %}
-    "parler",
-    {%- endif %}
     {%- endif %}
     'wagtail.contrib.forms',
     'wagtail.contrib.settings',
@@ -187,10 +184,15 @@ INSTALLED_APPS = (
     "djangocms_text_ckeditor",
     "cmsplugin_filer_image",
     "cmsplugin_filer_file",
-    "django_check_seo",
     "meta",
     {%- endif %}
 
+    {%- if cookiecutter.use_check_seo %}
+    "django_check_seo",
+    {%- endif %}
+    {%- if cookiecutter.use_parler %}
+    "parler",
+    {%- endif %}
     # Common
     "sekizai",
     "gunicorn",
@@ -228,27 +230,6 @@ CMS_CONFIRM_VERSION4 = True
 #     }
 # }
 
-META_SITE_PROTOCOL = "https"
-META_SITE_DOMAIN = "{{cookiecutter.project_slug}}.ch"
-META_USE_OG_PROPERTIES = True
-META_SITE_TYPE = "website"
-
-PAGE_META_DESCRIPTION_LENGTH = 160
-
-
-# DEFAULTS
-DJANGO_CHECK_SEO_SETTINGS = {
-    "content_words_number": [300, 600],
-    "internal_links": 1,
-    "external_links": 1,
-    "meta_title_length": [30, 60],
-    "meta_description_length": [50, PAGE_META_DESCRIPTION_LENGTH],
-    "keywords_in_first_words": 50,
-    "max_link_depth": 4,
-    "max_url_length": 70,
-}
-
-
 {% elif cookiecutter.cms == "Wagtail" %}
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -272,6 +253,29 @@ WAGTAIL_I18N_ENABLED = True
 {%- endif %}
 
 {%- endif %}
+
+
+META_SITE_PROTOCOL = "https"
+META_SITE_DOMAIN = "{{cookiecutter.project_slug}}.ch"
+META_USE_OG_PROPERTIES = True
+META_SITE_TYPE = "website"
+
+PAGE_META_DESCRIPTION_LENGTH = 160
+
+{%- if cookiecutter.use_check_seo %}
+# DEFAULTS
+DJANGO_CHECK_SEO_SETTINGS = {
+    "content_words_number": [300, 600],
+    "internal_links": 1,
+    "external_links": 1,
+    "meta_title_length": [30, 60],
+    "meta_description_length": [50, PAGE_META_DESCRIPTION_LENGTH],
+    "keywords_in_first_words": 50,
+    "max_link_depth": 4,
+    "max_url_length": 70,
+}
+{%- endif %}
+
 
 THUMBNAIL_PROCESSORS = (
     "easy_thumbnails.processors.colorspace",
