@@ -9,8 +9,9 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from filer.fields.image import FilerImageField
 from meta.models import ModelMeta
+{%- if cookiecutter.use_parler %}
 from parler.models import TranslatableModel, TranslatedFields
-
+{%- endif %}
 
 class ArticleStatuses(models.IntegerChoices):
     draft = 0, _("Brouillon")
@@ -18,9 +19,14 @@ class ArticleStatuses(models.IntegerChoices):
     removed = 20, _("Supprimé")
 
 
-class NewsCategory(TranslatableModel):
+
+class NewsCategory({%- if cookiecutter.use_parler %}TranslatableModel{% else %}models.Model{%- endif %}):
     order = models.IntegerField(default=0)
+    {%- if cookiecutter.use_parler %}
     translations = TranslatedFields(name=models.CharField(_("Name"), max_length=127))
+    {% else %}
+    name=models.CharField(_("Name"), max_length=127)
+    {%- endif %}
 
     def __str__(self):
         return self.name
@@ -31,7 +37,7 @@ class NewsCategory(TranslatableModel):
         verbose_name_plural = _("Categories")
 
 
-class Article(ModelMeta, TranslatableModel):
+class Article(ModelMeta,{%- if cookiecutter.use_parler %}TranslatableModel{% else %}models.Model{%- endif %}):
     status = models.IntegerField(
         choices=ArticleStatuses.choices, default=ArticleStatuses.draft
     )
@@ -42,10 +48,16 @@ class Article(ModelMeta, TranslatableModel):
 
     image = FilerImageField(on_delete=models.PROTECT)
     placeholders = PlaceholderRelationField()
+    {%- if cookiecutter.use_parler %}
     translations = TranslatedFields(
         title=models.CharField(_("Title"), max_length=512),
         chapeau=models.TextField(blank=True, null=True),
     )
+    {% else %}
+    title=models.CharField(_("Title"), max_length=512)
+    chapeau=models.TextField(blank=True, null=True)
+    {%- endif %}
+    
 
     _metadata = {
         "title": "title",

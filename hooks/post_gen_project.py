@@ -2,7 +2,6 @@
 import os
 import random
 import shutil
-
 try:
     # Inspired by
     # https://github.com/django/django/blob/master/django/utils/crypto.py
@@ -80,43 +79,45 @@ def main():
     shutil.move(os.path.join(settings_dir, "local.py-template"), os.path.join(settings_dir, "local.py"))
     exit_code = os.system("cd {{cookiecutter.project_slug}}")
     if exit_code:
-        print("There was an error generating project. Cannot cd in folder {{cookiecutter.project_slug}}")
+        print("Project generation failed. Cannot cd in {{cookiecutter.project_slug}}")
         return
     exit_code = os.system("~/.pyenv/versions/3.12.*/bin/python -m venv .venv")
     if exit_code:
-        print("There was an error generating project. Cannot create virtual environment.")
+        print("Project generation failed. Cannot create virtualenv")
         return
-    exit_code = os.system("source .venv/bin/activate")
+    exit_code = os.system(".venv/bin/python -m pip install --upgrade pip wheel pip-tools")
     if exit_code:
-        print("There was an error generating project. Cannot activate virtual environment.")
+        print("Project generation failed. Cannot install pip-tools")
         return
-    exit_code = os.system("pip install --upgrade pip wheel pip-tools")
+    exit_code = os.system(".venv/bin/pip-compile")
     if exit_code:
-        print("There was an error generating project. Cannot install pip-tools.")
+        print("Project generation failed. Cannot run pip-compile")
         return
-    exit_code = os.system("pip-compile")
+    exit_code = os.system(".venv/bin/pip-sync")
     if exit_code:
-        print("There was an error generating project. Cannot install requirements with pip-compile.")
+        print("Project generation failed. Cannot run pip-sync")
         return
-    exit_code = os.system("pip-sync")
+    exit_code = os.system("cd {{cookiecutter.project_slug}}")
     if exit_code:
-        print("There was an error generating project. Cannot install requirements with pip-sync.")
+        print("Project generation failed. Cannot cd in {{cookiecutter.project_slug}}")
         return
-    os.system("cd {{cookiecutter.project_slug}}")
     exit_code = os.system("createdb {{cookiecutter.project_slug}}")
     if exit_code:
-        print("There was an error generating project. Cannot install create database {{cookiecutter.project_slug}}.")
+        print("Project generation failed. Cannot create db with name {{cookiecutter.project_slug}}")
         return
-    exit_code = os.system("echo \"Site.objects.all().update(domain='{{cookiecutter.domain_name}}')\" | python manage.py shell_plus")
     if exit_code:
-        print("There was an error generating project. Cannot run shell_plus to alter domain name of Site.")
+        print("Project generation failed. Cannot set domain name in shell_plus")
         return
-    exit_code = os.system("python manage.py migrate")
+    exit_code = os.system(".venv/bin/python {{cookiecutter.project_slug}}/manage.py migrate")
     if exit_code:
-        print("There was an error generating project. Cannot migrations.")
+        print("Project generation failed. Cannot run migrate")
         return
-    exit_code = os.system("echo \"User.objects.create_superuser('info@cruncher.ch','admin' )\" | python manage.py shell_plus")
+    exit_code = os.system("echo \"Site.objects.all().update(domain='{{cookiecutter.domain_name}}')\" | .venv/bin/python {{cookiecutter.project_slug}}/manage.py shell_plus")
+    if exit_code:
+        print("Project generation failed. Cannot set domain name in shell_plus")
+        return
+    exit_code = os.system("echo \"User.objects.create_superuser('info@cruncher.ch','admin' )\" | .venv/bin/python {{cookiecutter.project_slug}}/manage.py shell_plus")
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
-    
+
 if __name__ == "__main__":
     main()

@@ -184,7 +184,7 @@ INSTALLED_APPS = (
     "djangocms_text_ckeditor",
     "cmsplugin_filer_image",
     "cmsplugin_filer_file",
-    "meta",
+    #"meta",
     {%- endif %}
 
     {%- if cookiecutter.use_check_seo %}
