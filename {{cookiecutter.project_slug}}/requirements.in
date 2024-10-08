@@ -68,6 +68,6 @@ djangocms-text-ckeditor
 # comms
 # djangocms-page-meta~=1.4.4 # Doesn't work with djangoCMS 4 (feb 2024)
 {%- endif %}
-{%- if cookiecutter.multilanguage %}
+{%- if cookiecutter.use_check_seo %}
 django-check-seo>=0.6.2
 {%- endif %}

@@ -23,17 +23,17 @@ def context():
   }
 
 SUPPORTED_COMBINATIONS = [
-     {"cms": "DjangoCMS"},
-    # {"cms": "Wagtail"},
-    # {"cms": "None"},
-    # {"multilanguage": True},
-    # {"multilanguage": False},
-    # {"use_check_seo": True},
-    # {"use_check_seo": False},
-    #{"use_parler": True},
-     {"use_parler": False},
-    # {"include_news_app": True},
-     {"include_news_app": False},
+    {"cms": "DjangoCMS"},
+    {"cms": "Wagtail"},
+    {"cms": "None"},
+    {"multilanguage": True},
+    {"multilanguage": False},
+    {"use_check_seo": True},
+    {"use_check_seo": False},
+    {"use_parler": True},
+    {"use_parler": False},
+    {"include_news_app": True},
+    {"include_news_app": False},
 ]
 
 @pytest.mark.parametrize("context_override", SUPPORTED_COMBINATIONS)
