@@ -97,26 +97,27 @@ def main():
     if exit_code:
         print("Project generation failed. Cannot run pip-sync")
         return exit_code
-    exit_code = os.system("cd {{cookiecutter.project_slug}}")
-    if exit_code:
-        print("Project generation failed. Cannot cd in {{cookiecutter.project_slug}}")
-        return exit_code
-    exit_code = os.system("createdb {{cookiecutter.project_slug}}")
-    if exit_code:
-        print("Project generation failed. Cannot create db with name {{cookiecutter.project_slug}}")
-        return exit_code
-    if exit_code:
-        print("Project generation failed. Cannot set domain name in shell_plus")
-        return exit_code
-    exit_code = os.system(".venv/bin/python {{cookiecutter.project_slug}}/manage.py migrate")
-    if exit_code:
-        print("Project generation failed. Cannot run migrate")
-        return exit_code
-    exit_code = os.system("echo \"Site.objects.all().update(domain='{{cookiecutter.domain_name}}', name='{{cookiecutter.project_name}}')\" | .venv/bin/python {{cookiecutter.project_slug}}/manage.py shell_plus")
-    if exit_code:
-        print("Project generation failed. Cannot set domain name in shell_plus")
-        return exit_code
-    exit_code = os.system("echo \"User.objects.create_superuser('info@cruncher.ch','admin' )\" | .venv/bin/python {{cookiecutter.project_slug}}/manage.py shell_plus")
+    if not os.environ.get("GITHUB_WORKFLOW"):
+        exit_code = os.system("cd {{cookiecutter.project_slug}}")
+        if exit_code:
+            print("Project generation failed. Cannot cd in {{cookiecutter.project_slug}}")
+            return exit_code
+        exit_code = os.system("createdb {{cookiecutter.project_slug}}")
+        if exit_code:
+            print("Project generation failed. Cannot create db with name {{cookiecutter.project_slug}}")
+            return exit_code
+        if exit_code:
+            print("Project generation failed. Cannot set domain name in shell_plus")
+            return exit_code
+        exit_code = os.system(".venv/bin/python {{cookiecutter.project_slug}}/manage.py migrate")
+        if exit_code:
+            print("Project generation failed. Cannot run migrate")
+            return exit_code
+        exit_code = os.system("echo \"Site.objects.all().update(domain='{{cookiecutter.domain_name}}', name='{{cookiecutter.project_name}}')\" | .venv/bin/python {{cookiecutter.project_slug}}/manage.py shell_plus")
+        if exit_code:
+            print("Project generation failed. Cannot set domain name in shell_plus")
+            return exit_code
+        exit_code = os.system("echo \"User.objects.create_superuser('info@cruncher.ch','admin' )\" | .venv/bin/python {{cookiecutter.project_slug}}/manage.py shell_plus")
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
 if __name__ == "__main__":
