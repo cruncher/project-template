@@ -91,3 +91,6 @@ EMAIL_FILE_PATH = '/home/marco/Desktop'
 # EMAIL_PORT = 1025
 
 QUERYCOUNT = {'IGNORE_REQUEST_PATTERNS': [r'^/static/', r'^/source/', r'^/media/']}
+
+SHELL_PLUS_IMPORTS = ["uuid", "datetime", "django.utils.timezone", "django.db.models"]
+
