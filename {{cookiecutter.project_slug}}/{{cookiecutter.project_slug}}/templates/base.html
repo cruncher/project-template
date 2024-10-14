@@ -1,0 +1,102 @@
+{% raw %}
+<!doctype html>{% load sekizai_tags i18n static  cache_buster_tags  cruncher_tags {% endraw %} {%- if cookiecutter.cms == "DjangoCMS" %}cms_tags{%- endif %}{% raw %} %}
+{% comment %} {% page_meta request.current_page as page_meta %} {% endcomment %}
+{% autoescape off %}<html lang="{{request.LANGUAGE_CODE}}">{% endautoescape %}
+<head>
+    {% remove_linebreaks indent=4 %}
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    {% end_remove_linebreaks %}
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2">
+
+    {% block extra_head_meta %}{% endblock extra_head_meta %}
+
+    <title>{% block headtitle %}{% endblock headtitle %}</title>
+
+    <script title="load">
+    document.documentElement.className += ' js content-loading loading';
+    window.addEventListener('DOMContentLoaded', () => document.documentElement.classList.remove('content-loading'));
+    window.addEventListener('load', () => document.documentElement.classList.remove('loading'));
+    </script>
+
+    <script title="config">
+    {% if debug %}
+    window.DEBUG = { literal: false };
+    //window.slideshowStylesheet      = '/static/slide-show/shadow.css';
+    {% else %}
+    //window.slideshowStylesheet      = '/static/build/slide-show/shadow.css';
+    {% endif %}
+
+    window.config = {
+        csrf: '{{ csrf_token }}'
+    };
+
+    {% render_block "config" %}
+    </script>
+
+    <!--link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 163dpi)" href="/static/icons/57-touch-icon-iphone.png" />
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 132dpi)" href="/static/icons/72-touch-icon-iphone.png" />
+    <link rel="apple-touch-icon-precomposed" media="screen and (resolution: 326dpi)" href="/static/icons/114-touch-icon-iphone.png" />
+    <link rel="manifest" href="/static/icons/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff"-->
+
+    {% if debug %}
+
+    <link rel="stylesheet" href="{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.css?v={% cache_buster %}" />
+    <link rel="stylesheet" href="{{STATIC_URL}}bolt/debug/debug.css" />
+    {% else %}
+    <link rel="stylesheet" href="{{STATIC_URL}}build/{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.css?v={% cache_buster %}" />
+    {% endif %}
+
+    {% if request.user.is_superuser %}
+    {# Warn admins about empty elements, buttons without type, images with no alt #}
+    <link rel="stylesheet" href="{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/classes/warn-not-cms.css" />
+    {% endif %}
+
+    {% render_block "css" %}
+    {% block head %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+    {% render_block "templates" %}
+</head>
+
+<body {% block bodytag %}{% endblock bodytag %}>
+    {% endraw %}
+    {%- if cookiecutter.cms == "DjangoCMS" %}
+    {% raw %}
+    {% cms_toolbar %}
+    {% endraw %}
+    {%- endif %}
+    {% raw %}
+    {% block body %}{% endblock body %}
+
+    {% if debug %}<!-- scripts -->{% endif %}
+    <script type="module" title="Module">
+        {% if debug %}
+        import { validationMessages } from '{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.js?v={% cache_buster %}';
+        {% else %}
+        import { validationMessages } from '{{STATIC_URL}}build/{% endraw %}{{cookiecutter.project_slug}}{% raw %}/module.js?v={% cache_buster %}';
+        {% endif %}
+        {% render_block "script" %}
+    </script>
+    {% render_block "js" %}
+
+    {% if debug or request.user.is_superuser %}
+    {# Warn admins about empty elements #}
+    <script type="module" src="{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/classes/warn-not-cms.js"></script>
+    {% endif %}
+
+    {% if not debug %}
+    <!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-129018304-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-129018304-1');
+    </script-->
+    {% endif %}
+</body>
+</html>
+{% endraw %}

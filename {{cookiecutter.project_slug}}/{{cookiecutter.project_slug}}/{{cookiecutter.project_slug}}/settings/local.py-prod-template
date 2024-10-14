@@ -1,0 +1,37 @@
+DEBUG = False
+
+CSRF_TRUSTED_ORIGINS = ['https://*.cruncher.ch','https://*.127.0.0.1', 'https://*.{{cookiecutter.project_slug}}.ch']
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+
+
+INTERNAL_IPS = ('127.0.0.1',)
+# ALLOWED_HOSTS = [
+#     '0.0.0.0',
+#     '127.0.0.1',
+# ]
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://31a22f6ea6d741379508da83b374bda6@o333.ingest.sentry.io/5575486",
+    integrations=[DjangoIntegration()],
+)
+
+
+
+AWS_ACCESS_KEY_ID = ""
+AWS_SECRET_ACCESS_KEY = ""
+AWS_STORAGE_BUCKET_NAME = ""
+
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_S3_HOST = "sos-ch-gva-2.exo.io"
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_HOST}"
+AWS_S3_ENDPOINT_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}"
+MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+AWS_S3_ENDPOINT_URL = f"https://{AWS_S3_HOST}"

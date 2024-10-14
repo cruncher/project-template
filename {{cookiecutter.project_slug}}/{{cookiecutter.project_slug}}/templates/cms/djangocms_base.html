@@ -1,0 +1,15 @@
+{% raw %}
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags %}
+
+{% block body_tag %}class=""{% endblock %}
+
+{% block headtitle %}{% page_attribute "title" %} — {{block.super}}{% endblock headtitle %}
+
+{% comment %}
+{% block headtitle %}{% page_attribute "page_title" %}{% if request.current_page.parent_page %} — {% page_attribute "page_title" request.current_page.parent_page %}{% endif %}{% endblock %}
+{% endcomment %}
+
+{% block body %}
+{% endblock %}
+{% endraw %}

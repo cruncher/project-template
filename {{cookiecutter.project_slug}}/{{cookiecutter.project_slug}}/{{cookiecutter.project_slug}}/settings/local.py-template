@@ -1,0 +1,104 @@
+import os
+
+DEBUG = True
+
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+DEV_STATIC_URLS = {
+    r'^static/(?P<path>.*)$': os.path.join(BASE_DIR, 'static'),
+    r'^source/(?P<path>.*)$': os.path.join(BASE_DIR, 'source'),
+}
+
+
+
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(PROJECT_DIR, "..", "templates")],
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.request",
+                "django.template.context_processors.media",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+                "sekizai.context_processors.sekizai",
+                {%- if cookiecutter.cms == "DjangoCMS" %}
+                "cms.context_processors.cms_settings",
+                {% elif cookiecutter.cms == "Wagtail" %}
+                "wagtail.contrib.settings.context_processors.settings",
+                {%- endif %}
+            ],
+            "debug": True,
+            "loaders": [
+                'django.template.loaders.filesystem.Loader',
+                "django.template.loaders.app_directories.Loader",
+            ],
+        },
+    }
+]
+
+
+INTERNAL_IPS = ('127.0.0.1',)
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    '127.0.0.1',
+    'localhost',
+    'marco.local',
+    '.ngrok.io',
+    '192.168.1.117',
+    'testserver'
+]
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_HTTPONLY = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_FRAME_DENY = True
+
+# # SECURE_HSTS_SECONDS = 3600 # 31536000
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_BROWSER_XSS_FILTER = True
+# CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_HTTPONLY = True
+# X_FRAME_OPTIONS = 'DENY'
+# SILENCED_SYSTEM_CHECKS = ['security.W005', 'security.W004']
+
+# RAVEN_CONFIG = {'dsn': 'https://25e37a7cfab648fcb78d175366d96391:f03c3608addb4b83a59dedd4531c18df@app.getsentry.com/70082',}
+
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': '{{cookiecutter.project_slug}}',                      # Or path to database file if using sqlite3.
+#    }
+# }
+
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+#        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#    }
+#}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'eml_email_backend.EmailBackend'
+EMAIL_FILE_PATH = '/home/marco/Desktop'
+
+# Or, web interface:
+# docker run  --publish 8025:8025 --publish 1025:1025 mailhog/mailhog
+# Or, another one:
+# docker run --rm -p 1080:1080 -p 1025:1025 marlonb/mailcrab:latest
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_PORT = 1025
+
+QUERYCOUNT = {'IGNORE_REQUEST_PATTERNS': [r'^/static/', r'^/source/', r'^/media/']}
+
+SHELL_PLUS_IMPORTS = ["uuid", "datetime", "django.utils.timezone", "django.db.models"]
+

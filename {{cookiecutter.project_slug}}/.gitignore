@@ -1,0 +1,10 @@
+*.log
+*.pot
+*.pyc
+*.code-workspace
+settings/local.py
+local.py
+.venv
+tmp/*
+node_modules
+*/static/build/
