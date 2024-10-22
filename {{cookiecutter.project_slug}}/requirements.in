@@ -8,6 +8,7 @@ python-memcached
 pymemcache
 raven
 IPython
+ptpython
 pudb
 {%- if cookiecutter.use_parler %}
 django-parler~=2.3
