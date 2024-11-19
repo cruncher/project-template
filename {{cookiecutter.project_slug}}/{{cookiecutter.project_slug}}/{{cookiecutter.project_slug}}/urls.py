@@ -97,3 +97,6 @@ urlpatterns += i18n_patterns(
 {%- if cookiecutter.use_check_seo %}
 urlpatterns += [path("django-check-seo/", include("django_check_seo.urls"))]
 {%- endif %}
+
+
+handler404 = "{{cookiecutter.project_slug}}.views.custom_404"
