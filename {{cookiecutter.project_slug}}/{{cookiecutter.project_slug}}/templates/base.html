@@ -55,7 +55,21 @@
     {# Warn admins about empty elements, buttons without type, images with no alt #}
     <link rel="stylesheet" href="{{STATIC_URL}}{% endraw %}{{cookiecutter.project_slug}}{% raw %}/classes/warn-not-cms.css" />
     {% endif %}
-
+    
+    {% if debug %}
+    <script type="importmap">{
+        "imports": {
+            "dom/": "/static/dom/modules/",
+            "fn/": "/static/fn/modules/",
+            "bolt/": "/static/bolt/",
+            "literal/": "/static/literal/",
+            "slide-show/": "/static/slide-show/",
+            "form-elements/": "/static/form-elements/",
+            "details-toggle/": "/static/details-toggle/"
+        }
+    }</script>
+    {% endif %}
+    
     {% render_block "css" %}
     {% block head %}{% endblock %}
     {% block extrahead %}{% endblock %}
