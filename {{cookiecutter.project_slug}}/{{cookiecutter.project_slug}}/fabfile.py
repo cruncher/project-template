@@ -172,7 +172,7 @@ def sync_get():
     get_remote_db()
     local(f"dropdb --if-exists {env.local_db}")
     local(f"createdb -E utf8 {env.local_db}")
-    local(f"psql -q -d {env.local_db} -f {env.remote_db}.dmp")
+    local(f"psql -q -o /dev/null -d {env.local_db} -f {env.remote_db}.dmp")
     local(f'rm {env.remote_db}.dmp')
     local("python manage.py migrate")
     local('python manage.py set_fake_passwords --password="admin"')
