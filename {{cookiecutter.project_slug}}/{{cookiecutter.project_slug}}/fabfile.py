@@ -162,7 +162,7 @@ def generate_cache_buster():
 def get_remote_db():
     with (cd(CODE_DIR)):
         with prefix(env.activate):
-            run(f"pg_dump -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
+            run(f"pg_dump --no-owner --no-acl  -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
     local(f"rsync -avz -e ssh {env.hosts[0]}:backup/{env.remote_db}.dmp .")
 
 def sync_media():
