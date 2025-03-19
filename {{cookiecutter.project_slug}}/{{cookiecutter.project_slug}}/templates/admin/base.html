@@ -1,4 +1,4 @@
-{% raw %}
+
 {% extends "admin/base.html" %}
 {% load i18n cruncher_tags %}
 {% get_available_languages as LANGUAGES %}
@@ -26,6 +26,7 @@
     body #user-tools .lang-button {
         font-size: 0.85rem;
     }
+
     .filerFile .image-preview {
         vertical-align: top;
         display: inline-block;
@@ -34,6 +35,34 @@
         display: none;
     }
 
+    .change-form .flex-container > .cke {
+        max-width: 800px;
+    }
 </style>
+
+<script type="text/javascript">
+window.addEventListener('DOMContentLoaded', function() {
+    let cleanDeeplHTML = (htmlin) => {
+        return htmlin.replace(/<\/p>./g, '</p>').trim();
+    }
+
+    window.setTimeout( () => {
+        document.querySelectorAll('.django-ckeditor-widget textarea, textarea.CMS_CKEditor[contenteditable]').forEach((html_field) => {
+            if (
+                typeof CKEDITOR === 'object' &&
+                typeof CKEDITOR.instances === 'object' &&
+                typeof CKEDITOR.instances[html_field.id] === 'object'
+            ) {
+                html_field.addEventListener('change', (e) => {
+                    let html_out = cleanDeeplHTML(html_field.value)
+                    console.log(html_field, 'changed', html_out)
+                    CKEDITOR.instances[html_field.id].setData(html_out)
+                });
+                console.log('Change event listened on', html_field, 'added');
+            }
+        });
+    }, 500)
+});
+
+</script>
 {% endblock %}
-{% endraw %}
