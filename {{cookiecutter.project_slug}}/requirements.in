@@ -11,7 +11,8 @@ IPython
 ptpython
 pudb
 {%- if cookiecutter.use_parler %}
-django-parler~=2.3
+# django-parler~=2.3
+django-parler @ git+https://github.com/halitcelik/django-parler.git@c73444588db27f367352cef057f10da63071f9fc
 {%- endif %}
 redis
 boto3
