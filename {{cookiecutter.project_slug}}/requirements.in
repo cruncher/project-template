@@ -12,7 +12,7 @@ ptpython
 pudb
 {%- if cookiecutter.use_parler %}
 # django-parler~=2.3
-django-parler @ git+https://github.com/halitcelik/django-parler.git@c73444588db27f367352cef057f10da63071f9fc
+django-parler @ git+https://github.com/cruncher/django-parler.git@65e47700814aab220fc6483dfdafd11cb176d36c
 {%- endif %}
 redis
 boto3
