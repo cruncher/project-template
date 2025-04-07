@@ -126,7 +126,7 @@ def shorter_timesince(dt):
 
 @register.filter
 def get(dct, key):
-    if type(dct) is not dict:
+    if not isinstance(dct, dict):
         return None
     return dct.get(str(key), None)
 
