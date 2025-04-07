@@ -1,3 +1,5 @@
+import os
+
 from .base import *  # noqa
 from .djangocms import *  # noqa
 from .s3 import *  # noqa
