@@ -50,7 +50,7 @@ django-admin-honeypot @ git+https://github.com/cruncher/django-admin-honeypot.gi
 
 # task scheduler
 rq~=1.16.0
-django-tasks-scheduler>=1.3.2
+django-tasks-scheduler>=1.3.2,<3.0
 
 
 {%- if cookiecutter.cms == "Wagtail" %}
@@ -62,9 +62,10 @@ wagtail-localize
 
 {% elif cookiecutter.cms == "DjangoCMS" %}
 # DJANGO CMS
-cmsplugin-filer @ git+https://github.com/cruncher/cmsplugin-filer@1cfeeaa4a7756327bc3505205f60218a324d8fce
-django-cms~=4.1
-djangocms-versioning
+djangocms-picture
+djangocms-video
+django-cms~=5.0
+# djangocms-versioning
 djangocms-snippet
 djangocms-text-ckeditor
 # comms

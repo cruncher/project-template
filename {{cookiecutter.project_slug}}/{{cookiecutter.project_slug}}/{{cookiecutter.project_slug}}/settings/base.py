@@ -184,10 +184,10 @@ INSTALLED_APPS = (
     "menus",
     "filer",
     "djangocms_snippet",
-    "djangocms_versioning",
+    # "djangocms_versioning",
     "djangocms_text_ckeditor",
-    "cmsplugin_filer_image",
-    "cmsplugin_filer_file",
+    "djangocms_picture",
+    "djangocms_video",
     #"meta",
     {%- endif %}
 
