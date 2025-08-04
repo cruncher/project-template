@@ -16,7 +16,7 @@ env.git_branch = "main"
 env.gunicorn_process = ["{{cookiecutter.project_slug}}_gunicorn", ]
 env.forward_agent = True
 env.sentry_project_slug = "{{cookiecutter.project_slug}}"
-env.senty_org_slug = "cruncher"
+env.sentry_org_slug = "cruncher"
 
 
 def migrate(do_reload=True):
@@ -109,7 +109,7 @@ def build_static():
 def sentry_new_release():
     rev = local("/usr/bin/git rev-parse HEAD", capture=True)
     local(
-        f"sentry-cli releases --org {env.senty_org_slug} "
+        f"sentry-cli releases --org {env.sentry_org_slug} "
         f"--project {env.sentry_project_slug}  new {rev} --finalize"
     )
 
