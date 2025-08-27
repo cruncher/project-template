@@ -58,8 +58,9 @@ class VerboseForeignKeyRawIdWidget(ForeignKeyRawIdWidget):
 
         return (
             mark_safe(
-                '<span class="pill"><strong><a href="{}">{}'
-                "</a></strong></span>".format(url, str(obj))
+                '<span class="pill"><a target="_blank" href="{}">{}</a></span>'.format(
+                    url, str(obj)
+                )
             ),
             "",
         )
@@ -88,15 +89,15 @@ class VerboseManyToManyRawIdWidget(ManyToManyRawIdWidget):
                 url = ""  # Admin not registered for target model.
 
             result.append(
-                '<span class="pill"><strong><a href="{}">{}</a>'
-                '</strong>&nbsp;<a class="deletelink rel-delete-link" '
+                '<span class="pill"><a target="_blank"  href="{}">{}</a>'
+                '&nbsp;<a class="deletelink rel-delete-link" '
                 'data-rel="{}" href="#"></a></span>'.format(url, str(obj), obj.pk)
             )
 
         return mark_safe(" ".join(result)), ""
 
 
-class ImprovedModelAdmin(admin.ModelAdmin):
+class VerboseRelationsModelAdmin(admin.ModelAdmin):
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name in self.raw_id_fields:
             kwargs.pop("request", None)
