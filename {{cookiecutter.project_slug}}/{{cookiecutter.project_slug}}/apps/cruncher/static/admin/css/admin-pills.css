@@ -8,21 +8,30 @@
     display: inline-block;
     color: white;
     white-space: nowrap;
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     position: relative;
 }
 
+.pill, .pill a {
+    font-weight: normal;
+}
+
 .pill a:hover {
     text-decoration: none;
- }
- .pill + .pill,
-.related-lookup + strong > .pill {margin-left: 0.5rem;}
+}
+
+.pill + .pill,
+.related-lookup + strong > .pill {
+    margin-left: 0.5rem;
+}
+
 .pill .deletelink {
     margin-left: 0.25rem;
 }
+
 input + .related-lookup {
-  height: 30px;
-  line-height: 30px;
-  background-position: 50%;
+    height: 30px;
+    line-height: 30px;
+    background-position: 50%;
 }
