@@ -1,4 +1,5 @@
 import os
+from scheduler.types import Broker, SchedulerConfiguration
 
 
 def gettext(s):
@@ -422,10 +423,33 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Set your DSN value
 RAVEN_CONFIG = {"dsn": None}
-RQ = {"DEFAULT_RESULT_TTL": 2678400}
-SCHEDULER_QUEUES = {
-    "default": {"HOST": "localhost", "PORT": 6379, "DB": 0, "DEFAULT_TIMEOUT": 360}
-}
+
+SCHEDULER_CONFIG = SchedulerConfiguration(
+    EXECUTIONS_IN_PAGE=20,
+    SCHEDULER_INTERVAL=10,
+    BROKER=Broker.REDIS,
+    # Callback timeout in seconds (success/failure/stopped)
+    CALLBACK_TIMEOUT=60,
+    # Default values, can be overriden per task/job
+    # Time To Live (TTL) in seconds to keep successful job results
+    DEFAULT_SUCCESS_TTL=3600,
+    DEFAULT_FAILURE_TTL=365
+    * 24
+    * 60
+    * 60,  # Time To Live (TTL) in seconds to keep job failure information
+    DEFAULT_JOB_TTL=10 * 60,  # Time To Live (TTL) in seconds to keep job information
+    DEFAULT_JOB_TIMEOUT=5 * 60,  # timeout (seconds) for a job
+    # General configuration values
+    # Time To Live (TTL) in seconds to keep worker information after last heartbeat
+    DEFAULT_WORKER_TTL=10 * 60,
+    # The interval to run maintenance tasks in seconds. 10 minutes.
+    DEFAULT_MAINTENANCE_TASK_INTERVAL=10 * 60,
+    DEFAULT_JOB_MONITORING_INTERVAL=30,  # The interval to monitor jobs in seconds.
+    # Period (secs) to wait before requiring to reacquire locks
+    SCHEDULER_FALLBACK_PERIOD_SECS=120,
+)
+
+SCHEDULER_QUEUES = {"default": {"HOST": "localhost", "PORT": 6379, "DB": 0}}
 
 SHELL_PLUS = "ipython"
 
