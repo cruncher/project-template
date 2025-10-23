@@ -79,10 +79,9 @@ def compilemessages(do_reload=True):
 
 
 def requirements():
-    with (cd(BASE_DIR)):
-        with prefix(env.activate):
-            run("pip install -q --upgrade pip wheel pip-tools")
-            run("pip-sync -q")
+    with cd(BASE_DIR):
+        run("uv self update")
+        run("uv pip install -r pyproject.toml --no-progress")
 
 
 def local_git_pull():
