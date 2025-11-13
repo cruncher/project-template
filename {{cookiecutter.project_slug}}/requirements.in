@@ -21,7 +21,7 @@ django-filer
 django-impersonate
 django-sekizai
 django-storages
-Fabric3 @ git+https://github.com/cruncher/fabric.git@2008803bb540d8ccccb1398c04d4b8637d947ccf
+Fabric3 @ git+https://github.com/cruncher/fabric.git@957fb149bea013fbef7c6dbfd540e0ffac9eedbb
 psycopg2-binary
 python-dateutil
 requests
