@@ -81,7 +81,7 @@ def compilemessages(do_reload=True):
 def requirements():
     with cd(BASE_DIR):
         run("uv self update")
-        run("uv pip install -r pyproject.toml --no-progress")
+        run("uv sync --no-progress")
 
 
 def local_git_pull():
