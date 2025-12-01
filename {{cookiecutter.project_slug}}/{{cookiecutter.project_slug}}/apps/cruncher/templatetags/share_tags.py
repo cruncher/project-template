@@ -3,6 +3,7 @@ from urllib.parse import quote as url_quote
 from django import template
 from django.conf import settings
 
+
 register = template.Library()
 
 
@@ -22,15 +23,15 @@ def title_and_url(obj):
 @register.filter
 def share_on_twitter(obj):
     url, title = title_and_url(obj)
-    return "https://twitter.com/intent/tweet?text=" + url_quote(
-        ((title or "") + " " + (url or "")).strip()
+    return (
+        f"https://twitter.com/intent/tweet?url={url_quote(url)}&text={url_quote(title)}"
     )
 
 
 @register.filter
 def share_on_linkedin(obj):
-    url, __ = title_and_url(obj)
-    return f"https://www.linkedin.com/sharing/share-offsite/?url={url_quote(url)}"
+    url, title = title_and_url(obj)
+    return f"https://www.linkedin.com/shareArticle?mini=true&url={url_quote(url)}&title={url_quote(title)}"
 
 
 @register.filter
