@@ -162,8 +162,8 @@ def get_remote_db():
     with (cd(CODE_DIR)):
         with prefix(env.activate):
             run(f"pg_dump --no-owner --no-acl  -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
-    local(f"rsync -avz -e ssh {env.hosts[0]}:backup/{env.remote_db}.dmp .")
-
+    local(f"rsync -avzh --progress --stats -e ssh {env.hosts[0]}:backup/{env.remote_db}.dmp .")
+    
 def sync_media():
     local(f"rsync -avz -e ssh {env.hosts[0]}:{BASE_DIR}/tmp/media/ ../tmp/media/")
 
