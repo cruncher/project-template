@@ -86,9 +86,82 @@ target-version = "py311"
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
 
+[tool.uv.sources]
+{%- if cookiecutter.use_parler %}
+django-parler = { git = "https://github.com/cruncher/django-parler.git", rev = "65e47700814aab220fc6483dfdafd11cb176d36c" }
+{%- endif %}
+fabric3 = { git = "https://github.com/cruncher/fabric.git", rev = "957fb149bea013fbef7c6dbfd540e0ffac9eedbb" }
+django-admin-honeypot = { git = "https://github.com/cruncher/django-admin-honeypot.git", rev = "1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf" }
+
 
 [project]
 requires-python = "==3.13.*"
 name='{{cookiecutter.project_slug}}'
 version='0.1'
+
+
+dependencies = [
+    "black>=24.3.0",
+    "boto3>=1.42.60",
+    "django>=5.2,<5.3",
+    "django-admin-honeypot",
+
+    "django-eml-email-backend>=0.1",
+    "django-extensions>=4.1",
+    "django-filer>=3.4.4",
+    "django-impersonate>=1.9.5",
+    "django-otp>=1.7.0",
+    {%- if cookiecutter.use_parler %}
+    "django-parler",
+    {%- endif %}
+    "django-querycount>=0.8.3",
+    "django-rosetta>=0.10.3",
+    "django-sekizai>=4.1.0",
+    "django-storages>=1.14.6",
+    "django-tasks-scheduler>=4.0.8",
+    "django-typer[rich]>=3.6.4",
+
+    {%- if cookiecutter.cms == "Wagtail" %}
+    # WAGTAIL
+    "wagtail>=6.1,<6.3",
+    {%- if cookiecutter.multilanguage %}
+    "wagtail-localize",
+    {%- endif %}
+    {% elif cookiecutter.cms == "DjangoCMS" %}
+    "djangocms-picture>=4.1.1",
+    "djangocms-snippet>=5.0.2",
+    "djangocms-text-ckeditor>=5.1.7",
+    "djangocms-versioning>=2.5.1",
+    "djangocms-video>=3.1.0",
+    "django-cms~=5.0",
+    {%- endif %}
+    {%- if cookiecutter.use_check_seo %}
+    "django-check-seo>=0.6.2",
+    {%- endif %}
+
+    "easy-thumbnails>=2.10.1",
+    "fabric3",
+    "flake8>=7.3.0",
+    "gunicorn>=25.1.0",
+    "ipython>=9.10.0",
+    "pillow>=12.1.1",
+    "pre-commit>=4.5.1",
+    "psycopg2-binary>=2.9.11",
+    "ptpython>=3.0.32",
+    "pudb>=2025.1.5",
+    "pymemcache>=4.0.0",
+    "python-dateutil>=2.9.0.post0",
+    "python-memcached>=1.62",
+    "pytz>=2026.1.post1",
+    "qrcode>=8.2",
+    "raven>=6.10.0",
+    "redis>=7.2.1",
+    "requests>=2.32.5",
+    "sentry-sdk>=2.54.0",
+    "unidecode>=1.4.0",
+    "werkzeug>=3.1.6",
+    "xlrd>=2.0.2",
+    "xlwt>=1.3.0",
+
+]
 

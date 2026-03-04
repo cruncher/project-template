@@ -189,6 +189,7 @@ INSTALLED_APPS = (
     "djangocms_text_ckeditor",
     "djangocms_picture",
     "djangocms_video",
+    "djangocms_versioning",
     #"meta",
     {%- endif %}
 
