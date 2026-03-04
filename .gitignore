@@ -8,3 +8,4 @@ local.py
 tmp/*
 node_modules
 */static/build/
+.idea
