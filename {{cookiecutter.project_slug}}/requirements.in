@@ -1,5 +1,5 @@
 # COMMON
-Django>=4.2,<4.3
+Django>=5.2,<5.3
 Pillow
 gunicorn
 easy-thumbnails
