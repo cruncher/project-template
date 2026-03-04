@@ -37,6 +37,6 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get install curl
       - name: Install Python Dependencies
-        run: python -m pip install --upgrade pytest-cookies
+        run: python -m pip install --upgrade pytest-cookies 'chardet<7'
       - name: Test installation
         run: pytest -s
