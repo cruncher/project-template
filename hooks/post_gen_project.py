@@ -73,6 +73,7 @@ def main():
         shutil.rmtree(os.path.join("{{cookiecutter.project_slug}}", "templates", "cms"))
     static_path = os.path.join("{{cookiecutter.project_slug}}", "static")
     os.system("git init")
+
     if {{cookiecutter.add_submodule_bolt}}:
         os.system(
             f"git submodule add https://github.com/stephband/bolt-2.git {os.path.join(static_path, 'bolt')}"
@@ -107,17 +108,12 @@ def main():
     if exit_code:
         print("Project generation failed. Cannot create virtualenv")
         return exit_code
-    exit_code = os.system(
-        ".venv/bin/python -m pip install --upgrade pip wheel pip-tools"
-    )
+    exit_code = os.system(".venv/bin/python -m pip install --upgrade pip uv")
     if exit_code:
         print("Project generation failed. Cannot install pip-tools")
         return exit_code
-    exit_code = os.system(".venv/bin/python -m pip install --upgrade uv")
-    if exit_code:
-        print("Project generation failed. Cannot install uv")
-        return exit_code
-    exit_code = os.system("uv sync")
+
+    exit_code = os.system(".venv/bin/uv sync")
     if exit_code:
         print("Project generation failed. Cannot run uv")
         return exit_code
