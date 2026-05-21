@@ -88,7 +88,7 @@ max-complexity = 10
 
 [tool.uv.sources]
 {%- if cookiecutter.use_parler %}
-django-parler = { git = "https://github.com/cruncher/django-parler.git", rev = "65e47700814aab220fc6483dfdafd11cb176d36c" }
+django-parler = { git = "https://github.com/cruncher/django-parler.git", rev = "995a0b67df92be040f9b8fc807cd31c3764776e5" }
 {%- endif %}
 fabric3 = { git = "https://github.com/cruncher/fabric.git", rev = "957fb149bea013fbef7c6dbfd540e0ffac9eedbb" }
 django-admin-honeypot = { git = "https://github.com/cruncher/django-admin-honeypot.git", rev = "1cf94e3d9809bb45e54fa83f9587a8c9bcc62fdf" }
