@@ -450,7 +450,7 @@ SCHEDULER_CONFIG = SchedulerConfiguration(
     SCHEDULER_FALLBACK_PERIOD_SECS=120,
 )
 
-SCHEDULER_QUEUES = {"default": {"HOST": "localhost", "PORT": 6379, "DB": 0}}
+SCHEDULER_QUEUES = {"default": {"URL": "redis://localhost:6379/0"}}
 
 SHELL_PLUS = "ipython"
 
