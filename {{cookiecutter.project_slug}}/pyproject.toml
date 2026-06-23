@@ -69,7 +69,8 @@ exclude = [
     "dist",
     "node_modules",
     "venv",
-    "migrations"
+    "migrations",
+    ".idea"
 ]
 lint.per-file-ignores = {}
 
