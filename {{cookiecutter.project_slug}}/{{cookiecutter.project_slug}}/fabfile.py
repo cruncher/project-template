@@ -13,7 +13,11 @@ env.activate = f"source {BASE_DIR}/.venv/bin/activate"
 env.remote_db = "{{cookiecutter.project_slug}}"
 env.local_db = "{{cookiecutter.project_slug}}"
 env.git_branch = "main"
-env.gunicorn_process = ["{{cookiecutter.project_slug}}_gunicorn", ]
+env.gunicorn_process = [
+    ("{{cookiecutter.project_slug}}_gunicorn", None),
+    ("{{cookiecutter.project_slug}}_rqworker:*", ":workers:{{cookiecutter.project_slug}}-worker-*"),
+]
+
 env.forward_agent = True
 env.sentry_project_slug = "{{cookiecutter.project_slug}}"
 env.sentry_org_slug = "cruncher"
@@ -54,10 +58,17 @@ def git_push():
     with (cd(BASE_DIR)):
         run(f"git push origin {env.git_branch}")
 
-
 def reload_server():
-    for procs in env.gunicorn_process:
-        run(f"sudo supervisorctl restart {procs}")
+    for proc_group, redis_prefix in env.gunicorn_process:
+        if redis_prefix is None:
+            run("sudo supervisorctl restart %s" % proc_group)
+        else:
+            run(f"sudo supervisorctl stop {proc_group}")
+            run(
+                f'redis-cli -n {SCHEDULER_REDIS_DB}  KEYS  "{redis_prefix}" |'
+                f" xargs redis-cli -n {SCHEDULER_REDIS_DB} DEL"
+            )
+            run(f"sudo supervisorctl start {proc_group}")
 
 def clear_cache():
     with (cd(CODE_DIR)):
