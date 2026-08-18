@@ -104,7 +104,7 @@ version='0.1'
 dependencies = [
     "black>=26.3.1",
     "boto3>=1.42.60",
-    "django>=5.2,<5.3",
+    "django>=5.2.15,<5.3",
     "django-admin-honeypot",
 
     "django-eml-email-backend>=0.1",
@@ -120,7 +120,7 @@ dependencies = [
     "django-sekizai>=4.1.0",
     "django-storages>=1.14.6",
     "django-tasks-scheduler>=4.0.8",
-    "django-typer[rich]>=3.6.4",
+    "django-typer>=3.6.4",
 
     {%- if cookiecutter.cms == "Wagtail" %}
     # WAGTAIL
