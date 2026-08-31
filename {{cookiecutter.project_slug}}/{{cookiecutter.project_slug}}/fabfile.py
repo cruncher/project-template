@@ -3,6 +3,7 @@ import string
 
 from fabric.api import cd, env, local, prefix, settings
 from fabric.operations import run
+from {{cookiecutter.project_slug}}.settings.base import SCHEDULER_REDIS_DB
 
 
 BASE_DIR = "/home/projects/{{cookiecutter.project_slug}}/{{cookiecutter.project_slug}}"
@@ -61,7 +62,7 @@ def git_push():
 def reload_server():
     for proc_group, redis_prefix in env.gunicorn_process:
         if redis_prefix is None:
-            run("sudo supervisorctl restart %s" % proc_group)
+            run(f"sudo supervisorctl restart {proc_group}")
         else:
             run(f"sudo supervisorctl stop {proc_group}")
             run(
@@ -71,9 +72,8 @@ def reload_server():
             run(f"sudo supervisorctl start {proc_group}")
 
 def clear_cache():
-    with (cd(CODE_DIR)):
-        with prefix(env.activate):
-            run("python manage.py clear_cache")
+    with (cd(CODE_DIR), prefix(env.activate)):
+        run("python manage.py clear_cache")
 
 
 def load():
@@ -82,9 +82,8 @@ def load():
 
 
 def compilemessages(do_reload=True):
-    with (cd(CODE_DIR)):
-        with prefix(env.activate):
-            run("python manage.py compilemessages")
+    with (cd(CODE_DIR), prefix(env.activate)):
+        run("python manage.py compilemessages")
     if do_reload:
         reload_server()
 
@@ -104,9 +103,8 @@ def local_git_push():
 
 
 def fix_cms():
-    with (cd(CODE_DIR)):
-        with prefix(env.activate):
-            run("python manage.py cms fix-tree")
+    with (cd(CODE_DIR), prefix(env.activate)):
+        run("python manage.py cms fix-tree")
 
 
 def build_static():
@@ -142,7 +140,7 @@ def deploy():
 
 def crontab():
     with (cd(BASE_DIR)):
-        run("crontab {}/conf/prod/crontab".format(BASE_DIR))
+        run(f"crontab {BASE_DIR}/conf/prod/crontab")
         run("crontab -l")
 
 
@@ -152,15 +150,13 @@ def ssh():
 
 
 def version():
-    with (cd(CODE_DIR)):
-        with prefix(env.activate):
-            run("python manage.py --version")
+    with (cd(CODE_DIR), prefix(env.activate)):
+        run("python manage.py --version")
 
 
 def clear_cache_buster(cache_buster):
-    with (cd(CODE_DIR)):
-        with prefix(env.activate):
-            run(f"python manage.py clear_cache_buster --buster={cache_buster}")
+    with (cd(CODE_DIR), prefix(env.activate)):
+        run(f"python manage.py clear_cache_buster --buster={cache_buster}")
 
 
 def generate_cache_buster():
@@ -170,9 +166,8 @@ def generate_cache_buster():
 
 
 def get_remote_db():
-    with (cd(CODE_DIR)):
-        with prefix(env.activate):
-            run(f"pg_dump --no-owner --no-acl  -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
+    with cd(CODE_DIR), prefix(env.activate):
+        run(f"pg_dump --no-owner --no-acl  -f ~/backup/{env.remote_db}.dmp {env.remote_db}")
     local(f"rsync -avzh --progress --stats -e ssh {env.hosts[0]}:backup/{env.remote_db}.dmp .")
     
 def sync_media():
