@@ -4,6 +4,6 @@ from .base import *  # NOQA
 from .s3 import *  # NOQA
 {%- endif %}
 try:
-    from .local import *  # NOQA
+    from .local import *  # noqa: F403
 except ImportError:
     pass
