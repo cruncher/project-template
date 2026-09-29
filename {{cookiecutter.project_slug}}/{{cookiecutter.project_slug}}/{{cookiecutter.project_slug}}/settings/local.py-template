@@ -92,7 +92,7 @@ EMAIL_BACKEND = 'eml_email_backend.EmailBackend'
 EMAIL_FILE_PATH = '/home/marco/Desktop'
 
 # Or, web interface:
-# docker run  --publish 8025:8025 --publish 1025:1025 mailhog/mailhog
+# docker run --rm -p 1080:1080 -p 1025:1025 marlonb/mailcrab:latest
 # Or, another one:
 # docker run --rm -p 1080:1080 -p 1025:1025 marlonb/mailcrab:latest
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
